@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlphaEdge AI-900 — Master Programme in Applied Artificial Intelligence for Financial Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF9F5;--paper-2:#F1EEE4;--ink:#0B1A34;--ink-soft:#3D4D66;--ink-faint:#6B7891;
+  --gold:#8F6A14;--gold-bright:#C9A227;--rule:#DCD5C3;--rule-strong:#B9AE93;
+  --field:#0B1A34;--field-ink:#F3EEE1;--field-rule:#2A3D5C;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1526;--paper-2:#101F33;--ink:#EFE9DC;--ink-soft:#B3BECD;--ink-faint:#8593A8;
+    --gold:#D9B44A;--gold-bright:#EBD183;--rule:#1E3149;--rule-strong:#2E4869;
+    --field:#050D18;--field-ink:#F3EEE1;--field-rule:#22354F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1526;--paper-2:#101F33;--ink:#EFE9DC;--ink-soft:#B3BECD;--ink-faint:#8593A8;
+  --gold:#D9B44A;--gold-bright:#EBD183;--rule:#1E3149;--rule-strong:#2E4869;
+  --field:#050D18;--field-ink:#F3EEE1;--field-rule:#22354F;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Spectral",Georgia,serif;font-size:17px;line-height:1.62;font-weight:300}
+a{color:var(--gold);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.cover{background:var(--field);color:var(--field-ink);padding:clamp(3rem,9vw,6.5rem) clamp(1.25rem,6vw,5rem) clamp(2.5rem,6vw,4rem);border-bottom:3px solid var(--gold-bright)}
+.cover-inner{max-width:1080px;margin:0 auto}
+.brandline{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap;margin:0 0 2.4rem;font-family:"IBM Plex Sans",sans-serif}
+.brandmark{font-family:"Spectral",serif;font-size:1.45rem;font-weight:700;letter-spacing:-.01em;color:var(--gold-bright)}
+.brandsub{font-size:.68rem;letter-spacing:.2em;font-weight:600;color:#8FA0B8}
+.coursecode{font-family:"IBM Plex Mono",monospace;font-size:.85rem;color:var(--gold-bright);border:1px solid var(--gold-bright);padding:.18rem .55rem;margin-bottom:1.3rem;display:inline-block;letter-spacing:.06em}
+.cover h1{font-weight:600;font-size:clamp(2.1rem,5.6vw,3.9rem);line-height:1.06;letter-spacing:-.022em;margin:0 0 1.1rem;max-width:20ch}
+.cover .sub{font-size:clamp(1.02rem,2.2vw,1.3rem);font-weight:300;color:#CFD8E6;max-width:60ch;margin:0 0 2.8rem;line-height:1.52}
+.goldrule{height:2px;background:linear-gradient(90deg,var(--gold-bright),rgba(201,162,39,.08));border:0;margin:0 0 2rem;transform-origin:left}
+@media (prefers-reduced-motion:no-preference){
+  .goldrule{animation:sweep 1.1s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes sweep{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+.record{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.4rem 2rem;font-family:"IBM Plex Sans",sans-serif;border-top:1px solid var(--field-rule);padding-top:1.5rem}
+.record div span{display:block;font-size:.66rem;letter-spacing:.14em;color:#8FA0B8;font-weight:600;margin-bottom:.35rem}
+.record div strong{font-size:.92rem;font-weight:500;color:var(--field-ink)}
+
+.shell{max-width:1250px;margin:0 auto;padding:0 clamp(1.25rem,5vw,3rem);display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(2rem,5vw,4.2rem);align-items:start}
+@media (max-width:920px){.shell{grid-template-columns:minmax(0,1fr)}}
+nav.toc{position:sticky;top:0;padding:3rem 0;font-family:"IBM Plex Sans",sans-serif;font-size:.81rem;line-height:1.38;border-right:1px solid var(--rule);max-height:100vh;overflow-y:auto}
+@media (max-width:920px){nav.toc{position:static;border-right:0;border-bottom:1px solid var(--rule);padding:2rem 0;max-height:none}}
+nav.toc p{font-size:.63rem;letter-spacing:.16em;font-weight:700;color:var(--ink-faint);margin:1.4rem 0 .8rem}
+nav.toc p:first-child{margin-top:0}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc li{margin:0 0 .55rem}
+nav.toc a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent}
+nav.toc a:hover{color:var(--ink);border-bottom-color:var(--gold)}
+nav.toc .mc{font-family:"IBM Plex Mono",monospace;color:var(--gold);font-size:.72rem;margin-right:.35rem}
+
+main{padding:3rem 0 5rem;min-width:0}
+section{margin:0 0 4.2rem;scroll-margin-top:1.5rem}
+h2{font-weight:600;font-size:clamp(1.7rem,3.8vw,2.4rem);line-height:1.14;letter-spacing:-.018em;margin:0 0 1.3rem;max-width:24ch}
+h2 .num{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:.68rem;letter-spacing:.2em;font-weight:700;color:var(--gold);margin-bottom:.85rem}
+h3{font-weight:600;font-size:1.3rem;line-height:1.25;margin:2.6rem 0 .8rem;letter-spacing:-.01em;border-top:2px solid var(--gold-bright);padding-top:.85rem}
+h3 span{display:block;font-family:"IBM Plex Mono",monospace;font-size:.7rem;color:var(--gold);font-weight:400;margin-bottom:.35rem;letter-spacing:.04em}
+h4{font-family:"IBM Plex Sans",sans-serif;font-size:.9rem;font-weight:700;margin:1.6rem 0 .5rem}
+p{margin:0 0 1.05rem;max-width:74ch}
+.lead{font-size:1.15rem;line-height:1.55;color:var(--ink-soft);max-width:66ch}
+ul,ol{max-width:74ch;padding-left:1.15rem;margin:0 0 1.05rem}
+li{margin-bottom:.4rem}
+strong{font-weight:600}
+em.term{font-style:normal;font-weight:600;color:var(--gold)}
+code{font-family:"IBM Plex Mono",monospace;font-size:.85em;background:var(--paper-2);padding:.08em .32em;border-radius:2px}
+.ref{font-family:"IBM Plex Sans",sans-serif;font-size:.78em;color:var(--gold);white-space:nowrap}
+
+.eq{background:var(--paper-2);border-left:3px solid var(--gold-bright);padding:.9rem 1.05rem;margin:1.2rem 0;max-width:74ch;overflow-x:auto}
+.eq .m{font-family:"Spectral",serif;font-style:italic;font-size:1.04rem;display:block;white-space:nowrap;line-height:1.8}
+.eq .g{font-family:"IBM Plex Sans",sans-serif;font-size:.79rem;color:var(--ink-soft);font-style:normal;display:block;margin-top:.45rem;white-space:normal}
+
+.ledger{border-top:2px solid var(--ink);margin:1.6rem 0 0}
+.entry{display:grid;grid-template-columns:96px minmax(0,1fr);gap:0 1.4rem;padding:1.4rem 0;border-bottom:1px solid var(--rule)}
+@media (max-width:620px){.entry{grid-template-columns:minmax(0,1fr);gap:.5rem}}
+.stamp{font-family:"IBM Plex Sans",sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.1em;color:var(--gold);padding-top:.35rem;font-variant-numeric:tabular-nums}
+.stamp b{display:block;font-size:1.35rem;letter-spacing:-.01em;color:var(--ink);font-weight:600;line-height:1;margin-bottom:.2rem}
+.entry h4{margin:0 0 .45rem;font-size:1.03rem;font-family:"Spectral",serif;font-weight:600;letter-spacing:-.005em}
+.entry p{margin:0 0 .55rem;font-size:.95rem;color:var(--ink-soft)}
+.entry ul{margin:0 0 .6rem;font-size:.94rem;color:var(--ink-soft)}
+.ship{font-family:"IBM Plex Sans",sans-serif;font-size:.82rem;color:var(--ink);border-left:2px solid var(--gold-bright);padding:.12rem 0 .12rem .7rem;max-width:70ch}
+.ship b{font-weight:600;color:var(--gold)}
+
+.panel{background:var(--paper-2);border:1px solid var(--rule);padding:clamp(1.1rem,3vw,1.9rem);margin:1.8rem 0}
+.panel h4:first-child{margin-top:0}
+.panel p:last-child,.panel ul:last-child{margin-bottom:0}
+.flagged{border-left:4px solid var(--gold-bright)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:1.8rem 0}
+.stats div{background:var(--paper);padding:1rem 1.1rem}
+.stats b{display:block;font-size:1.7rem;font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:.22rem}
+.stats span{font-family:"IBM Plex Sans",sans-serif;font-size:.73rem;color:var(--ink-faint);line-height:1.35;display:block}
+
+.tablewrap{overflow-x:auto;margin:1.6rem 0;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;min-width:580px;font-family:"IBM Plex Sans",sans-serif;font-size:.85rem}
+th,td{text-align:left;padding:.68rem .85rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{background:var(--paper-2);font-weight:700;font-size:.72rem;letter-spacing:.05em;color:var(--ink)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+
+.tagrow{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0 1.2rem;padding:0;list-style:none;max-width:76ch}
+.tagrow li{font-family:"IBM Plex Mono",monospace;font-size:.74rem;border:1px solid var(--rule-strong);padding:.16rem .45rem;margin:0;color:var(--ink-soft)}
+
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem;margin:1.8rem 0}
+.pair>div{border-top:2px solid var(--gold-bright);padding-top:.85rem}
+.pair h4{margin-top:0}
+.pair p{font-size:.93rem;color:var(--ink-soft)}
+
+.svgwrap{overflow-x:auto;margin:1.9rem 0}
+svg{display:block;max-width:100%;height:auto}
+
+.index{columns:2;column-gap:2.2rem;font-family:"IBM Plex Sans",sans-serif;font-size:.79rem;line-height:1.45;max-width:none;padding:0;list-style:none;margin:.6rem 0 1.6rem}
+@media (max-width:700px){.index{columns:1}}
+.index li{margin:0 0 .22rem;break-inside:avoid;color:var(--ink-soft)}
+.idxhead{font-family:"IBM Plex Sans",sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.09em;color:var(--gold);margin:1.5rem 0 .5rem;border-bottom:1px solid var(--rule);padding-bottom:.3rem}
+
+.biblio{font-size:.89rem;max-width:80ch}
+.biblio li{margin-bottom:.45rem;color:var(--ink-soft)}
+.biblio b{color:var(--ink);font-weight:600}
+
+footer{background:var(--field);color:var(--field-ink);padding:2.8rem clamp(1.25rem,5vw,3rem);font-family:"IBM Plex Sans",sans-serif;font-size:.84rem;line-height:1.6;border-top:3px solid var(--gold-bright)}
+footer div{max-width:1250px;margin:0 auto}
+footer p{max-width:78ch;color:#BCC7D8}
+footer strong{color:var(--gold-bright);font-weight:600}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="brandline">
+      <span class="brandmark">ALPHAEdge</span>
+      <span class="brandsub">QUANT AND FINANCIAL ENGINEERING ACADEMY</span>
+    </div>
+    <span class="coursecode">AE / AI-900 · FLAGSHIP</span>
+    <h1>Master Programme in Applied Artificial Intelligence for Financial Systems</h1>
+    <p class="sub">Fifty-two weeks. Thirteen modules. Machine learning, deep learning, generative AI, retrieval, the Model Context Protocol, agentic systems, production engineering and governance — taught completely, in sequence, with nothing assumed and nothing skipped.</p>
+    <hr class="goldrule">
+    <div class="record">
+      <div><span>PROGRAMME</span><strong>AlphaEdge AI-900</strong></div>
+      <div><span>DURATION</span><strong>52 weeks · 4 terms</strong></div>
+      <div><span>LOAD</span><strong>20–22 hrs/week · 1,100 hours</strong></div>
+      <div><span>MODULES</span><strong>13 · plus 17-week capstone</strong></div>
+      <div><span>AWARD</span><strong>AlphaEdge Master Certificate</strong></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+
+<nav class="toc" aria-label="Contents">
+  <p>THE PROGRAMME</p>
+  <ul>
+    <li><a href="#what">What this programme is</a></li>
+    <li><a href="#why">Why it exists</a></li>
+    <li><a href="#benefit">What you gain</a></li>
+    <li><a href="#who">Who it is for</a></li>
+    <li><a href="#method">The AlphaEdge method</a></li>
+    <li><a href="#map">Programme map</a></li>
+  </ul>
+  <p>TERM I · FOUNDATIONS</p>
+  <ul>
+    <li><a href="#m1"><span class="mc">M1</span>Software &amp; systems</a></li>
+    <li><a href="#m2"><span class="mc">M2</span>Mathematics for AI</a></li>
+    <li><a href="#m3"><span class="mc">M3</span>Data engineering</a></li>
+  </ul>
+  <p>TERM II · MACHINE LEARNING</p>
+  <ul>
+    <li><a href="#m4"><span class="mc">M4</span>Supervised &amp; ensembles</a></li>
+    <li><a href="#m5"><span class="mc">M5</span>Unsupervised &amp; Bayesian</a></li>
+    <li><a href="#m6"><span class="mc">M6</span>Time series &amp; causality</a></li>
+  </ul>
+  <p>TERM III · DEEP &amp; GENERATIVE</p>
+  <ul>
+    <li><a href="#m7"><span class="mc">M7</span>Neural architectures</a></li>
+    <li><a href="#m8"><span class="mc">M8</span>Transformers &amp; LLMs</a></li>
+    <li><a href="#m9"><span class="mc">M9</span>Generative, multimodal, RL</a></li>
+  </ul>
+  <p>TERM IV · APPLIED SYSTEMS</p>
+  <ul>
+    <li><a href="#m10"><span class="mc">M10</span>Retrieval &amp; RAG</a></li>
+    <li><a href="#m11"><span class="mc">M11</span>MCP &amp; tool infrastructure</a></li>
+    <li><a href="#m12"><span class="mc">M12</span>Agentic AI</a></li>
+    <li><a href="#m13"><span class="mc">M13</span>Production &amp; governance</a></li>
+  </ul>
+  <p>REFERENCE</p>
+  <ul>
+    <li><a href="#capstone">Capstone</a></li>
+    <li><a href="#assessment">Assessment</a></li>
+    <li><a href="#faculty">Faculty &amp; laboratory</a></li>
+    <li><a href="#index">Complete concept index</a></li>
+    <li><a href="#biblio">Bibliography</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- WHAT -->
+<section id="what">
+  <h2><span class="num">SECTION ONE</span>What this programme is</h2>
+
+  <p class="lead">AI-900 is a single continuous year of instruction that takes a learner from writing their first function to deploying a governed, monitored, multi-agent AI system into a regulated financial environment.</p>
+
+  <p>It is the complete version. The two shorter AlphaEdge programmes each solve part of the problem — PE-200 teaches a market professional to direct AI systems, and QF-600 teaches quantitative modelling to a technical depth. AI-900 contains the full ground: everything in both, plus the entire modern applied-AI stack that neither has room for. Retrieval architectures. The Model Context Protocol. Agentic systems, memory and orchestration. Generative models beyond language. Reinforcement learning in full. Production engineering, observability, security and regulatory governance.</p>
+
+  <p>The programme is organised as <strong>four terms of thirteen weeks</strong>, containing <strong>thirteen modules</strong>. Every module ends in a working system that is reviewed and defended. A capstone runs for the final seventeen weeks in parallel with teaching.</p>
+
+  <h4>The three commitments that define it</h4>
+  <ul>
+    <li><strong>Nothing is assumed.</strong> A learner who has never written code and has never seen a matrix can enter Week 1 and follow every step. The mathematics is rebuilt from the beginning. No module opens by saying "you will recall from your undergraduate course".</li>
+    <li><strong>Nothing is skipped.</strong> Section Fourteen of this document is a complete concept index — every named technique, architecture, protocol primitive, algorithm and failure mode the programme covers, listed so it can be checked line by line.</li>
+    <li><strong>Nothing is unverified.</strong> Every model must beat a declared baseline. Every result must survive a validation procedure designed for financial data. Every system must ship with an evaluation harness. A demonstration that cannot be measured is not a deliverable.</li>
+  </ul>
+
+  <div class="stats">
+    <div><b>52</b><span>Weeks of continuous instruction</span></div>
+    <div><b>13</b><span>Modules, each ending in a defended system</span></div>
+    <div><b>1,100</b><span>Contact and supervised laboratory hours</span></div>
+    <div><b>400+</b><span>Named concepts in the published index</span></div>
+    <div><b>1:6</b><span>Research mentor to learner ratio</span></div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <h2><span class="num">SECTION TWO</span>Why this programme exists</h2>
+
+  <p class="lead">Four gaps in how applied AI is currently taught. Each one produces a recognisable kind of failed practitioner, and AI-900 is designed against all four.</p>
+
+  <h4>Gap one — the tool course produces someone who cannot debug</h4>
+  <p>Short courses teach a framework. The learner can assemble a pipeline while the framework behaves as documented, and is helpless the moment it does not. They cannot read a stack trace into a cause, cannot tell a data problem from a model problem, and cannot evaluate whether a new library is better than the one they know. AI-900 teaches mechanism before tooling: backpropagation is implemented by hand before PyTorch appears, attention is built before a model is called, and a vector index is constructed before a vector database is used.</p>
+
+  <h4>Gap two — the theory course produces someone who cannot ship</h4>
+  <p>University sequences cover the mathematics rigorously and stop at the notebook. The graduate has never handled a malformed feed, never reconciled a position, never watched a model degrade in production, never written a monitoring alert, and has no idea what an audit trail is for. Term IV of AI-900 exists entirely to close this, and production work begins in Week 1 with version control and testing rather than being appended at the end.</p>
+
+  <h4>Gap three — almost nobody teaches the new integration layer</h4>
+  <p>The hardest and most commercially valuable problems in applied AI today are not model problems. They are integration problems: how a model reaches trustworthy information, how it calls a tool safely, how several agents coordinate without compounding each other's errors, how state persists, and how any of it is audited. Retrieval architecture, the <em class="term">Model Context Protocol</em>, agent orchestration and context engineering are treated here as first-class engineering disciplines with three full modules, not as a closing lecture.</p>
+
+  <h4>Gap four — validation is taught as an afterthought, and in finance that is fatal</h4>
+  <p>In most domains an over-optimistic model is embarrassing. In markets it is expensive, and the mechanism is specific: overlapping labels leak information across cross-validation folds, and a researcher who tests many variants will find an apparently significant one by construction <span class="ref">[López de Prado, 2018; Harvey, Liu &amp; Zhu, 2016]</span>. AI-900 teaches purged validation, deflation for multiple testing and pre-registration as core methodology in Module 6, then enforces them on every submission for the remaining thirty weeks.</p>
+
+  <div class="panel flagged">
+    <p><strong>The summary claim.</strong> There are good courses on machine learning. There are good courses on generative AI. There are good courses on quantitative finance. There is almost nothing that teaches all three as one continuous body of knowledge, with the modern integration layer included and with a validation standard strict enough for money. AI-900 is built to be that.</p>
+  </div>
+</section>
+
+<!-- BENEFIT -->
+<section id="benefit">
+  <h2><span class="num">SECTION THREE</span>What you gain</h2>
+
+  <h3><span>FOR THE LEARNER</span>Eight capabilities, each examinable</h3>
+  <ol>
+    <li><strong>You can build any standard model from scratch and explain why it works.</strong> Not call a library — derive the update rule, implement it, and verify the gradients numerically.</li>
+    <li><strong>You can tell a real result from a lucky one.</strong> The single scarcest skill in applied quantitative work, and the one that makes a graduate employable at a serious institution.</li>
+    <li><strong>You can build a retrieval system that does not fabricate.</strong> Grounded, cited, measured on faithfulness and context recall, and able to refuse.</li>
+    <li><strong>You can expose capability through MCP.</strong> Write a server, write a client, negotiate capabilities, handle transports and authorisation, and defend against tool poisoning and confused-deputy attacks.</li>
+    <li><strong>You can design an agent that is safe to run unattended.</strong> Planning, memory, tool use, state, human-in-the-loop gates, budget limits, and an evaluation suite that proves the guardrails hold.</li>
+    <li><strong>You can put a model into production and keep it alive.</strong> Registry, serving, observability, drift detection, rollback, cost control and incident response.</li>
+    <li><strong>You can pass a model risk review.</strong> Documentation, independent validation, explainability and the governance vocabulary a regulator or a bank's second line actually uses.</li>
+    <li><strong>You have a portfolio that proves all of it.</strong> Thirteen defended systems and one capstone, published, with code, evaluation results and honest failure analysis.</li>
+  </ol>
+
+  <h3><span>CAREER</span>Where graduates go</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Role</th><th>Modules that matter most</th><th>What the portfolio must show</th></tr></thead>
+      <tbody>
+        <tr><td>Quantitative researcher</td><td>M4–M6, M9</td><td>A validated strategy dossier with deflated statistics and capacity analysis</td></tr>
+        <tr><td>Machine learning engineer</td><td>M7–M9, M13</td><td>A trained model served in production with monitoring and rollback</td></tr>
+        <tr><td>AI / LLM engineer</td><td>M8, M10–M12</td><td>A grounded agentic system with an evaluation harness and threat model</td></tr>
+        <tr><td>Quantitative developer</td><td>M1, M3, M13</td><td>Tested, reconciled, fault-tolerant system code</td></tr>
+        <tr><td>Data engineer</td><td>M1, M3</td><td>A point-in-time pipeline with quality gates and lineage</td></tr>
+        <tr><td>Model risk / validation</td><td>M6, M13</td><td>An independent validation report on someone else's model</td></tr>
+        <tr><td>Surveillance &amp; RegTech</td><td>M4, M6, M13</td><td>A detection model with investigator-grade explainability</td></tr>
+        <tr><td>AI product lead</td><td>M10–M13</td><td>A system specification, cost model and governance design</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span>FOR THE EMPLOYER</span>What a sponsoring institution gets</h3>
+  <ul>
+    <li>A person who can be handed an ambiguous problem and will return a specification before returning a model.</li>
+    <li>Work that arrives documented, tested and reproducible, so it survives the person who wrote it.</li>
+    <li>Someone who will say "this result is not real" before a committee does.</li>
+    <li>Internal capacity to evaluate vendors rather than depend on them — the graduate can read a vendor's claims and test them.</li>
+    <li>A shortened path through model risk review, because the documentation standard is built into how they work.</li>
+  </ul>
+
+  <div class="panel">
+    <h4>What the programme does not promise</h4>
+    <p>AlphaEdge makes no representation about trading returns, profitability or income. Markets are adaptive and competitive, and a great many well-built strategies do not work. What the programme delivers is capability, a defensible portfolio and professional employability. Any education provider promising market outcomes is either mistaken or in breach of the advertising rules that apply to financial education in most jurisdictions — and we would rather say so plainly than compete on that ground.</p>
+  </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+  <h2><span class="num">SECTION FOUR</span>Who it is for, and how to enter</h2>
+
+  <div class="pair">
+    <div>
+      <h4>The career changer</h4>
+      <p>Commerce, management, accountancy or economics background. Understands markets, has never programmed. Enters through Bridge Fortnight. The largest single group, and the group the programme was designed for.</p>
+    </div>
+    <div>
+      <h4>The engineer entering finance</h4>
+      <p>Can code, does not know markets or the validation discipline. Term I moves fast for them; Modules 3, 6 and 13 are where the real work is.</p>
+    </div>
+    <div>
+      <h4>The market practitioner</h4>
+      <p>Trader, analyst, broking or risk professional. Has domain intuition and wants to build rather than buy. Terms II and III are the transformation.</p>
+    </div>
+    <div>
+      <h4>The institutional cohort</h4>
+      <p>Sponsored teams from brokers, asset managers, banks, exchanges or fintechs, taken through together with a capstone drawn from their own business problem.</p>
+    </div>
+  </div>
+
+  <h4>Entry</h4>
+  <ul>
+    <li><strong>Bridge Fortnight</strong> — two self-paced weeks before Week 1: environment setup, terminal and editor basics, arithmetic of returns and compounding, reading a contract specification, and a placement diagnostic. Free, and mandatory for every entrant regardless of background.</li>
+    <li><strong>Direct entry</strong> to Term II is available to holders of AlphaEdge QF-600, or on passing a technical screening covering Python, probability and linear algebra.</li>
+    <li><strong>Deferral over failure.</strong> A candidate who cannot clear the diagnostic is deferred to the next intake with targeted remediation rather than admitted and failed at Week 20.</li>
+  </ul>
+</section>
+
+<!-- METHOD -->
+<section id="method">
+  <h2><span class="num">SECTION FIVE</span>The AlphaEdge method</h2>
+
+  <p>Three proprietary frameworks structure the programme. Each is named, taught explicitly, and applied as a submission requirement rather than offered as advice.</p>
+
+  <h3><span>FRAMEWORK ONE</span>The Four-Layer Framework</h3>
+  <p>Every AI system built in this programme is decomposed into four layers, and work on a layer may not begin until the layer beneath it is demonstrably sound.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Layer</th><th>Question</th><th>Failure if neglected</th></tr></thead>
+      <tbody>
+        <tr><td>L1 · Specification</td><td>What exactly is being computed?</td><td>The system answers a different question and nobody notices</td></tr>
+        <tr><td>L2 · Grounding</td><td>Where does the evidence come from?</td><td>Confident fabrication of figures, dates and sources</td></tr>
+        <tr><td>L3 · Verification</td><td>How do we know it is right?</td><td>Silent degradation; no way to distinguish improvement from regression</td></tr>
+        <tr><td>L4 · Governance</td><td>What happens under attack or misuse?</td><td>Data leakage, manipulated output, regulatory exposure</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span>FRAMEWORK TWO</span>The Research Protocol</h3>
+  <p>Six mandatory steps on every quantitative submission from Module 6 onward: <strong>Register</strong> the hypothesis before touching data · <strong>Partition</strong> a sealed holdout opened once · <strong>Validate</strong> with purging, embargo and walk-forward only · <strong>Count</strong> every variant tested including abandoned ones · <strong>Deflate</strong> the performance statistic for the number of trials · <strong>Falsify</strong> in a written section titled <em>Why this may not work</em>.</p>
+  <div class="eq">
+    <span class="m">E[max SR<sub>N</sub>] ≈ (1 − γ)·Z<sup>−1</sup>[1 − 1/N] + γ·Z<sup>−1</sup>[1 − 1/(N·e)]</span>
+    <span class="g">The expected best Sharpe ratio across N trials when there is no skill at all. With enough attempts this exceeds 1.5 on pure noise. It is the benchmark against which every result in AI-900 is judged <span class="ref">[Bailey &amp; López de Prado, 2014]</span>.</span>
+  </div>
+
+  <h3><span>FRAMEWORK THREE</span>The Maturity Ladder</h3>
+  <p>Every system is graded on where it sits, and the target for a capstone is Level 4.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Level</th><th>State</th><th>Evidence required</th></tr></thead>
+      <tbody>
+        <tr><td>L0 · Demo</td><td>It runs once</td><td>A notebook</td></tr>
+        <tr><td>L1 · Reproducible</td><td>It runs for someone else</td><td>Pinned environment, seeds, documented data lineage</td></tr>
+        <tr><td>L2 · Measured</td><td>Quality is quantified</td><td>Evaluation harness, baseline comparison, regression suite</td></tr>
+        <tr><td>L3 · Robust</td><td>It survives bad input and attack</td><td>Failure tests, adversarial suite, documented threat model</td></tr>
+        <tr><td>L4 · Operable</td><td>It can be run by someone else in production</td><td>Monitoring, alerting, rollback, runbook, cost model, audit trail</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="map">
+  <h2><span class="num">SECTION SIX</span>Programme map</h2>
+
+  <div class="svgwrap">
+  <svg viewBox="0 0 800 210" role="img" aria-label="Programme map: four terms of thirteen weeks containing thirteen modules, with a capstone running from week thirty-six.">
+    <g font-family="IBM Plex Sans, sans-serif">
+      <line x1="10" y1="30" x2="790" y2="30" stroke="var(--rule-strong)" stroke-width="1"/>
+      <g font-size="9" fill="var(--ink-faint)">
+        <text x="10" y="21">W1</text><text x="205" y="21">W14</text><text x="400" y="21">W27</text>
+        <text x="595" y="21">W40</text><text x="768" y="21">W52</text>
+      </g>
+      <g>
+        <rect x="10" y="38" width="188" height="6" fill="var(--gold-bright)"/>
+        <rect x="205" y="38" width="188" height="6" fill="var(--gold-bright)"/>
+        <rect x="400" y="38" width="188" height="6" fill="var(--gold-bright)"/>
+        <rect x="595" y="38" width="195" height="6" fill="var(--gold-bright)"/>
+      </g>
+      <g font-size="10.5" font-weight="700" fill="var(--ink)">
+        <text x="10" y="60">TERM I</text><text x="205" y="60">TERM II</text><text x="400" y="60">TERM III</text><text x="595" y="60">TERM IV</text>
+      </g>
+      <g font-size="9.5" fill="var(--ink-soft)">
+        <text x="10" y="74">Foundations</text><text x="205" y="74">Machine learning</text>
+        <text x="400" y="74">Deep &amp; generative</text><text x="595" y="74">Applied AI systems</text>
+      </g>
+      <g>
+        <rect x="10" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="74" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="138" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="205" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="269" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="333" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="400" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="464" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="528" y="84" width="60" height="44" fill="var(--paper-2)" stroke="var(--ink)" stroke-width=".8"/>
+        <rect x="595" y="84" width="45" height="44" fill="var(--field)"/>
+        <rect x="644" y="84" width="45" height="44" fill="var(--field)"/>
+        <rect x="693" y="84" width="45" height="44" fill="var(--field)"/>
+        <rect x="742" y="84" width="48" height="44" fill="var(--field)"/>
+      </g>
+      <g font-size="9" font-weight="700" fill="var(--gold)">
+        <text x="40" y="99" text-anchor="middle">M1</text><text x="104" y="99" text-anchor="middle">M2</text><text x="168" y="99" text-anchor="middle">M3</text>
+        <text x="235" y="99" text-anchor="middle">M4</text><text x="299" y="99" text-anchor="middle">M5</text><text x="363" y="99" text-anchor="middle">M6</text>
+        <text x="430" y="99" text-anchor="middle">M7</text><text x="494" y="99" text-anchor="middle">M8</text><text x="558" y="99" text-anchor="middle">M9</text>
+      </g>
+      <g font-size="9" font-weight="700" fill="var(--gold-bright)">
+        <text x="617" y="99" text-anchor="middle">M10</text><text x="666" y="99" text-anchor="middle">M11</text>
+        <text x="715" y="99" text-anchor="middle">M12</text><text x="766" y="99" text-anchor="middle">M13</text>
+      </g>
+      <g font-size="8.5" fill="var(--ink-soft)" text-anchor="middle">
+        <text x="40" y="112">Software</text><text x="40" y="122">engineering</text>
+        <text x="104" y="112">Maths</text><text x="104" y="122">for AI</text>
+        <text x="168" y="112">Data</text><text x="168" y="122">engineering</text>
+        <text x="235" y="112">Supervised</text><text x="235" y="122">ensembles</text>
+        <text x="299" y="112">Unsupervised</text><text x="299" y="122">Bayesian</text>
+        <text x="363" y="112">Time series</text><text x="363" y="122">causality</text>
+        <text x="430" y="112">Neural</text><text x="430" y="122">architectures</text>
+        <text x="494" y="112">Transformers</text><text x="494" y="122">LLMs</text>
+        <text x="558" y="112">Generative</text><text x="558" y="122">RL</text>
+      </g>
+      <g font-size="8.5" fill="#A8B8CD" text-anchor="middle">
+        <text x="617" y="112">RAG</text><text x="617" y="122">retrieval</text>
+        <text x="666" y="112">MCP</text><text x="666" y="122">tools</text>
+        <text x="715" y="112">Agentic</text><text x="715" y="122">AI</text>
+        <text x="766" y="112">Production</text><text x="766" y="122">governance</text>
+      </g>
+      <rect x="528" y="146" width="262" height="28" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-dasharray="5 3"/>
+      <text x="659" y="164" text-anchor="middle" font-size="9.5" font-weight="600" fill="var(--gold)">Capstone research · 17 weeks in parallel from W36</text>
+      <text x="400" y="196" text-anchor="middle" font-size="8.5" fill="var(--ink-faint)">Research Protocol applies to every submission from Module 6 · Maturity Ladder applies from Module 7</text>
+    </g>
+  </svg>
+  </div>
+</section>
+
+<!-- ============ TERM I ============ -->
+<section id="m1">
+  <h2><span class="num">TERM I · MODULE 1 · WEEKS 1–4</span>Software and systems engineering</h2>
+  <p class="lead">Production discipline from the first week, not appended at the end. A learner who acquires these habits now will carry them for fifty-one more weeks; one who does not will produce work nobody can reuse.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>01</b>WEEK</div><div>
+      <h4>The machine, the shell and the language</h4>
+      <ul>
+        <li>How a computer executes a program: memory, processes, the file system, environment variables, exit codes.</li>
+        <li>The command line: navigation, pipes, redirection, permissions, process management, SSH.</li>
+        <li>Python fundamentals: types, control flow, functions, scope, mutability, comprehensions, iterators and generators, exceptions, context managers, decorators.</li>
+        <li>Data structures and their cost: lists, tuples, sets, dictionaries; hashing; time and space complexity in Big-O terms.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A command-line tool that processes a file, handles errors and exits correctly.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>02</b>WEEK</div><div>
+      <h4>Program design and correctness</h4>
+      <ul>
+        <li>Object-oriented design: classes, inheritance, composition, abstract base classes, dataclasses, protocols and duck typing.</li>
+        <li>Functional patterns: pure functions, immutability, higher-order functions, partial application.</li>
+        <li>Type hints and static checking; runtime validation with Pydantic.</li>
+        <li>Testing: unit, integration and property-based testing; fixtures, mocking, parametrisation, coverage; test-driven development on a real task.</li>
+        <li>Errors and logging: exception hierarchies, structured logging, log levels, traceability.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>03</b>WEEK</div><div>
+      <h4>Version control, environments and collaboration</h4>
+      <ul>
+        <li>Git in depth: the object model, commits, branching, merging, rebasing, conflict resolution, bisect, reflog, tags.</li>
+        <li>Collaboration: pull requests, code review practice, trunk-based against feature-branch workflow, semantic versioning, changelogs.</li>
+        <li>Environments and packaging: virtual environments, dependency resolution, lock files, build systems, publishing a package.</li>
+        <li>Containers: images, layers, Dockerfiles, volumes, networking, Compose; why reproducibility is a scientific requirement.</li>
+        <li>Continuous integration: automated test and lint pipelines on every commit.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A tested, containerised, pip-installable package with continuous integration.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>04</b>WEEK</div><div>
+      <h4>Performance, concurrency and computer architecture</h4>
+      <ul>
+        <li>Profiling: wall time, CPU time, memory; line profilers; finding the actual bottleneck instead of guessing.</li>
+        <li>NumPy: array memory layout, strides, views against copies, broadcasting, vectorisation, universal functions.</li>
+        <li>Concurrency and parallelism: threads, processes, the global interpreter lock, asyncio and the event loop, multiprocessing, shared memory.</li>
+        <li>Accelerators: what a GPU is, CUDA in outline, host-to-device transfer as the usual bottleneck.</li>
+        <li>Compiled acceleration: Numba, Cython, and calling C or Rust from Python.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A profiled, parallelised computation with a documented speedup and a benchmark suite proving it.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m2">
+  <h2><span class="num">TERM I · MODULE 2 · WEEKS 5–8</span>Mathematics for artificial intelligence</h2>
+  <p class="lead">Rebuilt from the beginning, motivated at every step by an object the learner will meet later in the programme rather than by an abstract example.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>05</b>WEEK</div><div>
+      <h4>Linear algebra</h4>
+      <ul>
+        <li>Vectors, norms, inner products, orthogonality, projection; vector spaces, basis, rank, null space.</li>
+        <li>Matrices as linear maps; multiplication, inverse, pseudo-inverse, determinant, trace, condition number.</li>
+        <li>Decompositions: LU, QR, Cholesky, eigendecomposition, singular value decomposition.</li>
+        <li>Applications built immediately: least squares by normal equations and by QR, principal component analysis by SVD, low-rank approximation.</li>
+        <li>Matrix calculus: gradients, Jacobians, Hessians, and the identities used in backpropagation.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>06</b>WEEK</div><div>
+      <h4>Calculus and optimisation</h4>
+      <ul>
+        <li>Limits, derivatives, the chain rule, partial derivatives, directional derivatives, Taylor expansion.</li>
+        <li>Convexity: convex sets and functions, why convexity guarantees a global optimum, and why deep learning abandons it.</li>
+        <li>Unconstrained optimisation: gradient descent, line search, Newton and quasi-Newton methods, conjugate gradient.</li>
+        <li>Constrained optimisation: Lagrange multipliers, the Karush–Kuhn–Tucker conditions, duality, quadratic programming, interior point methods.</li>
+        <li>Stochastic optimisation: mini-batch gradient descent, momentum, Nesterov acceleration, adaptive learning rates.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> Gradient descent, Newton's method and a constrained quadratic programme implemented and compared from first principles.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>07</b>WEEK</div><div>
+      <h4>Probability and statistical inference</h4>
+      <ul>
+        <li>Sample spaces, random variables, expectation, variance, covariance, moments, moment generating functions.</li>
+        <li>Distributions: Bernoulli, binomial, Poisson, uniform, normal, log-normal, exponential, gamma, beta, Student's t, chi-squared; heavy tails and the empirical failure of normality in financial returns.</li>
+        <li>Joint, marginal and conditional distributions; independence; Bayes' rule; the law of total probability.</li>
+        <li>Limit theorems: law of large numbers, central limit theorem, and where it does not apply.</li>
+        <li>Estimation: maximum likelihood, method of moments, bias, consistency, efficiency, the Cramér–Rao bound; bootstrap and jackknife.</li>
+        <li>Hypothesis testing: null and alternative, p-values and their correct interpretation, type I and type II error, statistical power, confidence intervals, multiple testing, Bonferroni and false discovery rate.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>08</b>WEEK</div><div>
+      <h4>Information theory, numerical methods and stochastic processes</h4>
+      <ul>
+        <li>Entropy, cross-entropy, Kullback–Leibler divergence, Jensen–Shannon divergence, mutual information; why cross-entropy is the standard classification loss.</li>
+        <li>Numerical computing: floating-point representation, catastrophic cancellation, numerical stability, the log-sum-exp trick, conditioning.</li>
+        <li>Root finding and integration: bisection, Newton–Raphson, quadrature, Monte Carlo integration, variance reduction, importance sampling.</li>
+        <li>Stochastic processes: random walks, martingales, Markov chains, Brownian motion, Itô's lemma, geometric Brownian motion, Ornstein–Uhlenbeck and mean reversion.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A numerical methods library with stability tests, plus a Monte Carlo simulation study of an estimator's sampling distribution.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m3">
+  <h2><span class="num">TERM I · MODULE 3 · WEEKS 9–13</span>Data engineering and financial market structure</h2>
+  <p class="lead">Where data comes from, how it is stored, how it is wrong, and how markets actually work. Five weeks, because more AI projects fail here than anywhere else.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>09</b>WEEK</div><div>
+      <h4>Data manipulation and relational thinking</h4>
+      <ul>
+        <li>pandas in depth: indexing, hierarchical indexes, joins and as-of joins, groupby and split-apply-combine, reshaping, rolling and expanding windows, time zones and session handling.</li>
+        <li>Polars and lazy evaluation; when the pandas model breaks down.</li>
+        <li>SQL to an advanced level: joins, aggregation, window functions, common table expressions, indexing strategy, query plans, normalisation.</li>
+        <li>Analytical engines and columnar formats: DuckDB, Parquet, Arrow, partitioning and predicate pushdown.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>10</b>WEEK</div><div>
+      <h4>Pipelines, storage systems and streaming</h4>
+      <ul>
+        <li>Storage models: relational, document, key-value, wide-column, time-series and vector databases, and the criteria for choosing.</li>
+        <li>Batch pipelines: extract-transform-load against extract-load-transform, idempotency, backfill, orchestration with a directed acyclic graph scheduler.</li>
+        <li>Streaming: publish-subscribe architecture, message brokers, exactly-once against at-least-once delivery, windowing, watermarks, event time against processing time.</li>
+        <li>Distributed processing in outline: partitioning, shuffling, and when a single machine is genuinely enough.</li>
+        <li>Data contracts, schema evolution, lineage and cataloguing.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>11</b>WEEK</div><div>
+      <h4>Data quality, validation and point-in-time architecture</h4>
+      <ul>
+        <li>The taxonomy of dirty data: missingness patterns, duplicates, outliers, unit and scale errors, encoding problems, timestamp errors.</li>
+        <li>Imputation and its dangers; why filling a gap can invent a signal.</li>
+        <li>Automated validation: schema checks, distributional checks, freshness and volume monitoring, quality gates that stop a pipeline.</li>
+        <li><strong>Point-in-time architecture:</strong> designing a store that answers "what was knowable on this date", including restatements, delayed disclosure and index reconstitution.</li>
+        <li>The bias audit as a formal checklist: survivorship, look-ahead, selection, and data snooping.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>12</b>WEEK</div><div>
+      <h4>Market microstructure</h4>
+      <ul>
+        <li>The limit order book, matching engines, price–time priority, order types, tick size, auctions, circuit mechanisms and halts.</li>
+        <li>Theory of the spread: adverse selection <span class="ref">[Glosten &amp; Milgrom, 1985]</span>, informed trading and linear price impact <span class="ref">[Kyle, 1985]</span>, inventory risk and quote skewing.</li>
+        <li>Liquidity measurement: quoted, effective and realised spread; depth; resilience; volume profiles and intraday seasonality.</li>
+        <li>Market participants: market makers, arbitrageurs, institutional flow, retail flow, high-frequency strategies.</li>
+        <li>Instrument architecture: cash equities, futures, options, currency and commodity contracts; specifications, expiry cycles, settlement, margining.</li>
+      </ul>
+      <div class="eq"><span class="m">ΔP = λ · q&nbsp;&nbsp;&nbsp;where&nbsp;&nbsp;λ = σ<sub>v</sub> / (2 σ<sub>u</sub>)</span>
+      <span class="g">Kyle's lambda — price impact per unit of signed order flow. The bridge between microstructure theory and the execution cost models of Module 13.</span></div>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>13</b>WEEK</div><div>
+      <h4>Financial data construction</h4>
+      <ul>
+        <li>Bar construction: tick, time, volume, dollar-value and imbalance bars, and why activity-based sampling yields better statistical properties than clock time <span class="ref">[López de Prado, 2018]</span>.</li>
+        <li>Corporate action adjustment; continuous futures and roll methodology; currency conversion and multi-market alignment.</li>
+        <li>Reference data: identifiers, mappings, sector classification, index membership history.</li>
+        <li>Alternative and unstructured data: filings, transcripts, news, web and satellite sources — with their licensing and bias implications.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A complete point-in-time market data platform with automated quality gates, lineage tracking and a written data dictionary. This is the substrate for the remaining thirty-nine weeks.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ TERM II ============ -->
+<section id="m4">
+  <h2><span class="num">TERM II · MODULE 4 · WEEKS 14–17</span>Supervised learning and ensembles</h2>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>14</b>WEEK</div><div>
+      <h4>Linear models and the learning problem</h4>
+      <ul>
+        <li>The formal setup: hypothesis space, loss function, empirical risk minimisation, generalisation, the bias–variance decomposition, the curse of dimensionality, the no-free-lunch theorem.</li>
+        <li>Linear regression: ordinary least squares, assumptions and their violations, heteroskedasticity, multicollinearity, robust standard errors.</li>
+        <li>Regularisation: ridge, lasso, elastic net; the geometry of why lasso selects; why shrinkage is near-mandatory at low signal-to-noise.</li>
+        <li>Classification: logistic regression, softmax regression, generalised linear models, link functions.</li>
+        <li>Metrics: accuracy, precision, recall, F1, ROC and area under curve, precision–recall curves, log loss, Brier score, and choosing a metric that matches economic cost.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>15</b>WEEK</div><div>
+      <h4>Non-linear and instance-based methods</h4>
+      <ul>
+        <li>k-nearest neighbours; distance metrics; the curse of dimensionality made concrete.</li>
+        <li>Naive Bayes and generative against discriminative classification.</li>
+        <li>Support vector machines: maximum margin, the hinge loss, soft margin, the kernel trick, radial basis and polynomial kernels; support vector regression.</li>
+        <li>Decision trees: splitting criteria, Gini and entropy, pruning, regression trees, handling categorical and missing values.</li>
+        <li>Feature engineering and preprocessing: scaling, encoding, binning, interactions, polynomial features, target encoding and its leakage risk.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>16</b>WEEK</div><div>
+      <h4>Ensemble methods</h4>
+      <ul>
+        <li>Why ensembles work: variance reduction, bias reduction, and the role of decorrelation.</li>
+        <li>Bagging and random forests <span class="ref">[Breiman, 2001]</span>; out-of-bag estimation; extremely randomised trees.</li>
+        <li>Boosting: AdaBoost, gradient boosting as functional gradient descent <span class="ref">[Friedman, 2001]</span>, and modern implementations with their differences — regularised objective and sparsity handling <span class="ref">[Chen &amp; Guestrin, 2016]</span>, leaf-wise growth and histogram binning, ordered boosting for categorical data.</li>
+        <li>Stacking, blending and calibrated meta-learners.</li>
+        <li>Why well-tuned gradient boosting remains the benchmark on tabular data, and therefore the baseline every deep model in Term III must beat.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>17</b>WEEK</div><div>
+      <h4>Model selection, tuning and calibration</h4>
+      <ul>
+        <li>Hyperparameter optimisation: grid and random search, Bayesian optimisation with Gaussian processes and tree-structured Parzen estimators, successive halving and Hyperband, multi-objective search.</li>
+        <li>Imbalanced learning: resampling, synthetic oversampling, class weighting, threshold tuning, and the metrics that survive imbalance.</li>
+        <li>Probability calibration: Platt scaling, isotonic regression, reliability diagrams; why an uncalibrated classifier cannot size a position.</li>
+        <li><strong>Conformal prediction:</strong> distribution-free prediction intervals with finite-sample coverage guarantees — the most practically useful uncertainty tool for deployed models.</li>
+        <li>Interpretability: permutation importance, partial dependence and individual conditional expectation, Shapley additive explanations <span class="ref">[Lundberg &amp; Lee, 2017]</span>, local surrogate models <span class="ref">[Ribeiro et al., 2016]</span>, counterfactual explanations, and the limits of each under feature dependence.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A tuned, calibrated, interpreted classifier with conformal prediction intervals, benchmarked against three baselines.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m5">
+  <h2><span class="num">TERM II · MODULE 5 · WEEKS 18–21</span>Unsupervised, probabilistic and Bayesian learning</h2>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>18</b>WEEK</div><div>
+      <h4>Clustering and density estimation</h4>
+      <ul>
+        <li>k-means and k-means++, the elbow and silhouette criteria; k-medoids.</li>
+        <li>Hierarchical clustering: linkage criteria, dendrograms, cluster distance metrics.</li>
+        <li>Density-based clustering: DBSCAN, HDBSCAN, and clusters of arbitrary shape.</li>
+        <li>Gaussian mixture models and the expectation–maximisation algorithm derived in full.</li>
+        <li>Kernel density estimation; anomaly and novelty detection with isolation forests, one-class support vector machines and local outlier factor.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>19</b>WEEK</div><div>
+      <h4>Dimensionality reduction and representation</h4>
+      <ul>
+        <li>Principal component analysis: derivation by variance maximisation and by reconstruction error; kernel PCA; probabilistic PCA.</li>
+        <li>Independent component analysis; non-negative matrix factorisation; factor analysis.</li>
+        <li>Manifold learning: multidimensional scaling, Isomap, locally linear embedding, t-SNE and UMAP — with an honest account of what their visualisations do and do not mean.</li>
+        <li>Matrix factorisation and collaborative filtering; random projection and the Johnson–Lindenstrauss lemma.</li>
+        <li><strong>Correlation matrix denoising:</strong> random matrix theory shows most eigenvalues of a sample correlation matrix are noise, and filtering them materially improves downstream optimisation <span class="ref">[Laloux et al., 1999]</span>.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>20</b>WEEK</div><div>
+      <h4>Bayesian machine learning</h4>
+      <ul>
+        <li>The Bayesian framework: priors, likelihood, posterior, predictive distribution, conjugacy, model evidence.</li>
+        <li>Bayesian linear and logistic regression; hierarchical and multilevel models; partial pooling and shrinkage.</li>
+        <li>Inference: Markov chain Monte Carlo, Metropolis–Hastings, Gibbs sampling, Hamiltonian Monte Carlo and the no-U-turn sampler; convergence diagnostics.</li>
+        <li>Variational inference: the evidence lower bound, mean-field approximation, stochastic variational inference — the mathematics that reappears in Module 9's variational autoencoder.</li>
+        <li>Gaussian processes: kernels, hyperparameter learning, and Bayesian optimisation as an application.</li>
+        <li>Probabilistic programming in practice.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>21</b>WEEK</div><div>
+      <h4>Learning paradigms beyond supervision</h4>
+      <ul>
+        <li>Semi-supervised learning: self-training, co-training, label propagation, consistency regularisation.</li>
+        <li>Self-supervised learning: pretext tasks, contrastive objectives, InfoNCE, SimCLR and momentum contrast, masked reconstruction — the paradigm underlying every modern foundation model.</li>
+        <li>Transfer learning and domain adaptation: feature extraction, fine-tuning, covariate shift correction, domain-adversarial training.</li>
+        <li>Active learning: uncertainty, margin and query-by-committee sampling; the economics of labelling.</li>
+        <li>Multi-task and meta-learning: hard and soft parameter sharing, model-agnostic meta-learning, few-shot learning.</li>
+        <li>Online and incremental learning; concept drift adaptation; multi-armed bandits, upper confidence bound, Thompson sampling and contextual bandits.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> An unsupervised regime detection system with a Bayesian uncertainty layer, validated against known historical regimes.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m6">
+  <h2><span class="num">TERM II · MODULE 6 · WEEKS 22–26</span>Time series, causality and the validation discipline</h2>
+  <p class="lead">The methodological core of the entire programme. Everything submitted after Week 26 must comply with what is taught here.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>22</b>WEEK</div><div>
+      <h4>Classical time series analysis</h4>
+      <ul>
+        <li>Stationarity, unit roots, augmented Dickey–Fuller and KPSS tests; autocorrelation and partial autocorrelation functions.</li>
+        <li>Autoregressive and moving average models, ARMA, ARIMA, SARIMA, ARIMAX; Box–Jenkins identification; information criteria.</li>
+        <li>Decomposition: trend, seasonality, residual; STL; exponential smoothing and the Holt–Winters family.</li>
+        <li>Multivariate models: vector autoregression, impulse response, Granger causality, cointegration and the Engle–Granger and Johansen procedures, vector error correction and the theory of statistical arbitrage pairs.</li>
+        <li>Spectral analysis: Fourier and wavelet decomposition of a price series.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>23</b>WEEK</div><div>
+      <h4>State space models and volatility</h4>
+      <ul>
+        <li>State space representation; the Kalman filter derived in full; the extended and unscented variants; particle filters.</li>
+        <li>Applications: dynamic hedge ratios, time-varying beta, latent regime and trend extraction.</li>
+        <li>Hidden Markov models: forward–backward, Viterbi, Baum–Welch; regime switching; change-point detection.</li>
+        <li>Volatility modelling: ARCH <span class="ref">[Engle, 1982]</span>, GARCH <span class="ref">[Bollerslev, 1986]</span>, EGARCH, GJR-GARCH, stochastic volatility; realised volatility from intraday data; the heterogeneous autoregressive model <span class="ref">[Corsi, 2009]</span>.</li>
+        <li>Range-based volatility estimators <span class="ref">[Parkinson, 1980; Garman &amp; Klass, 1980; Yang &amp; Zhang, 2000]</span>.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>24</b>WEEK</div><div>
+      <h4>Causal inference</h4>
+      <p>Correlation is what machine learning finds. Causation is what a decision requires. Most practitioners never learn the difference formally.</p>
+      <ul>
+        <li>The potential outcomes framework; the fundamental problem of causal inference; average and conditional treatment effects.</li>
+        <li>Causal graphs: directed acyclic graphs, d-separation, confounders, colliders, mediators, the back-door and front-door criteria <span class="ref">[Pearl, 2009]</span>.</li>
+        <li>Identification strategies: randomisation, matching and propensity scores, inverse probability weighting, instrumental variables, difference-in-differences, regression discontinuity, synthetic control.</li>
+        <li>Causal machine learning: double machine learning, causal forests, uplift modelling.</li>
+        <li>Sensitivity analysis and the honest statement of untestable assumptions.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>25</b>WEEK</div><div>
+      <h4>Validation that does not lie</h4>
+      <p>The week opens with every learner producing a spectacular and entirely fictitious result. They spend the week learning why it was fictitious.</p>
+      <ul>
+        <li>Why standard k-fold cross-validation is invalid on overlapping financial labels; the mechanism of leakage.</li>
+        <li><strong>Purging, embargo, walk-forward and combinatorial purged cross-validation</strong> — generating a distribution of backtest paths rather than a single number <span class="ref">[López de Prado, 2018]</span>.</li>
+        <li>Labelling methods: fixed horizon, the triple-barrier method, meta-labelling, sample weighting by label uniqueness.</li>
+        <li>Fractional differentiation: retaining memory while satisfying stationarity.</li>
+        <li><strong>Multiple testing and deflation:</strong> the expected maximum Sharpe ratio under the null, the deflated Sharpe ratio <span class="ref">[Bailey &amp; López de Prado, 2014]</span>, the probability of backtest overfitting <span class="ref">[Bailey et al., 2016]</span>, the reality check and superior predictive ability tests <span class="ref">[White, 2000; Hansen, 2005]</span>, the stationary bootstrap <span class="ref">[Politis &amp; Romano, 1994]</span>, and the argument that conventional significance thresholds are far too lenient for this field <span class="ref">[Harvey, Liu &amp; Zhu, 2016]</span>.</li>
+      </ul>
+      <div class="eq"><span class="m">(1 − B)<sup>d</sup> X<sub>t</sub> = Σ<sub>k≥0</sub> ω<sub>k</sub> X<sub>t−k</sub>&nbsp;&nbsp;·&nbsp;&nbsp;ω<sub>k</sub> = −ω<sub>k−1</sub>(d − k + 1)/k</span>
+      <span class="g">Fractional differencing at real-valued order d. Learners search for the smallest d passing a stationarity test, preserving maximum memory — a materially better model input than the first difference.</span></div>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>26</b>WEEK</div><div>
+      <h4>Feature engineering for markets, and the Research Protocol</h4>
+      <ul>
+        <li>Feature families: price and return across horizons, volatility, volume, microstructure, cross-sectional rank and neutralisation, calendar and event features, macro and flow features, sentiment features.</li>
+        <li>Feature selection under correlation: substitution effects, clustered importance, mean decrease accuracy against mean decrease impurity.</li>
+        <li>Signal evaluation: information coefficient, decay and half-life, turnover, quantile spread analysis.</li>
+        <li><strong>Formal adoption of the AlphaEdge Research Protocol</strong> — pre-registration, sealed holdout, trial logging, deflation and mandatory falsification, binding on every submission for the remaining twenty-six weeks.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A cross-sectional predictive model with purged walk-forward validation, deflated performance statistics, and a full log of every hypothesis tested including failures.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ TERM III ============ -->
+<section id="m7">
+  <h2><span class="num">TERM III · MODULE 7 · WEEKS 27–30</span>Neural networks and architectures</h2>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>27</b>WEEK</div><div>
+      <h4>Neural networks from first principles</h4>
+      <ul>
+        <li>The perceptron; the multilayer perceptron; the universal approximation theorem and what it does not promise.</li>
+        <li>Activation functions: sigmoid, tanh, ReLU, leaky ReLU, ELU, GELU, SiLU, softmax; the dying ReLU problem.</li>
+        <li>Backpropagation derived and implemented by hand in NumPy; gradients verified numerically against finite differences before automatic differentiation is permitted.</li>
+        <li>Loss functions: mean squared and absolute error, Huber, cross-entropy, focal, contrastive, triplet; and designing a loss around economic cost.</li>
+        <li>Initialisation: Xavier and He schemes; vanishing and exploding gradients.</li>
+      </ul>
+      <div class="eq"><span class="m">δ<sup>(l)</sup> = (W<sup>(l+1)ᵀ</sup> δ<sup>(l+1)</sup>) ⊙ σ′(z<sup>(l)</sup>)&nbsp;&nbsp;·&nbsp;&nbsp;∂L/∂W<sup>(l)</sup> = δ<sup>(l)</sup>(a<sup>(l−1)</sup>)ᵀ</span>
+      <span class="g">The backpropagation recursion. Implemented directly, then verified, then and only then replaced by a framework.</span></div>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>28</b>WEEK</div><div>
+      <h4>Training deep networks</h4>
+      <ul>
+        <li>Optimisers: stochastic gradient descent, momentum, Nesterov, AdaGrad, RMSProp, Adam <span class="ref">[Kingma &amp; Ba, 2015]</span>, AdamW <span class="ref">[Loshchilov &amp; Hutter, 2019]</span>, LAMB; second-order methods in outline.</li>
+        <li>Learning rate schedules: step, cosine, warmup, cyclical, one-cycle; gradient clipping.</li>
+        <li>Normalisation: batch, layer, group, instance and RMS normalisation; why layer normalisation dominates in transformers.</li>
+        <li>Regularisation: dropout <span class="ref">[Srivastava et al., 2014]</span>, weight decay, label smoothing, mixup, early stopping, data augmentation.</li>
+        <li>Residual connections and why depth became trainable <span class="ref">[He et al., 2016]</span>.</li>
+        <li>The PyTorch workflow end to end: tensors, autograd, modules, datasets and dataloaders, training loops, mixed precision, gradient accumulation, checkpointing, distributed data parallel, experiment tracking.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>29</b>WEEK</div><div>
+      <h4>Convolutional and sequence architectures</h4>
+      <ul>
+        <li>Convolution: kernels, stride, padding, dilation, receptive field; pooling; 1-D, 2-D and 3-D convolution.</li>
+        <li>Architecture lineage: LeNet, AlexNet, VGG, Inception, ResNet, DenseNet, EfficientNet, MobileNet; depthwise separable convolution.</li>
+        <li>Computer vision tasks: classification, detection, segmentation, transfer learning from pretrained backbones.</li>
+        <li>Recurrent networks: vanilla RNN, LSTM <span class="ref">[Hochreiter &amp; Schmidhuber, 1997]</span>, GRU, bidirectional and stacked variants; truncated backpropagation through time.</li>
+        <li>Sequence-to-sequence with encoder–decoder and additive attention; teacher forcing and exposure bias.</li>
+        <li>Temporal convolutional networks; dilated causal convolution; WaveNet-style architectures.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>30</b>WEEK</div><div>
+      <h4>Graph neural networks and deep learning on market data</h4>
+      <ul>
+        <li>Graph representation: adjacency, degree and Laplacian matrices; node, edge and graph-level tasks.</li>
+        <li>Graph convolutional networks, GraphSAGE, graph attention networks, message passing; over-smoothing and its mitigation.</li>
+        <li>Financial graphs: supply chains, ownership structures, correlation networks, transaction graphs for fraud and anomaly detection.</li>
+        <li><strong>Deep learning applied directly to the order book:</strong> convolutional and recurrent models on limit order book states <span class="ref">[Zhang et al., 2019]</span>, and the finding that price-formation features learned this way generalise across instruments <span class="ref">[Sirignano &amp; Cont, 2019]</span>.</li>
+        <li>The financial reality check: why squared error on price levels yields a lagged copy of the input; sign against magnitude against distribution; and mandatory baselining against persistence and against the Module 4 boosted-tree benchmark.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A deep sequence model on market data with a full walk-forward evaluation and an explicit, honestly reported comparison against the classical baseline.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m8">
+  <h2><span class="num">TERM III · MODULE 8 · WEEKS 31–34</span>Transformers and large language models</h2>
+  <p class="lead">Built from the inside out. By the end of this module a learner can implement a small transformer, fine-tune a large one, align it, quantise it and serve it.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>31</b>WEEK</div><div>
+      <h4>Transformer internals</h4>
+      <ul>
+        <li>Tokenisation: byte-pair encoding, WordPiece, SentencePiece, unigram; vocabulary size trade-offs; out-of-vocabulary and multilingual behaviour.</li>
+        <li>Embeddings: token, positional and segment; tied embeddings.</li>
+        <li>Attention: scaled dot-product, multi-head, causal masking, cross-attention; complexity and the quadratic bottleneck.</li>
+        <li>Positional schemes: sinusoidal, learned, relative, rotary embeddings, ALiBi; length extrapolation.</li>
+        <li>The block: feed-forward layers, residual stream, pre-norm against post-norm, layer normalisation and RMSNorm.</li>
+        <li>Efficiency: grouped-query and multi-query attention, key-value caching, FlashAttention, sliding window and sparse attention, mixture-of-experts routing.</li>
+        <li>Architecture families: encoder-only, decoder-only, encoder–decoder, and what each is for.</li>
+      </ul>
+      <div class="eq"><span class="m">Attention(Q, K, V) = softmax( QKᵀ / √d<sub>k</sub> ) V</span>
+      <span class="g">The operation at the centre of the module. Learners implement it, then remove the √d<sub>k</sub> scaling and observe the softmax saturate — understanding by controlled destruction.</span></div>
+      <p class="ship"><b>Ships:</b> A small transformer trained from scratch on a financial text corpus.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>32</b>WEEK</div><div>
+      <h4>Pretraining, scaling and emergent behaviour</h4>
+      <ul>
+        <li>Objectives: causal language modelling, masked language modelling, span corruption, next-sentence and contrastive objectives.</li>
+        <li>Data: corpus construction, deduplication, filtering, contamination, tokenisation budget, curriculum.</li>
+        <li>Scaling laws and compute-optimal allocation between parameters and data <span class="ref">[Kaplan et al., 2020; Hoffmann et al., 2022]</span>.</li>
+        <li>In-context learning and few-shot behaviour <span class="ref">[Brown et al., 2020]</span>; the debate over emergent capability and measurement artefacts.</li>
+        <li>Distributed training: data, tensor, pipeline and sequence parallelism; ZeRO sharding; activation checkpointing; mixed precision.</li>
+        <li>Evaluation: perplexity, benchmark suites, contamination and the limits of leaderboard scores.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>33</b>WEEK</div><div>
+      <h4>Adaptation and alignment</h4>
+      <ul>
+        <li>Full fine-tuning and its cost; catastrophic forgetting.</li>
+        <li>Parameter-efficient methods: adapters, prefix tuning, prompt tuning, low-rank adaptation <span class="ref">[Hu et al., 2022]</span> and its quantised form <span class="ref">[Dettmers et al., 2023]</span>; rank selection and merge strategies.</li>
+        <li>Instruction tuning: dataset construction, formatting, mixing, synthetic data generation and its pitfalls.</li>
+        <li>Alignment: reinforcement learning from human feedback with reward modelling and PPO <span class="ref">[Ouyang et al., 2022]</span>; direct preference optimisation and its relatives; constitutional and AI-feedback approaches; reward hacking and over-optimisation.</li>
+        <li>Continued pretraining on domain corpora; model merging and model soups.</li>
+        <li>The decision framework: when to prompt, when to retrieve, when to fine-tune, and when to do nothing.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A domain-adapted open-weight model, fine-tuned with LoRA on a financial corpus and evaluated against the base model.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>34</b>WEEK</div><div>
+      <h4>Inference, serving and prompt engineering</h4>
+      <ul>
+        <li>Decoding: greedy, beam search, temperature, top-k, top-p, min-p, repetition penalties, constrained and grammar-guided decoding, structured output enforcement.</li>
+        <li>Compression: post-training quantisation, quantisation-aware training, GPTQ and AWQ, GGUF formats, pruning, knowledge distillation.</li>
+        <li>Serving: continuous batching, paged attention, speculative decoding, prefix caching, throughput against latency, the cost model per token.</li>
+        <li><strong>Prompt engineering as a measured discipline:</strong> role and constraint design, output contracts, exemplar selection and ordering <span class="ref">[Min et al., 2022]</span>, chain-of-thought <span class="ref">[Wei et al., 2022]</span>, self-consistency <span class="ref">[Wang et al., 2023]</span>, least-to-most decomposition <span class="ref">[Zhou et al., 2023]</span>, self-critique, and prompt versioning with regression tests.</li>
+        <li>Hallucination: taxonomy and mechanism <span class="ref">[Ji et al., 2023]</span>; long-context degradation <span class="ref">[Liu et al., 2024]</span>; detection strategies.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A quantised model served locally with structured output enforcement, a versioned prompt library, and a measured latency and cost profile.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m9">
+  <h2><span class="num">TERM III · MODULE 9 · WEEKS 35–39</span>Generative models, multimodal AI and reinforcement learning</h2>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>35</b>WEEK</div><div>
+      <h4>Generative modelling beyond language</h4>
+      <ul>
+        <li>The generative problem: explicit against implicit density, tractable against approximate likelihood.</li>
+        <li>Autoencoders and variational autoencoders: the evidence lower bound, the reparameterisation trick, posterior collapse, disentanglement.</li>
+        <li>Generative adversarial networks: the minimax objective, mode collapse, Wasserstein GAN, conditional GAN, training instability.</li>
+        <li>Normalising flows: invertible transformations, exact likelihood, coupling layers.</li>
+        <li>Diffusion models: the forward noising process, denoising objectives, score matching, classifier-free guidance, samplers and latent diffusion.</li>
+        <li>Financial applications and their dangers: synthetic data generation for augmentation and stress testing, and why a generative model trained on a single price history cannot create new information.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>36</b>WEEK</div><div>
+      <h4>Representation learning and multimodal systems</h4>
+      <ul>
+        <li>Embeddings: word2vec and GloVe, contextual embeddings, sentence and document embeddings, instruction-tuned embedding models.</li>
+        <li>Contrastive learning: InfoNCE, in-batch negatives, hard negative mining, temperature; training a domain embedding model.</li>
+        <li>Vision–language alignment: contrastive image–text pretraining, vision encoders, projection into a language model, visual instruction tuning.</li>
+        <li>Document AI: layout-aware parsing, table extraction from financial statements, optical character recognition, chart and figure understanding, handwriting.</li>
+        <li>Audio and speech: transcription, diarisation, and processing earnings calls end to end.</li>
+        <li>Cross-modal retrieval and unified embedding spaces.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A document understanding pipeline converting a scanned filing into structured, validated records. Capstone research begins this week.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>37</b>WEEK</div><div>
+      <h4>Reinforcement learning foundations</h4>
+      <ul>
+        <li>Markov decision processes: states, actions, rewards, transitions, discounting, policies, value and action-value functions, the Bellman equations.</li>
+        <li>Dynamic programming: policy evaluation, policy iteration, value iteration.</li>
+        <li>Model-free prediction and control: Monte Carlo methods, temporal difference learning, TD(λ), eligibility traces, SARSA, Q-learning.</li>
+        <li>Exploration: epsilon-greedy, optimism under uncertainty, entropy regularisation; the exploration–exploitation trade-off.</li>
+        <li>Function approximation and the deadly triad; deep Q-networks and their stabilising mechanisms <span class="ref">[Mnih et al., 2015]</span>; double, duelling and prioritised replay variants; distributional and rainbow approaches.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>38</b>WEEK</div><div>
+      <h4>Policy methods and advanced reinforcement learning</h4>
+      <ul>
+        <li>Policy gradients: REINFORCE, baselines, the advantage function, actor–critic, A2C and A3C.</li>
+        <li>Trust region and proximal methods: TRPO, PPO <span class="ref">[Schulman et al., 2017]</span> — the algorithm that also powers language model alignment.</li>
+        <li>Continuous control: DDPG, TD3, soft actor–critic and maximum entropy reinforcement learning.</li>
+        <li>Model-based reinforcement learning; world models; Monte Carlo tree search.</li>
+        <li>Offline reinforcement learning and distribution shift; imitation learning and inverse reinforcement learning.</li>
+        <li>Multi-agent reinforcement learning: cooperation, competition, non-stationarity, self-play.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>39</b>WEEK</div><div>
+      <h4>Reinforcement learning and deep learning applied to markets</h4>
+      <ul>
+        <li><strong>Honest scope.</strong> Reinforcement learning applied to directional alpha on noisy low-frequency data overfits severely. Its documented successes are in <em class="term">optimal execution</em> <span class="ref">[Nevmyvaka et al., 2006]</span> and <em class="term">hedging under transaction costs</em> <span class="ref">[Ritter, 2017]</span>; the broader literature is surveyed critically <span class="ref">[Hambly et al., 2023]</span>.</li>
+        <li><strong>Deep hedging:</strong> learning a hedging policy directly by minimising a convex risk measure of terminal wealth under costs and discrete rebalancing <span class="ref">[Bühler et al., 2019]</span>.</li>
+        <li>Derivatives foundations for engineers: Black–Scholes–Merton, the Greeks, implied volatility, the surface, skew and term structure; neural pricing surrogates; Greeks by automatic differentiation.</li>
+        <li>Reward design failure modes; simulator fidelity; and the standard pathology in which an agent learns to exploit a naive simulator rather than the market.</li>
+      </ul>
+      <div class="eq"><span class="m">min<sub>θ</sub> ρ( −Z + Σ<sub>k</sub> δ<sup>θ</sup><sub>k</sub>·ΔS<sub>k</sub> − Σ<sub>k</sub> c(δ<sup>θ</sup><sub>k</sub> − δ<sup>θ</sup><sub>k−1</sub>) )</span>
+      <span class="g">The deep hedging objective. Because costs sit inside the objective, the learned policy trades less than a textbook delta hedge — which is what practitioners actually do and what closed-form theory cannot express.</span></div>
+      <p class="ship"><b>Module artefact:</b> A reinforcement learning execution agent benchmarked against scheduled strategies, plus a deep hedging notebook demonstrating cost-aware policy learning.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ TERM IV ============ -->
+<section id="m10">
+  <h2><span class="num">TERM IV · MODULE 10 · WEEKS 40–42</span>Retrieval and retrieval-augmented generation</h2>
+  <p class="lead">How a model reaches trustworthy information. In financial applications this is the difference between a useful system and a liability.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>40</b>WEEK</div><div>
+      <h4>Search, indexing and the retrieval layer</h4>
+      <ul>
+        <li>Information retrieval foundations: the inverted index, term frequency–inverse document frequency, BM25, query expansion.</li>
+        <li>Dense retrieval: bi-encoders, embedding model selection, dimensionality and storage cost.</li>
+        <li>Vector indexes in depth: exact flat search, inverted file indexes, hierarchical navigable small world graphs, product quantisation, the recall–latency–memory trade-off; filtered and hybrid search.</li>
+        <li>Vector stores and their operational characteristics; metadata filtering; multi-tenancy; incremental and streaming indexing.</li>
+        <li>Reranking: cross-encoders, listwise rerankers, late-interaction models; measuring the gain a reranker actually provides.</li>
+        <li>Retrieval metrics: recall at k, mean reciprocal rank, normalised discounted cumulative gain — measured separately from generation quality.</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A vector index implemented from scratch, then benchmarked against a production vector database.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>41</b>WEEK</div><div>
+      <h4>RAG architectures</h4>
+      <ul>
+        <li>The base architecture and why it exists <span class="ref">[Lewis et al., 2020]</span>: grounding, freshness, attribution, and cost against fine-tuning.</li>
+        <li>Ingestion: layout-aware parsing, table and figure handling, chunking strategies — fixed, recursive, semantic, sentence-window, parent-document, and hierarchical summarisation.</li>
+        <li>Contextual enrichment: prepending document-level context to chunks before embedding, metadata attachment, and the measured retrieval gain.</li>
+        <li>Query transformation: rewriting, expansion, decomposition, hypothetical document embeddings, multi-query and fusion ranking, routing across multiple corpora.</li>
+        <li>Advanced patterns: graph-based retrieval over extracted entities and relations, self-reflective RAG that critiques its own retrieval, corrective RAG with fallback search, and agentic RAG that plans multi-step retrieval.</li>
+        <li>The long-context question: when a large context window replaces retrieval and when it does not, with attention to cost, latency and mid-context degradation <span class="ref">[Liu et al., 2024]</span>.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>42</b>WEEK</div><div>
+      <h4>Evaluating and hardening a RAG system</h4>
+      <ul>
+        <li>The evaluation framework: context precision and recall, faithfulness, answer relevance, citation accuracy, and measured abstention on out-of-corpus questions.</li>
+        <li>Golden dataset construction; synthetic question generation and its biases; human annotation and inter-rater agreement.</li>
+        <li>Automated judging and its documented position, verbosity and self-preference biases <span class="ref">[Zheng et al., 2023]</span>; calibrating a judge against human labels before trusting it.</li>
+        <li>Diagnosis: separating retrieval failure from generation failure from chunking failure — the single most valuable debugging skill in this module.</li>
+        <li><strong>Point-in-time retrieval for finance:</strong> timestamp integrity so a system can never retrieve a document that did not exist at the decision time, and the look-ahead trap of publication against event timestamp.</li>
+        <li>Security: indirect prompt injection through retrieved documents <span class="ref">[Greshake et al., 2023]</span>; treating all retrieved text as untrusted data.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A grounded financial research assistant with page-level citations, a published evaluation harness scoring five metrics, point-in-time guarantees and an injection test suite.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m11">
+  <h2><span class="num">TERM IV · MODULE 11 · WEEKS 43–45</span>The Model Context Protocol and tool infrastructure</h2>
+  <p class="lead">The integration layer. MCP is an open standard for connecting AI systems to tools, data and prompts through a common interface, and it is taught here as a protocol to be implemented rather than a product to be consumed.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>43</b>WEEK</div><div>
+      <h4>Protocol foundations and server construction</h4>
+      <ul>
+        <li>The integration problem MCP solves: without a standard, every model–tool pair is bespoke, and capability cannot be reused across applications.</li>
+        <li>Architecture: hosts, clients and servers; the one-client-per-server relationship; separation of the application from the capability provider.</li>
+        <li>Message layer: JSON-RPC request, response and notification; identifiers, error objects and the lifecycle of a call.</li>
+        <li>Connection lifecycle: initialisation, capability negotiation, protocol version agreement, operation, shutdown.</li>
+        <li><strong>Server primitives:</strong> <em class="term">tools</em> (model-invoked actions with typed input schemas), <em class="term">resources</em> (application-controlled context identified by URI, with subscriptions and templates), and <em class="term">prompts</em> (user-invoked templates).</li>
+        <li><strong>Client primitives:</strong> <em class="term">sampling</em> (a server requesting a model completion through the host), <em class="term">roots</em> (filesystem or URI boundaries granted to a server), and <em class="term">elicitation</em> (a server requesting structured input from the user mid-operation).</li>
+      </ul>
+      <p class="ship"><b>Ships:</b> A working MCP server exposing tools, resources and prompts over a documented schema.</p>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>44</b>WEEK</div><div>
+      <h4>Transports, clients, authorisation and deployment</h4>
+      <ul>
+        <li>Transports: standard input/output for local processes, and streamable HTTP with server-sent events for remote servers; session management, resumability and message replay.</li>
+        <li>Building a client: server discovery and configuration, capability inspection, tool registration into a model context, result handling, timeouts, cancellation and progress notifications.</li>
+        <li>Authorisation: the OAuth 2.1 pattern for remote servers, resource indicators, token audience binding, scopes and consent, and credential storage.</li>
+        <li>Tool design as an engineering discipline: naming, description quality, input schema design, error message design, response shaping, token economy, idempotency and pagination — the factors that determine whether a model uses a tool correctly.</li>
+        <li>Operations: versioning, backward compatibility, registries and discovery, logging, tracing and observability of tool calls.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>45</b>WEEK</div><div>
+      <h4>MCP security and the trust boundary</h4>
+      <p>A protocol that lets a model invoke real actions on real systems is a security surface. This week is taught as an attack-and-defend laboratory.</p>
+      <ul>
+        <li><strong>Tool poisoning:</strong> malicious instructions embedded in a tool description or schema, read by the model as guidance.</li>
+        <li><strong>Rug-pull mutation:</strong> a server that changes a tool's behaviour after the user has approved it.</li>
+        <li><strong>The confused deputy problem:</strong> a server with legitimate privilege induced to act on an attacker's behalf.</li>
+        <li><strong>Token passthrough and audience confusion:</strong> why a token issued for one service must never be forwarded to another.</li>
+        <li><strong>Cross-server interference and tool shadowing;</strong> namespace collision; supply-chain risk in third-party servers.</li>
+        <li>Defences: least privilege and scoped roots, explicit user consent for state-changing calls, human-in-the-loop approval gates, input and output validation, allow-listing, sandboxing and process isolation, rate and budget limits, comprehensive audit logging.</li>
+        <li>Financial deployment: exposing read-only market and research capability while keeping any order path behind a separate, human-authorised boundary.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A hardened MCP server and client pair with authorisation, consent gates, audit logging, and a written threat model with a demonstrated attack and its mitigation.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m12">
+  <h2><span class="num">TERM IV · MODULE 12 · WEEKS 46–48</span>Agentic artificial intelligence</h2>
+  <p class="lead">Systems that plan, act, remember and coordinate. The hardest engineering in modern AI, because errors compound across steps rather than appearing in one place.</p>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>46</b>WEEK</div><div>
+      <h4>Agent architectures and reasoning loops</h4>
+      <ul>
+        <li>What makes a system agentic: autonomy over control flow, tool use, persistence across steps, and a goal rather than an instruction.</li>
+        <li>Core loops: the interleaving of reasoning and action <span class="ref">[Yao et al., 2023]</span>; plan-and-execute; reflection and self-critique; branching search over candidate plans <span class="ref">[Yao et al., 2024]</span>.</li>
+        <li>Task decomposition: hierarchical planning, sub-goal generation, dependency graphs, replanning on failure.</li>
+        <li>Tool use: function calling, parallel calls, schema design, argument validation, tool selection under a large tool set, retrieval over tools.</li>
+        <li>Control flow as a graph: state machines, conditional edges, cycles, checkpointing and resumption; why an explicit graph beats an implicit prompt loop in production.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>47</b>WEEK</div><div>
+      <h4>Memory, context engineering and multi-agent systems</h4>
+      <ul>
+        <li><strong>Memory architectures:</strong> working memory in the context window, episodic memory of past interactions, semantic memory of learned facts, procedural memory of learned routines; writing, retrieval, consolidation and forgetting policies.</li>
+        <li><strong>Context engineering:</strong> treating the context window as a managed budget — selection, compaction and summarisation, structured note files, offloading to external state, and delegation to sub-agents with isolated contexts.</li>
+        <li>Multi-agent patterns: supervisor and worker hierarchies, peer swarms with handoff, role-specialised teams, debate and critique ensembles, blackboard coordination.</li>
+        <li>When multi-agent helps and when it hurts: parallelisable breadth against compounding error, communication cost, and the case for a single well-equipped agent.</li>
+        <li>Human-in-the-loop design: approval gates, interruption and resumption, editable plans, and escalation policy.</li>
+        <li>Orchestration frameworks compared on their actual abstractions rather than their marketing.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>48</b>WEEK</div><div>
+      <h4>Agent evaluation, reliability and safety</h4>
+      <ul>
+        <li>Why agent evaluation is hard: non-determinism, multi-step trajectories, partial credit, and the difference between task success and process quality.</li>
+        <li>Trajectory evaluation: step-level correctness, tool-selection accuracy, redundancy, recovery from error, cost and step count per task.</li>
+        <li>Building an agent test harness: deterministic environments, replayable fixtures, simulated tools, seeded runs, regression suites in continuous integration.</li>
+        <li>Failure modes catalogued: infinite loops, goal drift, premature termination, hallucinated tool results, cascading error, reward hacking, over-permissioned action.</li>
+        <li>Guardrails: budget and step limits, action allow-lists, dry-run and simulation modes, output validation, kill switches, and irreversibility analysis of every action an agent can take.</li>
+        <li>Agentic security: prompt injection through tool output, exfiltration through tool arguments, and the lethal combination of private data access, untrusted content and external communication.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A multi-step research agent built on MCP tools, with persistent memory, human approval gates, a trajectory evaluation harness and a documented failure catalogue.</p>
+    </div></div>
+  </div>
+</section>
+
+<section id="m13">
+  <h2><span class="num">TERM IV · MODULE 13 · WEEKS 49–52</span>Production engineering, security and governance</h2>
+
+  <div class="ledger">
+    <div class="entry"><div class="stamp"><b>49</b>WEEK</div><div>
+      <h4>MLOps, LLMOps and deployment</h4>
+      <ul>
+        <li>The lifecycle: experiment tracking, model registry, versioning of data, code, model and prompt together.</li>
+        <li>Feature stores: offline and online consistency, point-in-time correct joins, the training–serving skew problem.</li>
+        <li>Serving: batch, real-time and streaming inference; REST and gRPC; autoscaling; the cost model per request.</li>
+        <li>Deployment strategy: shadow mode, canary release, blue–green, champion–challenger, staged rollout, automated rollback.</li>
+        <li>Monitoring: covariate drift, concept drift, performance decay, data quality alerts, and distinguishing a broken model from a changed market.</li>
+        <li>Observability: distributed tracing of a multi-step AI call, token and cost accounting, latency budgets, structured evaluation logging, incident response and runbooks.</li>
+        <li>Continuous integration and delivery for models; automated retraining pipelines and their approval gates.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>50</b>WEEK</div><div>
+      <h4>Trading systems, execution and portfolio integration</h4>
+      <ul>
+        <li>Order management: state machines, idempotency, duplicate prevention, partial fills, rejections, disconnection handling, end-of-day reconciliation.</li>
+        <li>Execution: optimal liquidation under impact and volatility risk <span class="ref">[Almgren &amp; Chriss, 2001]</span>; the square-root impact law <span class="ref">[Tóth et al., 2011]</span>; scheduled and opportunistic algorithms; transaction cost analysis against arrival and interval benchmarks.</li>
+        <li>Portfolio construction: signal combination and decay, mean–variance and its instability <span class="ref">[Markowitz, 1952]</span>, covariance shrinkage <span class="ref">[Ledoit &amp; Wolf, 2004]</span>, equilibrium-anchored views <span class="ref">[Black &amp; Litterman, 1992]</span>, hierarchical risk parity <span class="ref">[López de Prado, 2016]</span>, volatility targeting and fractional Kelly sizing.</li>
+        <li>Risk: value at risk and conditional value at risk, coherence <span class="ref">[Artzner et al., 1999]</span>, factor exposure, stress testing, drawdown control, capacity analysis.</li>
+        <li>Backtest engineering: event-driven architecture, realistic fills, and the mandatory bias audit.</li>
+      </ul>
+      <div class="eq"><span class="m">CVaR<sub>α</sub> = E[ L | L ≥ VaR<sub>α</sub> ]&nbsp;&nbsp;·&nbsp;&nbsp;Σ<sub>shrunk</sub> = δF + (1−δ)S</span>
+      <span class="g">Conditional value at risk is subadditive and convex, so diversification can never increase it and it can be optimised directly — both properties fail for value at risk. Shrinkage is what makes the optimiser usable at all.</span></div>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>51</b>WEEK</div><div>
+      <h4>AI security and model risk governance</h4>
+      <ul>
+        <li><strong>The attack surface:</strong> direct and indirect prompt injection, jailbreaking, data poisoning, backdoors, model extraction and inversion, membership inference, adversarial examples, supply-chain compromise of models and dependencies.</li>
+        <li>Defences: input and output filtering, privilege separation, sandboxing, provenance verification, red teaming as a standing practice.</li>
+        <li>Privacy: personal data handling, minimisation, anonymisation and re-identification risk, differential privacy, federated learning, data residency.</li>
+        <li><strong>Model risk management:</strong> model inventory, independent validation, challenger models, documentation standards, separation of development from validation, and the review cycle.</li>
+        <li><strong>Regulatory frameworks:</strong> risk-tiered AI legislation, voluntary risk management frameworks, AI management system standards, algorithmic trading regulation and its common architecture across jurisdictions — unique algorithm identification, routing through an accountable intermediary, controlled interface access, order-rate limits, mandatory kill switches and audit trails. A jurisdiction annex is issued with each cohort.</li>
+        <li>Fairness, bias measurement and mitigation; explainability obligations; market integrity and the detection of manipulative patterns.</li>
+      </ul>
+    </div></div>
+
+    <div class="entry"><div class="stamp"><b>52</b>WEEK</div><div>
+      <h4>Capstone defence and professional transition</h4>
+      <ul>
+        <li>Formal defence before an external panel drawn from industry and academia. The defence is adversarial by design: the panel's role is to find the flaw, and the grade depends substantially on the learner having found it first.</li>
+        <li>Portfolio publication; systems architecture interview preparation; technical and behavioural interview practice.</li>
+        <li>Structured introductions to hiring partners; guidance on statutory market certifications in the learner's jurisdiction.</li>
+      </ul>
+      <p class="ship"><b>Module artefact:</b> A deployed system at Maturity Level 4 — monitored, alerting, with rollback, a runbook, a cost model and an audit trail.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- CAPSTONE -->
+<section id="capstone">
+  <h2><span class="num">SECTION SEVEN</span>Capstone research</h2>
+  <p>Seventeen weeks, beginning Week 36, running in parallel with Modules 9 to 13. One track, one research mentor, one defended dossier. Two tracks are deliberately oriented toward market integrity and public interest.</p>
+
+  <div class="pair">
+    <div><h4>1 · Systematic research platform</h4><p>A cross-sectional machine learning alpha with purged walk-forward validation, deflated statistics, factor decomposition, cost sensitivity and capacity analysis, deployed with monitoring.</p></div>
+    <div><h4>2 · Derivatives and volatility</h4><p>A volatility or options strategy with a deep-hedging overlay, explicit Greeks limits and a validated pricing surrogate.</p></div>
+    <div><h4>3 · Agentic research desk</h4><p>A multi-agent system over MCP tools that converts filings and announcements into structured, cited, point-in-time signal records, with trajectory evaluation and a threat model.</p></div>
+    <div><h4>4 · Execution and microstructure</h4><p>A reinforcement learning or heuristic execution algorithm benchmarked on real order-book data, with an impact model estimated from the learner's own fills.</p></div>
+    <div><h4>5 · Market surveillance</h4><p>A detection system for manipulative order patterns, evaluated on precision, recall and false-positive burden, with investigator-grade explainability.</p></div>
+    <div><h4>6 · Investor protection</h4><p>A multilingual, low-bandwidth market literacy system with architectural guardrails that make recommendation impossible, proven against an adversarial evaluation set.</p></div>
+  </div>
+
+  <div class="panel flagged">
+    <h4>The capstone rule that defines the programme</h4>
+    <p>Every capstone contains a graded section titled <em>Why this may not work</em>. A learner presenting a Sharpe ratio of 3.2 without naming the assumptions that produce it fails that section regardless of the number. AlphaEdge trains explicitly against the dominant failure mode of the field: the confident result presented as a discovery.</p>
+  </div>
+</section>
+
+<!-- ASSESSMENT -->
+<section id="assessment">
+  <h2><span class="num">SECTION EIGHT</span>Assessment and certification</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Component</th><th>Weight</th><th>What it measures</th></tr></thead>
+      <tbody>
+        <tr><td>Weekly submissions</td><td>20%</td><td>Tested, documented, reproducible code delivered consistently</td></tr>
+        <tr><td>Module artefacts (13)</td><td>25%</td><td>Depth across every technical domain</td></tr>
+        <tr><td>Research Protocol compliance</td><td>10%</td><td>Pre-registration, trial logging, deflation, falsification</td></tr>
+        <tr><td>Maturity Ladder audit</td><td>10%</td><td>Whether systems are operable, not merely demonstrable</td></tr>
+        <tr><td>Governance examination</td><td>10%</td><td>Security, model risk and regulation — also a hard pass gate</td></tr>
+        <tr><td>Capstone dossier</td><td>20%</td><td>Integrated independent research</td></tr>
+        <tr><td>Panel defence</td><td>5%</td><td>Defensibility under adversarial questioning</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Negative results are graded positively.</strong> A learner who tests a well-motivated hypothesis, follows the protocol, finds no effect and documents it rigorously receives full marks. This is not leniency — it is the only grading rule consistent with the scientific claims the programme makes, and it removes the incentive that produces overfitted work everywhere else in the field.</p>
+  <h4>Awards</h4>
+  <ul>
+    <li><strong>AlphaEdge Master Certificate in Applied Artificial Intelligence for Financial Systems</strong> — on completion with a defended capstone and a pass in the governance examination.</li>
+    <li><strong>Distinction with Panel Commendation</strong> — awarded by the external panel, not the academy, to capstones judged publishable or production-ready.</li>
+    <li>Module-level certificates are issued as each of the thirteen modules is completed, so a learner accumulates credential value throughout the year rather than only at the end.</li>
+  </ul>
+</section>
+
+<!-- FACULTY -->
+<section id="faculty">
+  <h2><span class="num">SECTION NINE</span>Faculty and laboratory</h2>
+  <p><strong>Core faculty</strong> own pedagogy and continuity. <strong>Practitioner faculty</strong> — from buy-side research, broker and exchange technology, AI engineering and model risk — deliver specific modules. <strong>Research mentors</strong>, at one to six, review code weekly and carry the capstone relationship. A governance faculty lead owns Module 13 and signs off on all teaching and marketing material.</p>
+  <h4>Laboratory</h4>
+  <ul>
+    <li>Pre-provisioned cloud workspaces; accelerated compute from Module 7; a dedicated allocation per learner for fine-tuning in Module 8.</li>
+    <li>A licensed point-in-time historical data lake across equities, derivatives and currencies, with a document corpus for Terms III and IV.</li>
+    <li>A simulated matching engine, a broker simulation environment, and an internal MCP server registry for Module 11.</li>
+    <li>Git-based submission with automated testing, evaluation harness execution and provenance checking across cohorts.</li>
+  </ul>
+  <h4>Conduct and licensing</h4>
+  <p>All data is licensed with redistribution terms observed. No AlphaEdge communication makes any representation about investment returns. No module issues a directional view on a named instrument for learner action. No learner deploys capital as a condition of assessment, and the academy never routes or intermediates order flow.</p>
+</section>
+
+<!-- INDEX -->
+<section id="index">
+  <h2><span class="num">SECTION TEN</span>Complete concept index</h2>
+  <p class="lead">Every named concept taught in AI-900, listed so that coverage can be verified line by line. This is the answer to "what exactly does this programme contain".</p>
+
+  <p class="idxhead">SOFTWARE AND SYSTEMS · MODULE 1</p>
+  <ul class="index">
+    <li>Processes, memory, file systems</li><li>Shell, pipes, redirection, SSH</li><li>Python types, control flow, scope</li><li>Mutability and identity</li><li>Comprehensions, iterators, generators</li><li>Exceptions and context managers</li><li>Decorators and closures</li><li>Hashing and complexity analysis</li><li>Classes, inheritance, composition</li><li>Abstract base classes, protocols</li><li>Dataclasses and Pydantic validation</li><li>Type hints and static checking</li><li>Pure functions and immutability</li><li>Unit, integration, property-based testing</li><li>Fixtures, mocking, parametrisation</li><li>Test-driven development</li><li>Structured logging</li><li>Git object model, branching, rebase</li><li>Bisect, reflog, tags</li><li>Pull requests and code review</li><li>Semantic versioning</li><li>Virtual environments and lock files</li><li>Packaging and publishing</li><li>Docker images, layers, Compose</li><li>Continuous integration pipelines</li><li>CPU, memory and line profiling</li><li>NumPy strides, views, broadcasting</li><li>Universal functions and vectorisation</li><li>Threads, processes, the GIL</li><li>asyncio and the event loop</li><li>Multiprocessing and shared memory</li><li>GPU and CUDA fundamentals</li><li>Numba, Cython, FFI</li>
+  </ul>
+
+  <p class="idxhead">MATHEMATICS · MODULE 2</p>
+  <ul class="index">
+    <li>Vectors, norms, inner products</li><li>Orthogonality and projection</li><li>Vector spaces, basis, rank, null space</li><li>Matrices as linear maps</li><li>Inverse and pseudo-inverse</li><li>Determinant, trace, condition number</li><li>LU, QR, Cholesky decomposition</li><li>Eigendecomposition</li><li>Singular value decomposition</li><li>Least squares and low-rank approximation</li><li>Matrix calculus, Jacobians, Hessians</li><li>Limits, derivatives, chain rule</li><li>Taylor expansion</li><li>Convex sets and functions</li><li>Gradient descent and line search</li><li>Newton and quasi-Newton methods</li><li>Conjugate gradient</li><li>Lagrange multipliers</li><li>Karush–Kuhn–Tucker conditions</li><li>Duality and quadratic programming</li><li>Interior point methods</li><li>Momentum and Nesterov acceleration</li><li>Random variables and expectation</li><li>Moments and generating functions</li><li>Bernoulli, binomial, Poisson</li><li>Normal, log-normal, exponential</li><li>Gamma, beta, Student's t, chi-squared</li><li>Heavy tails and excess kurtosis</li><li>Joint, marginal, conditional distributions</li><li>Bayes' rule and total probability</li><li>Law of large numbers</li><li>Central limit theorem and its limits</li><li>Maximum likelihood estimation</li><li>Method of moments</li><li>Bias, consistency, efficiency</li><li>Cramér–Rao bound</li><li>Bootstrap and jackknife</li><li>Hypothesis testing, p-values</li><li>Type I and II error, power</li><li>Bonferroni and false discovery rate</li><li>Entropy and cross-entropy</li><li>Kullback–Leibler divergence</li><li>Jensen–Shannon divergence</li><li>Mutual information</li><li>Floating point and numerical stability</li><li>Log-sum-exp trick</li><li>Newton–Raphson and quadrature</li><li>Monte Carlo integration</li><li>Variance reduction, importance sampling</li><li>Random walks and martingales</li><li>Markov chains</li><li>Brownian motion and Itô's lemma</li><li>Geometric Brownian motion</li><li>Ornstein–Uhlenbeck processes</li>
+  </ul>
+
+  <p class="idxhead">DATA AND MARKETS · MODULE 3</p>
+  <ul class="index">
+    <li>pandas indexing and hierarchical indexes</li><li>As-of joins and split-apply-combine</li><li>Rolling and expanding windows</li><li>Time zones and session handling</li><li>Polars and lazy evaluation</li><li>SQL window functions and CTEs</li><li>Query plans and indexing strategy</li><li>Normalisation</li><li>DuckDB, Parquet, Arrow</li><li>Partitioning and predicate pushdown</li><li>Relational, document, key-value stores</li><li>Wide-column and time-series databases</li><li>Vector databases</li><li>ETL against ELT</li><li>Idempotency and backfill</li><li>DAG orchestration</li><li>Publish–subscribe and message brokers</li><li>Exactly-once against at-least-once</li><li>Windowing and watermarks</li><li>Event time against processing time</li><li>Partitioning and shuffling</li><li>Data contracts and schema evolution</li><li>Lineage and cataloguing</li><li>Missingness patterns and imputation</li><li>Outlier and unit-error detection</li><li>Distributional and freshness monitoring</li><li>Quality gates</li><li>Point-in-time architecture</li><li>Restatements and delayed disclosure</li><li>Survivorship bias</li><li>Look-ahead bias</li><li>Selection bias and data snooping</li><li>Limit order book and matching engines</li><li>Price–time priority and order types</li><li>Tick size, auctions, circuit breakers</li><li>Adverse selection (Glosten–Milgrom)</li><li>Kyle's lambda and informed trading</li><li>Inventory risk and quote skewing</li><li>Quoted, effective, realised spread</li><li>Depth, resilience, volume profile</li><li>Intraday seasonality</li><li>Market makers and arbitrageurs</li><li>Contract specifications and expiry</li><li>Settlement and margining</li><li>Tick, time, volume, dollar bars</li><li>Imbalance bars</li><li>Corporate action adjustment</li><li>Continuous futures and roll methods</li><li>Reference data and identifiers</li><li>Index membership history</li><li>Alternative and unstructured data</li>
+  </ul>
+
+  <p class="idxhead">MACHINE LEARNING · MODULES 4–6</p>
+  <ul class="index">
+    <li>Empirical risk minimisation</li><li>Bias–variance decomposition</li><li>Curse of dimensionality</li><li>No-free-lunch theorem</li><li>Ordinary least squares and assumptions</li><li>Heteroskedasticity, multicollinearity</li><li>Robust standard errors</li><li>Ridge, lasso, elastic net</li><li>Logistic and softmax regression</li><li>Generalised linear models</li><li>Precision, recall, F1, ROC-AUC</li><li>Log loss and Brier score</li><li>k-nearest neighbours</li><li>Naive Bayes</li><li>Support vector machines and kernels</li><li>Support vector regression</li><li>Decision trees, Gini, entropy, pruning</li><li>Scaling, encoding, binning</li><li>Target encoding and leakage</li><li>Bagging and random forests</li><li>Out-of-bag estimation</li><li>Extremely randomised trees</li><li>AdaBoost</li><li>Gradient boosting machines</li><li>XGBoost, LightGBM, CatBoost</li><li>Leaf-wise growth, histogram binning</li><li>Ordered boosting</li><li>Stacking and blending</li><li>Grid and random search</li><li>Bayesian optimisation, TPE</li><li>Successive halving and Hyperband</li><li>Resampling and synthetic oversampling</li><li>Class weighting and threshold tuning</li><li>Platt scaling and isotonic regression</li><li>Reliability diagrams</li><li>Conformal prediction</li><li>Permutation importance</li><li>Partial dependence and ICE</li><li>SHAP and LIME</li><li>Counterfactual explanations</li><li>k-means, k-means++, k-medoids</li><li>Hierarchical clustering and linkage</li><li>DBSCAN and HDBSCAN</li><li>Gaussian mixture models and EM</li><li>Kernel density estimation</li><li>Isolation forest, one-class SVM, LOF</li><li>PCA, kernel PCA, probabilistic PCA</li><li>ICA and non-negative matrix factorisation</li><li>Factor analysis</li><li>MDS, Isomap, LLE</li><li>t-SNE and UMAP</li><li>Random projection, Johnson–Lindenstrauss</li><li>Correlation matrix denoising</li><li>Priors, likelihood, posterior, evidence</li><li>Hierarchical and multilevel models</li><li>MCMC, Metropolis–Hastings, Gibbs</li><li>Hamiltonian Monte Carlo and NUTS</li><li>Variational inference and the ELBO</li><li>Gaussian processes</li><li>Probabilistic programming</li><li>Self-training and label propagation</li><li>Consistency regularisation</li><li>Contrastive learning and InfoNCE</li><li>Masked reconstruction</li><li>Transfer learning and domain adaptation</li><li>Active learning strategies</li><li>Multi-task and meta-learning, MAML</li><li>Online and incremental learning</li><li>Multi-armed bandits, UCB, Thompson</li><li>Contextual bandits</li><li>Stationarity, ADF and KPSS tests</li><li>ACF and PACF</li><li>ARMA, ARIMA, SARIMA, ARIMAX</li><li>Box–Jenkins and information criteria</li><li>STL and exponential smoothing</li><li>Holt–Winters</li><li>Vector autoregression</li><li>Impulse response and Granger causality</li><li>Cointegration, Engle–Granger, Johansen</li><li>Vector error correction</li><li>Fourier and wavelet analysis</li><li>Kalman, extended and unscented filters</li><li>Particle filters</li><li>Hidden Markov models, Viterbi, Baum–Welch</li><li>Change-point detection</li><li>ARCH, GARCH, EGARCH, GJR-GARCH</li><li>Stochastic volatility</li><li>Realised volatility and HAR</li><li>Parkinson, Garman–Klass, Yang–Zhang</li><li>Potential outcomes framework</li><li>Causal DAGs and d-separation</li><li>Confounders, colliders, mediators</li><li>Back-door and front-door criteria</li><li>Propensity scores and matching</li><li>Inverse probability weighting</li><li>Instrumental variables</li><li>Difference-in-differences</li><li>Regression discontinuity</li><li>Synthetic control</li><li>Double machine learning</li><li>Causal forests and uplift modelling</li><li>Purged k-fold and embargo</li><li>Walk-forward analysis</li><li>Combinatorial purged cross-validation</li><li>Triple-barrier labelling</li><li>Meta-labelling</li><li>Sample uniqueness weighting</li><li>Fractional differentiation</li><li>Deflated Sharpe ratio</li><li>Probability of backtest overfitting</li><li>Reality check and SPA test</li><li>Stationary bootstrap</li><li>Information coefficient and decay</li><li>Quantile spread analysis</li>
+  </ul>
+
+  <p class="idxhead">DEEP LEARNING AND GENERATIVE AI · MODULES 7–9</p>
+  <ul class="index">
+    <li>Perceptron and multilayer perceptron</li><li>Universal approximation theorem</li><li>Sigmoid, tanh, ReLU, GELU, SiLU</li><li>Dying ReLU</li><li>Backpropagation by hand</li><li>Numerical gradient checking</li><li>MSE, MAE, Huber, cross-entropy</li><li>Focal, contrastive, triplet loss</li><li>Xavier and He initialisation</li><li>Vanishing and exploding gradients</li><li>SGD, momentum, Nesterov</li><li>AdaGrad, RMSProp, Adam, AdamW, LAMB</li><li>Cosine, warmup, one-cycle schedules</li><li>Gradient clipping</li><li>Batch, layer, group, RMS normalisation</li><li>Dropout and label smoothing</li><li>Mixup and data augmentation</li><li>Residual connections</li><li>Autograd, mixed precision, DDP</li><li>Gradient accumulation and checkpointing</li><li>Convolution, stride, padding, dilation</li><li>Receptive field and pooling</li><li>LeNet, AlexNet, VGG, Inception</li><li>ResNet, DenseNet, EfficientNet</li><li>Depthwise separable convolution</li><li>Detection and segmentation</li><li>RNN, LSTM, GRU, bidirectional</li><li>Backpropagation through time</li><li>Seq2seq and additive attention</li><li>Teacher forcing and exposure bias</li><li>Temporal convolutional networks</li><li>Graph Laplacian and message passing</li><li>GCN, GraphSAGE, GAT</li><li>Over-smoothing</li><li>DeepLOB and order-book learning</li><li>Byte-pair encoding, WordPiece, SentencePiece</li><li>Token, positional, segment embeddings</li><li>Scaled dot-product attention</li><li>Multi-head and cross-attention</li><li>Causal masking</li><li>Sinusoidal, rotary, ALiBi positions</li><li>Pre-norm against post-norm</li><li>Grouped-query and multi-query attention</li><li>KV caching and FlashAttention</li><li>Sliding window and sparse attention</li><li>Mixture of experts</li><li>Encoder-only, decoder-only, enc–dec</li><li>Causal and masked language modelling</li><li>Span corruption</li><li>Corpus deduplication and filtering</li><li>Scaling laws and compute-optimality</li><li>In-context learning</li><li>Data, tensor, pipeline parallelism</li><li>ZeRO sharding</li><li>Perplexity and benchmark contamination</li><li>Catastrophic forgetting</li><li>Adapters, prefix and prompt tuning</li><li>LoRA and QLoRA</li><li>Instruction tuning</li><li>RLHF and reward modelling</li><li>Direct preference optimisation</li><li>Constitutional AI and RLAIF</li><li>Reward hacking and over-optimisation</li><li>Model merging and model soups</li><li>Greedy, beam, top-k, top-p, min-p decoding</li><li>Constrained and grammar-guided decoding</li><li>GPTQ, AWQ, GGUF quantisation</li><li>Pruning and distillation</li><li>Continuous batching and paged attention</li><li>Speculative decoding and prefix caching</li><li>Chain-of-thought and self-consistency</li><li>Least-to-most decomposition</li><li>Prompt versioning and regression tests</li><li>Hallucination taxonomy</li><li>Lost-in-the-middle degradation</li><li>Autoencoders and VAEs</li><li>Reparameterisation trick</li><li>Posterior collapse and disentanglement</li><li>GANs, Wasserstein GAN, mode collapse</li><li>Normalising flows and coupling layers</li><li>Diffusion and score matching</li><li>Classifier-free guidance</li><li>Latent diffusion</li><li>word2vec, GloVe, sentence embeddings</li><li>Hard negative mining</li><li>Vision–language alignment</li><li>Visual instruction tuning</li><li>Layout parsing, table extraction, OCR</li><li>Speech transcription and diarisation</li><li>MDPs and Bellman equations</li><li>Policy and value iteration</li><li>Monte Carlo and TD learning</li><li>TD(λ) and eligibility traces</li><li>SARSA and Q-learning</li><li>Epsilon-greedy and entropy regularisation</li><li>Deadly triad</li><li>DQN, double, duelling, prioritised replay</li><li>Distributional and Rainbow DQN</li><li>REINFORCE and advantage functions</li><li>A2C, A3C, TRPO, PPO</li><li>DDPG, TD3, soft actor–critic</li><li>Model-based RL and world models</li><li>Monte Carlo tree search</li><li>Offline RL and distribution shift</li><li>Imitation and inverse RL</li><li>Multi-agent RL and self-play</li><li>Deep hedging</li><li>Black–Scholes–Merton and the Greeks</li><li>Implied volatility surface and skew</li><li>Neural pricing surrogates</li>
+  </ul>
+
+  <p class="idxhead">RAG, MCP, AGENTS · MODULES 10–12</p>
+  <ul class="index">
+    <li>Inverted index and TF-IDF</li><li>BM25 and query expansion</li><li>Bi-encoders and dense retrieval</li><li>Flat, IVF, HNSW indexes</li><li>Product quantisation</li><li>Recall–latency–memory trade-off</li><li>Hybrid and filtered search</li><li>Metadata filtering and multi-tenancy</li><li>Incremental and streaming indexing</li><li>Cross-encoder and listwise reranking</li><li>Late-interaction retrieval</li><li>Recall@k, MRR, nDCG</li><li>Fixed, recursive, semantic chunking</li><li>Sentence-window and parent-document</li><li>Hierarchical summarisation</li><li>Contextual chunk enrichment</li><li>Query rewriting and decomposition</li><li>Hypothetical document embeddings</li><li>Multi-query and fusion ranking</li><li>Corpus routing</li><li>Graph-based retrieval</li><li>Self-reflective RAG</li><li>Corrective RAG with fallback search</li><li>Agentic RAG</li><li>Long-context against retrieval</li><li>Context precision and recall</li><li>Faithfulness and answer relevance</li><li>Citation accuracy and abstention rate</li><li>Synthetic question generation</li><li>LLM-as-judge and its biases</li><li>Retrieval against generation diagnosis</li><li>Point-in-time retrieval integrity</li><li>MCP hosts, clients, servers</li><li>JSON-RPC messages and errors</li><li>Initialisation and capability negotiation</li><li>Protocol version agreement</li><li>Tools primitive and input schemas</li><li>Resources primitive, URIs, subscriptions</li><li>Resource templates</li><li>Prompts primitive</li><li>Sampling primitive</li><li>Roots primitive</li><li>Elicitation primitive</li><li>stdio transport</li><li>Streamable HTTP and SSE</li><li>Session management and resumability</li><li>OAuth 2.1 authorisation</li><li>Resource indicators and audience binding</li><li>Scopes and consent</li><li>Tool naming and description design</li><li>Error message and response shaping</li><li>Token economy and pagination</li><li>Server versioning and registries</li><li>Tool-call tracing</li><li>Tool poisoning</li><li>Rug-pull mutation</li><li>Confused deputy problem</li><li>Token passthrough risk</li><li>Cross-server interference</li><li>Tool shadowing and namespace collision</li><li>Least privilege and scoped roots</li><li>Sandboxing and process isolation</li><li>Rate and budget limits</li><li>ReAct reasoning-action loop</li><li>Plan-and-execute</li><li>Reflection and self-critique</li><li>Tree of Thoughts</li><li>Hierarchical task decomposition</li><li>Replanning on failure</li><li>Function calling and parallel calls</li><li>Tool selection at scale</li><li>Agent graphs and state machines</li><li>Checkpointing and resumption</li><li>Working, episodic, semantic memory</li><li>Procedural memory</li><li>Memory consolidation and forgetting</li><li>Context budgeting and compaction</li><li>Structured note files</li><li>Sub-agent delegation</li><li>Supervisor–worker hierarchies</li><li>Peer swarms and handoff</li><li>Debate and critique ensembles</li><li>Blackboard coordination</li><li>Human-in-the-loop approval gates</li><li>Trajectory evaluation</li><li>Tool-selection accuracy</li><li>Cost and step count per task</li><li>Goal drift and premature termination</li><li>Cascading error</li><li>Dry-run and simulation modes</li><li>Irreversibility analysis</li><li>Exfiltration through tool arguments</li>
+  </ul>
+
+  <p class="idxhead">PRODUCTION, SECURITY, GOVERNANCE · MODULE 13</p>
+  <ul class="index">
+    <li>Experiment tracking and model registry</li><li>Versioning data, code, model, prompt</li><li>Feature stores and training–serving skew</li><li>Point-in-time correct joins</li><li>Batch, real-time, streaming inference</li><li>Autoscaling and cost per request</li><li>Shadow mode and canary release</li><li>Blue–green and champion–challenger</li><li>Automated rollback</li><li>Covariate and concept drift</li><li>Performance decay detection</li><li>Distributed tracing of AI calls</li><li>Token and cost accounting</li><li>Incident response and runbooks</li><li>Automated retraining with approval gates</li><li>Order state machines and idempotency</li><li>Partial fills and reconciliation</li><li>Kill switch design</li><li>Almgren–Chriss optimal execution</li><li>Square-root impact law</li><li>TWAP, VWAP, POV, implementation shortfall</li><li>Transaction cost analysis</li><li>Signal combination and turnover control</li><li>Mean–variance instability</li><li>Ledoit–Wolf shrinkage</li><li>Black–Litterman</li><li>Hierarchical risk parity</li><li>Volatility targeting and fractional Kelly</li><li>VaR, CVaR, coherent risk measures</li><li>Factor exposure and stress testing</li><li>Capacity analysis</li><li>Event-driven backtest architecture</li><li>Direct and indirect prompt injection</li><li>Jailbreaking</li><li>Data poisoning and backdoors</li><li>Model extraction and inversion</li><li>Membership inference</li><li>Adversarial examples</li><li>Supply-chain compromise</li><li>Red teaming as standing practice</li><li>Data minimisation and anonymisation</li><li>Differential privacy</li><li>Federated learning</li><li>Data residency</li><li>Model inventory and independent validation</li><li>Challenger models</li><li>Documentation standards</li><li>Risk-tiered AI regulation</li><li>AI risk management frameworks</li><li>AI management system standards</li><li>Algorithm identification and audit trails</li><li>Order-rate limits and routing accountability</li><li>Fairness measurement and mitigation</li><li>Manipulative pattern detection</li>
+  </ul>
+</section>
+
+<!-- BIBLIO -->
+<section id="biblio">
+  <h2><span class="num">SECTION ELEVEN</span>Bibliography</h2>
+  <p>AI-900 is assembled from primary literature. Learners receive the sources and are expected to read the abstract and results of each.</p>
+
+  <h4>Core texts</h4>
+  <ul class="biblio">
+    <li><b>Hastie, Tibshirani &amp; Friedman (2009).</b> <em>The Elements of Statistical Learning.</em></li>
+    <li><b>Bishop (2006).</b> <em>Pattern Recognition and Machine Learning.</em></li>
+    <li><b>Murphy (2022/2023).</b> <em>Probabilistic Machine Learning</em>, Vols. I–II.</li>
+    <li><b>Goodfellow, Bengio &amp; Courville (2016).</b> <em>Deep Learning.</em></li>
+    <li><b>Sutton &amp; Barto (2018).</b> <em>Reinforcement Learning: An Introduction.</em></li>
+    <li><b>López de Prado (2018).</b> <em>Advances in Financial Machine Learning.</em></li>
+    <li><b>Harris (2003).</b> <em>Trading and Exchanges.</em></li>
+    <li><b>Hull (2021).</b> <em>Options, Futures and Other Derivatives.</em></li>
+    <li><b>Pearl (2009).</b> <em>Causality.</em></li>
+    <li><b>Hamilton (1994).</b> <em>Time Series Analysis.</em></li>
+  </ul>
+
+  <h4>Methodology and validation</h4>
+  <ul class="biblio">
+    <li><b>Bailey &amp; López de Prado (2014).</b> The Deflated Sharpe Ratio.</li>
+    <li><b>Bailey, Borwein, López de Prado &amp; Zhu (2016).</b> The Probability of Backtest Overfitting.</li>
+    <li><b>Harvey, Liu &amp; Zhu (2016).</b> …and the Cross-Section of Expected Returns.</li>
+    <li><b>White (2000).</b> A Reality Check for Data Snooping.</li>
+    <li><b>Hansen (2005).</b> A Test for Superior Predictive Ability.</li>
+    <li><b>Politis &amp; Romano (1994).</b> The Stationary Bootstrap.</li>
+    <li><b>Gu, Kelly &amp; Xiu (2020).</b> Empirical Asset Pricing via Machine Learning.</li>
+    <li><b>Laloux et al. (1999).</b> Noise Dressing of Financial Correlation Matrices.</li>
+    <li><b>Lundberg &amp; Lee (2017).</b> A Unified Approach to Interpreting Model Predictions.</li>
+    <li><b>Ribeiro, Singh &amp; Guestrin (2016).</b> "Why Should I Trust You?"</li>
+  </ul>
+
+  <h4>Deep learning and generative models</h4>
+  <ul class="biblio">
+    <li><b>Hochreiter &amp; Schmidhuber (1997).</b> Long Short-Term Memory.</li>
+    <li><b>Srivastava et al. (2014).</b> Dropout.</li>
+    <li><b>He et al. (2016).</b> Deep Residual Learning for Image Recognition.</li>
+    <li><b>Kingma &amp; Ba (2015).</b> Adam.</li>
+    <li><b>Loshchilov &amp; Hutter (2019).</b> Decoupled Weight Decay Regularization.</li>
+    <li><b>Vaswani et al. (2017).</b> Attention Is All You Need.</li>
+    <li><b>Kingma &amp; Welling (2014).</b> Auto-Encoding Variational Bayes.</li>
+    <li><b>Goodfellow et al. (2014).</b> Generative Adversarial Networks.</li>
+    <li><b>Ho, Jain &amp; Abbeel (2020).</b> Denoising Diffusion Probabilistic Models.</li>
+    <li><b>Radford et al. (2021).</b> Learning Transferable Visual Models from Natural Language Supervision.</li>
+    <li><b>Zhang, Zohren &amp; Roberts (2019).</b> DeepLOB.</li>
+    <li><b>Sirignano &amp; Cont (2019).</b> Universal Features of Price Formation.</li>
+  </ul>
+
+  <h4>Language models, retrieval and agents</h4>
+  <ul class="biblio">
+    <li><b>Brown et al. (2020).</b> Language Models are Few-Shot Learners.</li>
+    <li><b>Kaplan et al. (2020).</b> Scaling Laws for Neural Language Models.</li>
+    <li><b>Hoffmann et al. (2022).</b> Training Compute-Optimal Large Language Models.</li>
+    <li><b>Lewis et al. (2020).</b> Retrieval-Augmented Generation.</li>
+    <li><b>Wei et al. (2022).</b> Chain-of-Thought Prompting.</li>
+    <li><b>Wang et al. (2023).</b> Self-Consistency Improves Chain of Thought Reasoning.</li>
+    <li><b>Zhou et al. (2023).</b> Least-to-Most Prompting.</li>
+    <li><b>Min et al. (2022).</b> Rethinking the Role of Demonstrations.</li>
+    <li><b>Ouyang et al. (2022).</b> Training Language Models to Follow Instructions with Human Feedback.</li>
+    <li><b>Rafailov et al. (2023).</b> Direct Preference Optimization.</li>
+    <li><b>Hu et al. (2022).</b> LoRA.</li>
+    <li><b>Dettmers et al. (2023).</b> QLoRA.</li>
+    <li><b>Yao et al. (2023).</b> ReAct.</li>
+    <li><b>Yao et al. (2024).</b> Tree of Thoughts.</li>
+    <li><b>Shinn et al. (2023).</b> Reflexion.</li>
+    <li><b>Zheng et al. (2023).</b> Judging LLM-as-a-Judge.</li>
+    <li><b>Ji et al. (2023).</b> Survey of Hallucination in Natural Language Generation.</li>
+    <li><b>Liu et al. (2024).</b> Lost in the Middle.</li>
+    <li><b>Greshake et al. (2023).</b> Indirect Prompt Injection.</li>
+    <li><b>Anthropic (2024–).</b> Model Context Protocol specification and security best practices.</li>
+    <li><b>OWASP (2025).</b> Top 10 for Large Language Model Applications.</li>
+  </ul>
+
+  <h4>Markets, execution and portfolio theory</h4>
+  <ul class="biblio">
+    <li><b>Markowitz (1952).</b> Portfolio Selection.</li>
+    <li><b>Kelly (1956).</b> A New Interpretation of Information Rate.</li>
+    <li><b>Black &amp; Scholes (1973);</b> <b>Merton (1973).</b> Option pricing.</li>
+    <li><b>Kyle (1985);</b> <b>Glosten &amp; Milgrom (1985).</b> Microstructure foundations.</li>
+    <li><b>Grinold (1989).</b> The Fundamental Law of Active Management.</li>
+    <li><b>Black &amp; Litterman (1992).</b> Global Portfolio Optimization.</li>
+    <li><b>Artzner et al. (1999).</b> Coherent Measures of Risk.</li>
+    <li><b>Almgren &amp; Chriss (2001).</b> Optimal Execution of Portfolio Transactions.</li>
+    <li><b>Ledoit &amp; Wolf (2004).</b> A Well-Conditioned Estimator for Large-Dimensional Covariance Matrices.</li>
+    <li><b>Lo (2004).</b> The Adaptive Markets Hypothesis.</li>
+    <li><b>Tóth et al. (2011);</b> <b>Gatheral (2010).</b> Market impact.</li>
+    <li><b>López de Prado (2016).</b> Building Diversified Portfolios that Outperform Out of Sample.</li>
+    <li><b>Engle (1982);</b> <b>Bollerslev (1986);</b> <b>Corsi (2009).</b> Volatility modelling.</li>
+    <li><b>Bühler et al. (2019).</b> Deep Hedging.</li>
+    <li><b>Nevmyvaka, Feng &amp; Kearns (2006);</b> <b>Ritter (2017);</b> <b>Hambly et al. (2023).</b> RL in finance.</li>
+  </ul>
+</section>
+
+</main>
+</div>
+
+<footer>
+  <div>
+    <p><strong>AlphaEdge — Quant and Financial Engineering Academy.</strong> Programme specification AE/AI-900, version 1.0.</p>
+    <p>This document describes an educational programme. It does not constitute investment advice or a research recommendation, and it makes no representation regarding investment returns. A jurisdiction annex setting out applicable local regulatory requirements is issued separately with each cohort.</p>
+  </div>
+</footer>
+
+</body>
+</html>
