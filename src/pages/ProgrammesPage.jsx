@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Layout from '../layout/Layout';
-
+import BrochureButton from '../components/BrochureButton';
 const programmes = [
   {
     title: 'AI-900 — Master Programme in Applied Artificial Intelligence for Financial Systems',
@@ -40,15 +40,20 @@ export default function ProgrammesPage() {
               </div>
               <h2 className="text-3xl font-bold tracking-[-0.04em] text-[var(--text-primary)]">{programme.title}</h2>
               <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">{programme.description}</p>
-              <div className="mt-8">
-                <Link to={programme.href} className="inline-flex rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950">
-                  Explore programme
-                </Link>
-              </div>
+             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                to={programme.href}
+                className="inline-flex rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950"
+              >
+                Explore programme
+              </Link>
+
+              <BrochureButton />
+            </div>
             </article>
           ))}
         </div>
-      </section>
+      </section>  
     </Layout>
   );
 }

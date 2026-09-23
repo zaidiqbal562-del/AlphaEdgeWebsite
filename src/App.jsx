@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { Analytics } from '@vercel/analytics/react';
 import { useState, useEffect } from 'react';
 import SplashScreen from './components/SplashScreen';
 
@@ -31,6 +32,7 @@ function App() {
   return (
     <HelmetProvider>
       <SplashScreen onComplete={() => setShowSplash(false)} />
+      <Analytics />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
