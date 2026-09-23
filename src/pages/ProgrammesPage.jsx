@@ -21,29 +21,29 @@ export default function ProgrammesPage() {
       title="Programmes | AlphaEdge"
       description="Explore flagship programmes in quantitative finance, algorithmic trading, research and applied AI at AlphaEdge."
     >
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--text-muted)]">Programmes</p>
-          <h1 className="mt-4 text-4xl font-black tracking-[-0.06em] text-[var(--text-primary)] sm:text-5xl">Learning pathways built for serious market capability.</h1>
-          <p className="mt-6 text-lg leading-8 text-[var(--text-secondary)]">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--text-muted)] sm:text-xs sm:tracking-[0.3em]">Programmes</p>
+          <h1 className="mt-3 text-2xl font-black tracking-[-0.05em] text-[var(--text-primary)] sm:mt-4 sm:text-4xl md:text-5xl sm:tracking-[-0.06em]">Learning pathways built for serious market capability.</h1>
+          <p className="mt-4 text-base leading-7 text-[var(--text-secondary)] sm:mt-6 sm:text-lg sm:leading-8">
             AlphaEdge delivers structured, research-led education for individuals and teams aiming to work at the intersection of finance, signals, AI systems and disciplined execution.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="grid gap-6 lg:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+        <div className="grid gap-5 grid-cols-1 sm:gap-6 lg:grid-cols-2">
           {programmes.map((programme) => (
-            <article key={programme.title} className="rounded-[30px] border border-[var(--border-soft)] bg-[var(--surface)] p-7 shadow-[0_16px_40px_rgba(15,23,42,0.18)]">
-              <div className="mb-4 inline-flex rounded-full border border-[var(--border-soft)] bg-[var(--surface-strong)] px-3 py-1 text-[10px] uppercase tracking-[0.25em] text-[var(--accent)]">
+            <article key={programme.title} className="rounded-[24px] sm:rounded-[30px] border border-[var(--border-soft)] bg-[var(--surface)] p-5 sm:p-7 shadow-[0_16px_40px_rgba(15,23,42,0.18)]">
+              <div className="mb-3 inline-flex rounded-full border border-[var(--border-soft)] bg-[var(--surface-strong)] px-2.5 py-0.5 text-[9px] uppercase tracking-[0.22em] text-[var(--accent)] sm:mb-4 sm:px-3 sm:py-1 sm:text-[10px] sm:tracking-[0.25em]">
                 {programme.badge}
               </div>
-              <h2 className="text-3xl font-bold tracking-[-0.04em] text-[var(--text-primary)]">{programme.title}</h2>
-              <p className="mt-4 text-base leading-7 text-[var(--text-secondary)]">{programme.description}</p>
-             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <h2 className="text-xl font-bold tracking-[-0.03em] text-[var(--text-primary)] sm:text-3xl sm:tracking-[-0.04em]">{programme.title}</h2>
+              <p className="mt-3 text-sm leading-6 text-[var(--text-secondary)] sm:mt-4 sm:text-base sm:leading-7">{programme.description}</p>
+             <div className="mt-6 flex flex-col gap-2.5 sm:gap-3 sm:mt-8 sm:flex-row sm:items-center">
               <Link
                 to={programme.href}
-                className="inline-flex rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950"
+                className="inline-flex rounded-full bg-[var(--accent)] px-4 py-2.5 text-xs font-semibold text-slate-950 sm:px-5 sm:py-3 sm:text-sm"
               >
                 Explore programme
               </Link>

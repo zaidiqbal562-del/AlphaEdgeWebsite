@@ -198,64 +198,64 @@ export default function ProgrammeAi900Page() {
             </div>
           </div>
 
-          <p className="mt-6 max-w-4xl text-lg leading-8 text-[var(--text-secondary)]">{ai900ProgrammeData.subtitle}</p>
+          <p className="mt-4 max-w-4xl text-base leading-7 text-[var(--text-secondary)] sm:mt-6 sm:text-lg sm:leading-8">{ai900ProgrammeData.subtitle}</p>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-4">
-              <div className="text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)]">Duration</div>
-              <div className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{ai900ProgrammeData.duration}</div>
+          <div className="mt-6 grid gap-3 sm:gap-4 sm:mt-8 grid-cols-2 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 sm:p-4">
+              <div className="text-[9px] uppercase tracking-[0.22em] text-[var(--text-muted)] sm:text-[10px] sm:tracking-[0.25em]">Duration</div>
+              <div className="mt-1.5 text-base font-semibold text-[var(--text-primary)] sm:mt-2 sm:text-lg">{ai900ProgrammeData.duration}</div>
             </div>
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-4">
-              <div className="text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)]">Load</div>
-              <div className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{ai900ProgrammeData.load}</div>
+            <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 sm:p-4">
+              <div className="text-[9px] uppercase tracking-[0.22em] text-[var(--text-muted)] sm:text-[10px] sm:tracking-[0.25em]">Load</div>
+              <div className="mt-1.5 text-base font-semibold text-[var(--text-primary)] sm:mt-2 sm:text-lg">{ai900ProgrammeData.load}</div>
             </div>
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-4">
-              <div className="text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)]">Modules</div>
-              <div className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{ai900ProgrammeData.modules}</div>
+            <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 sm:p-4">
+              <div className="text-[9px] uppercase tracking-[0.22em] text-[var(--text-muted)] sm:text-[10px] sm:tracking-[0.25em]">Modules</div>
+              <div className="mt-1.5 text-base font-semibold text-[var(--text-primary)] sm:mt-2 sm:text-lg">{ai900ProgrammeData.modules}</div>
             </div>
-            <div className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-4">
-              <div className="text-[10px] uppercase tracking-[0.25em] text-[var(--text-muted)]">Award</div>
-              <div className="mt-2 text-lg font-semibold text-[var(--text-primary)]">{ai900ProgrammeData.award}</div>
+            <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 sm:p-4">
+              <div className="text-[9px] uppercase tracking-[0.22em] text-[var(--text-muted)] sm:text-[10px] sm:tracking-[0.25em]">Award</div>
+              <div className="mt-1.5 text-base font-semibold text-[var(--text-primary)] sm:mt-2 sm:text-lg">{ai900ProgrammeData.award}</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mb-6 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-between lg:gap-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--text-muted)]">Curriculum search</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-[-0.05em] text-[var(--text-primary)]">Explore the 52-week map</h2>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--text-muted)] sm:text-xs sm:tracking-[0.3em]">Curriculum search</p>
+            <h2 className="mt-2 text-2xl font-bold tracking-[-0.04em] text-[var(--text-primary)] sm:mt-3 sm:text-3xl">Explore the 52-week map</h2>
           </div>
-          <label className="w-full max-w-md">
+          <label className="w-full sm:w-auto sm:max-w-md">
             <span className="sr-only">Search curriculum</span>
             <input
               type="text"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search modules, weeks or topics"
-              className="w-full rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-3 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none ring-0 transition focus:border-[var(--accent)]"
+              className="w-full rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-3 py-2.5 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none ring-0 transition focus:border-[var(--accent)] sm:px-4 sm:py-3 sm:text-sm"
             />
           </label>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {filteredTerms.map((term) => (
-            <div key={term.number} className="rounded-[28px] border border-[var(--border-soft)] bg-[var(--surface)] p-6">
-              <h3 className="text-2xl font-bold tracking-[-0.04em] text-[var(--text-primary)]">Term {term.number}: {term.title}</h3>
+            <div key={term.number} className="rounded-[20px] sm:rounded-[28px] border border-[var(--border-soft)] bg-[var(--surface)] p-4 sm:p-6">
+              <h3 className="text-lg sm:text-2xl font-bold tracking-[-0.03em] text-[var(--text-primary)] sm:tracking-[-0.04em]">Term {term.number}: {term.title}</h3>
 
-              <div className="mt-6 space-y-4">
+              <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
                 {term.modules.map((module) => (
-                  <details key={module.number} className="group rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-4" open>
-                    <summary className="cursor-pointer list-none text-lg font-semibold text-[var(--text-primary)]">
+                  <details key={module.number} className="group rounded-lg sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 sm:p-4" open>
+                    <summary className="cursor-pointer list-none text-sm sm:text-lg font-semibold text-[var(--text-primary)]">
                       Module {module.number}: {module.title}
                     </summary>
-                    <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                    <div className="mt-3 sm:mt-5 grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
                       {module.weeks.map((week) => (
-                        <div key={week.number} className="rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-4">
-                          <div className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Week {week.number}</div>
-                          <h4 className="mt-3 text-base font-semibold text-[var(--text-primary)]">{week.title}</h4>
-                          <ul className="mt-3 space-y-2 text-sm leading-6 text-[var(--text-secondary)]">
+                        <div key={week.number} className="rounded-lg sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-3 sm:p-4">
+                          <div className="text-[8px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)] sm:text-[10px] sm:tracking-[0.24em]">Week {week.number}</div>
+                          <h4 className="mt-2 text-xs font-semibold text-[var(--text-primary)] sm:mt-3 sm:text-base">{week.title}</h4>
+                          <ul className="mt-2 space-y-1 text-xs leading-5 text-[var(--text-secondary)] sm:mt-3 sm:space-y-2 sm:text-sm sm:leading-6">
                             {week.topics.map((topic) => (
                               <li key={topic}>• {topic}</li>
                             ))}

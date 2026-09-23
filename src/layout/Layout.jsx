@@ -552,27 +552,27 @@ export default function Layout({ title, description, keywords, children }) {
 
         <footer className="border-t border-[var(--border-soft)] bg-[var(--surface-strong)]">
 
-          <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.5fr_1fr_1fr] lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 sm:py-12 sm:gap-8 lg:grid-cols-[1.5fr_1fr_1fr] lg:px-8">
 
             {/* ================= FOOTER BRAND ================= */}
 
             <div>
 
-              <div className="mb-4 flex items-center gap-3">
+              <div className="mb-3 flex items-center gap-2 sm:gap-3">
 
                 <img
                   src="/AlphaEdge.jpg"
                   alt="AlphaEdge"
-                  className="h-10 w-auto object-contain"
+                  className="h-8 sm:h-10 w-auto object-contain"
                 />
 
                 <div>
 
-                  <div className="text-sm font-bold uppercase tracking-[0.2em]">
+                  <div className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] sm:tracking-[0.2em]">
                     AlphaEdge
                   </div>
 
-                  <div className="text-[10px] uppercase tracking-[0.3em] text-[var(--text-muted)]">
+                  <div className="text-[8px] uppercase tracking-[0.24em] text-[var(--text-muted)] sm:text-[10px] sm:tracking-[0.3em]">
                     Quantitative finance & AI institute
                   </div>
 
@@ -580,7 +580,7 @@ export default function Layout({ title, description, keywords, children }) {
 
               </div>
 
-              <p className="max-w-md text-sm leading-7 text-[var(--text-secondary)]">
+              <p className="max-w-md text-xs leading-6 text-[var(--text-secondary)] sm:text-sm sm:leading-7">
                 Premium research-led education for quantitative
                 finance, algorithmic trading and applied AI systems.
               </p>
@@ -591,11 +591,11 @@ export default function Layout({ title, description, keywords, children }) {
 
             <div>
 
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-[var(--text-primary)]">
+              <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-primary)] sm:tracking-[0.25em]">
                 Explore
               </h3>
 
-              <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
+              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-[var(--text-secondary)]">
 
                 <li>
                   <Link
@@ -632,11 +632,11 @@ export default function Layout({ title, description, keywords, children }) {
 
             <div>
 
-              <h3 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-[var(--text-primary)]">
+              <h3 className="mb-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.22em] text-[var(--text-primary)] sm:tracking-[0.25em]">
                 Connect
               </h3>
 
-              <ul className="space-y-3 text-sm text-[var(--text-secondary)]">
+              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-[var(--text-secondary)]">
 
                 <li>
                   <Link
