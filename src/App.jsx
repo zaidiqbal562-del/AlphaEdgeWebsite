@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SplashScreen from './components/SplashScreen';
 
 import HomePage from './pages/HomePage';
@@ -25,13 +25,13 @@ function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    // Ensure splash screen shows on page load
-    setShowSplash(true);
+    const timer = setTimeout(() => setShowSplash(false), 1600);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <HelmetProvider>
-      <SplashScreen onComplete={() => setShowSplash(false)} />
+      {showSplash && <SplashScreen />}
       <Analytics />
       <Router>
         <Routes>

@@ -259,7 +259,7 @@ export default function Layout({ title, description, keywords, children }) {
             {/* RIGHT SIDE */}
             {/* ================================================== */}
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
 
               {/* ================= THEME TOGGLE ================= */}
 
@@ -270,58 +270,36 @@ export default function Layout({ title, description, keywords, children }) {
                     value === 'dark' ? 'light' : 'dark'
                   )
                 }
-                className="group relative inline-flex h-9 w-16 shrink-0 items-center rounded-full p-1 transition-all duration-500 hover:shadow-[0_0_20px_rgba(45,212,191,0.3)]"
-                style={{
-                  background:
-                    theme === 'dark'
-                      ? 'linear-gradient(135deg, rgba(1, 4, 1, 0.8), rgb(249, 249, 250))'
-                      : 'linear-gradient(135deg, rgba(249, 250, 250, 0.9), rgb(0, 0, 0))',
-                }}
                 aria-label="Toggle dark and light mode"
+                aria-pressed={theme === 'dark'}
+                className="group relative inline-flex h-9 w-20 shrink-0 overflow-hidden rounded-full border border-[var(--border-soft)] bg-[var(--surface)] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-300 ease-out hover:border-[var(--text-muted)]"
               >
-                <div
-                  className="absolute inset-y-1 flex w-7 items-center justify-center rounded-full bg-[var(--accent)] shadow-[0_4px_12px_rgba(45,212,191,0.3)] transition-all duration-500"
-                  style={{
-                    left:
-                      theme === 'dark'
-                        ? '2px'
-                        : 'calc(100% - 30px)',
-                  }}
+                <span
+                  className={`absolute inset-y-1 w-7 rounded-full bg-[var(--accent)]/90 shadow-[0_8px_20px_rgba(15,23,42,0.18)] transition-all duration-300 ease-out ${
+                    theme === 'dark' ? 'translate-x-0 left-1' : 'translate-x-11 left-auto right-1'
+                  }`}
+                />
+
+                <span
+                  className={`relative z-10 flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 ${
+                    theme === 'dark' ? 'text-slate-950' : 'text-[var(--text-primary)]'
+                  }`}
                 >
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`h-4 w-4 transition-all duration-300 ${theme === 'dark' ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+                    <path d="M21 12.8A9 9 0 0 1 11.2 3a9 9 0 1 0 9.8 9.8Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
 
-                  {/* MOON */}
-
-                  <span
-                    className={`flex items-center justify-center transition-all duration-500 ${
-                      theme === 'dark'
-                        ? 'scale-100 opacity-100'
-                        : 'scale-0 opacity-0'
-                    }`}
-                  >
-                    <img
-                      src="/moon.png"
-                      alt="Dark mode"
-                      className="h-5 w-5 object-contain"
-                    />
-                  </span>
-
-                  {/* SUN */}
-
-                  <span
-                    className={`absolute flex items-center justify-center transition-all duration-500 ${
-                      theme === 'light'
-                        ? 'scale-100 opacity-100'
-                        : 'scale-0 opacity-0'
-                    }`}
-                  >
-                    <img
-                      src="/sun.png"
-                      alt="Light mode"
-                      className="h-5 w-5 object-contain"
-                    />
-                  </span>
-
-                </div>
+                <span
+                  className={`relative z-10 ml-auto flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 ${
+                    theme === 'light' ? 'text-amber-600' : 'text-[var(--text-muted)]'
+                  }`}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`h-4 w-4 transition-all duration-300 ${theme === 'light' ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
+                    <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.7"/>
+                    <path d="M12 2.5v2.1M12 19.4v2.1M21.5 12h-2.1M4.6 12H2.5M18.6 5.4l-1.5 1.5M7 17l-1.5 1.5M18.6 18.6l-1.5-1.5M7 7 5.5 5.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
+                  </svg>
+                </span>
               </button>
 
               {/* ================= APPLY BUTTON ================= */}
@@ -329,6 +307,7 @@ export default function Layout({ title, description, keywords, children }) {
               <Link
                 to="/contact"
                 className="hidden rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-slate-950 shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-200 hover:shadow-[0_0_30px_rgba(16,185,129,0.45)] active:scale-95 sm:inline-flex"
+                style={{ color: '#020817' }}
               >
                 Apply
               </Link>
@@ -531,6 +510,7 @@ export default function Layout({ title, description, keywords, children }) {
               <Link
                 to="/contact"
                 className="mt-4 flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-slate-950 shadow-[0_0_25px_rgba(16,185,129,0.3)] transition-all duration-200 active:scale-95"
+                style={{ color: '#020817' }}
               >
                 Apply Now
               </Link>
