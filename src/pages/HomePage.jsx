@@ -53,48 +53,85 @@ export default function HomePage() {
       description="AlphaEdge is a premium research-led institute for quantitative finance, algorithmic trading and applied AI. Learn end-to-end from market foundations to production-grade systems."
       keywords="quantitative finance, algorithmic trading, AI, machine learning, research-led education, fintech"
     >
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(45,212,191,0.2),_transparent_35%),radial-gradient(circle_at_right,_rgba(168,85,247,0.14),_transparent_30%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-12 lg:px-8 lg:pb-24 lg:pt-20">
-          <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-1">
-            <div>
-              <p className="mb-3 inline-flex rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--accent)] sm:text-[11px] sm:tracking-[0.28em]">
-                Research-led education for modern markets
-              </p>
-              <h1 className="max-w-3xl text-3xl font-black leading-[1.05] tracking-[-0.05em] text-[var(--text-primary)] sm:text-4xl md:text-5xl lg:text-7xl">
-                Build the next generation of market intelligence.
-              </h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-[var(--text-secondary)] sm:mt-6 sm:text-lg sm:leading-8">
-                AlphaEdge brings together quantitative finance, algorithmic trading, machine learning and applied AI in a disciplined system for professionals, researchers and future market builders.
-              </p>
+     {/* Full-width hero section */}
+<section className="relative isolate w-full overflow-hidden">
+  {/* Background image */}
+  <div
+    className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+    style={{ backgroundImage: "url('/pageone.jpeg')" }}
+  />
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:gap-4 sm:flex-wrap">
-                <Link to="/programmes/ai-900" className="rounded-full bg-[var(--accent)] px-5 py-2.5 text-xs font-semibold text-slate-950 shadow-[0_0_35px_rgba(16,185,129,0.35)] transition hover:translate-y-[-1px] hover:shadow-[0_0_45px_rgba(16,185,129,0.5)] sm:px-6 sm:py-3 sm:text-sm">
-                  Explore AI-900
-                </Link>
-                <Link to="/contact" className="rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-5 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:bg-[var(--surface-strong)] sm:px-6 sm:py-3 sm:text-sm">
-                  Book a consultation
-                </Link>
-              </div>
+  {/* Dark overlay for text readability */}
+  <div className="absolute inset-0 -z-10 bg-slate-950/65" />
 
-              <div className="mt-8 grid gap-3 grid-cols-3 sm:gap-4">
-                <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-3 sm:p-4">
-                  <div className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl"><NumberCounter target={52} duration={2000} /></div>
-                  <div className="mt-1.5 text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)] sm:mt-2 sm:text-xs sm:tracking-[0.22em]">weeks</div>
-                </div>
-                <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-3 sm:p-4">
-                  <div className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl"><NumberCounter target={13} duration={1500} /></div>
-                  <div className="mt-1.5 text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)] sm:mt-2 sm:text-xs sm:tracking-[0.22em]">modules</div>
-                </div>
-                <div className="rounded-xl sm:rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-3 sm:p-4">
-                  <div className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl"><NumberCounter target={1100} duration={2000} suffix="+" /></div>
-                  <div className="mt-1.5 text-[10px] uppercase tracking-[0.18em] text-[var(--text-muted)] sm:mt-2 sm:text-xs sm:tracking-[0.22em]">guided hours</div>
-                </div>
-              </div>
-            </div>
+  {/* Extra gradient: darker behind text, brighter on the right */}
+  <div className="absolute inset-0 -z-10 bg-gradient-to-r from-slate-950/80 via-slate-950/45 to-blue-950/20" />
+
+  {/* Hero content */}
+  <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-32">
+    <div className="max-w-4xl">
+      <p className="mb-6 inline-flex rounded-full border border-teal-300/40 bg-slate-950/70 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-teal-300 shadow-lg backdrop-blur-md">
+        Research-led education for modern markets
+      </p>
+
+      <h1 className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-white drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl">
+        Build the next generation of market intelligence.
+      </h1>
+
+      <p className="mt-6 max-w-2xl rounded-lg text-base font-medium leading-8 text-white drop-shadow-md sm:text-lg">
+        AlphaEdge brings together quantitative finance, algorithmic trading,
+        machine learning and applied AI in a disciplined system for
+        professionals, researchers and future market builders.
+      </p>
+
+      <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+        <Link
+          to="/programmes/ai-900"
+          className="inline-flex items-center justify-center rounded-full bg-teal-400 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-xl transition hover:-translate-y-1 hover:bg-teal-300"
+        >
+          Explore AI-900
+        </Link>
+
+        <Link
+          to="/contact"
+          className="inline-flex items-center justify-center rounded-full bg-teal-400 px-7 py-3.5 text-sm font-bold text-slate-950 shadow-xl transition hover:-translate-y-1 hover:bg-teal-300"
+        >
+          Book a consultation
+        </Link>
+      </div>
+
+      {/* Programme statistics */}
+      <div className="mt-12 grid max-w-2xl grid-cols-3 gap-3 sm:gap-5">
+        <div className="rounded-xl border border-white/25 bg-slate-950/65 p-4 shadow-lg backdrop-blur-md sm:p-5">
+          <div className="text-2xl font-black text-white sm:text-3xl">
+            <NumberCounter target={52} duration={2000} />
           </div>
+          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-200">
+            Weeks
+          </p>
         </div>
-      </section>
+
+        <div className="rounded-xl border border-white/25 bg-slate-950/65 p-4 shadow-lg backdrop-blur-md sm:p-5">
+          <div className="text-2xl font-black text-white sm:text-3xl">
+            <NumberCounter target={13} duration={1500} />
+          </div>
+          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-200">
+            Modules
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-white/25 bg-slate-950/65 p-4 shadow-lg backdrop-blur-md sm:p-5">
+          <div className="text-2xl font-black text-white sm:text-3xl">
+            <NumberCounter target={1100} duration={2000} suffix="+" />
+          </div>
+          <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-200">
+            Guided hours
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
         <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:gap-4 sm:flex-row sm:items-end">
