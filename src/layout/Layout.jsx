@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import ScrollReveal from '../components/ScrollReveal';
 
 const navigation = [
   { label: 'Home', href: '/' },
@@ -124,7 +125,7 @@ export default function Layout({ title, description, keywords, children }) {
               'https://linkedin.com/company/alphaedge',
               'https://twitter.com/alphaedge',
             ],
-            image: 'https://alphaedge.in/AlphaEdge.jpg',
+            image: 'https://alphaedge.in/logocropped.jpeg',
             address: {
               '@type': 'PostalAddress',
               addressCountry: 'IN',
@@ -524,7 +525,7 @@ export default function Layout({ title, description, keywords, children }) {
         {/* MAIN */}
         {/* ====================================================== */}
 
-        <main>{children}</main>
+        <main><ScrollReveal className="ae-site-content">{children}</ScrollReveal></main>
 
         {/* ====================================================== */}
         {/* FOOTER */}
@@ -541,7 +542,7 @@ export default function Layout({ title, description, keywords, children }) {
               <div className="mb-3 flex items-center gap-2 sm:gap-3">
 
                 <img
-                  src="/AlphaEdge.jpg"
+src="/logocropped.jpeg"
                   alt="AlphaEdge"
                   className="h-8 sm:h-10 w-auto object-contain"
                 />
@@ -575,7 +576,7 @@ export default function Layout({ title, description, keywords, children }) {
                 Explore
               </h3>
 
-              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-[var(--text-secondary)]">
+              <ul className="flex flex-col gap-2 text-xs text-[var(--text-secondary)] sm:gap-3 sm:text-sm">
 
                 <li>
                   <Link
@@ -616,7 +617,7 @@ export default function Layout({ title, description, keywords, children }) {
                 Connect
               </h3>
 
-              <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-[var(--text-secondary)]">
+              <ul className="flex flex-col gap-2 text-xs text-[var(--text-secondary)] sm:gap-3 sm:text-sm">
 
                 <li>
                   <Link
