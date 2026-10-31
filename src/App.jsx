@@ -39,7 +39,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/programmes" element={<ProgrammesPage />} />
           <Route path="/programmes/ai-900" element={<ProgrammeAi900Page />} />
-          <Route path="/algo-trading" element={<AlgoTradingPage />} />
+          <Route path="/algorithm" element={<AlgoTradingPage />} />
           <Route path="/ai-and-trading" element={<AIandTrading />} />
           <Route path="/governance-risk" element={<GovernanceRiskPage />} />
           <Route path="/careers" element={<CareersPage />} />

@@ -29,7 +29,7 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.05fr_1.45fr] lg:px-8">
           <div className="rounded-[28px] border border-[var(--border-soft)] bg-[linear-gradient(180deg,_rgba(15,23,42,0.95),_rgba(2,6,23,0.95))] p-6 shadow-[0_24px_80px_rgba(2,6,23,0.45)] sm:p-8">
             <div className="mb-6 flex items-center justify-start">
-              <img src="/AlphaEdge.jpg" alt="AlphaEdge" className="h-12 w-auto object-contain" />
+              <img src="/logocropped.jpeg" alt="AlphaEdge" className="h-12 w-auto object-contain" />
             </div>
 
             <p className="text-lg leading-8 text-[var(--text-primary)] sm:text-xl sm:leading-9">
