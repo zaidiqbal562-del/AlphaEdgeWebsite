@@ -13,9 +13,9 @@ const navigation = [
       { label: 'AI-900', href: '/programmes/ai-900' },
     ],
   },
-  { label: 'Algo Trading', href: '/algo-trading' },
-  { label: 'Mentors', href: '/mentors' },
-  { label: 'Research', href: '/research' },
+  { label: 'Algorithms', href: '/algo-trading' },
+  { label: 'AI & Trading', href: '/ai-and-trading' },
+  { label: 'Governance & Risk', href: '/governance-risk' },
   { label: 'Careers', href: '/careers' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'FAQ', href: '/faq' },
@@ -594,15 +594,6 @@ export default function Layout({ title, description, keywords, children }) {
                       className="transition-colors hover:text-[var(--accent)]"
                     >
                       Mentors
-                    </Link>
-                  </li>
-
-                  <li>
-                    <Link
-                      to="/research"
-                      className="transition-colors hover:text-[var(--accent)]"
-                    >
-                      Research
                     </Link>
                   </li>
 

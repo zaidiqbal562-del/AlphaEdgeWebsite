@@ -9,8 +9,7 @@ import AboutPage from './pages/AboutPage';
 import ProgrammesPage from './pages/ProgrammesPage';
 import ProgrammeAi900Page from './pages/ProgrammeAi900Page';
 import AlgoTradingPage from './pages/AlgoTradingPage';
-import MentorsPage from './pages/MentorsPage';
-import ResearchPage from './pages/ResearchPage';
+import AIandTrading from './pages/AIandTrading';
 import CareersPage from './pages/CareersPage';
 import AdmissionsPage from './pages/AdmissionsPage';
 import FaqPage from './pages/FaqPage';
@@ -18,6 +17,7 @@ import ContactPage from './pages/ContactPage';
 import ProjectsPage from './pages/ProjectsPage';
 import CapstonePage from './pages/CapstonePage';
 import AlphaEdgeOneYearPage from './pages/AlphaEdgeOneYearPage';
+import GovernanceRiskPage from './pages/GovernanceRiskPage';
 
 import './App.css';
 
@@ -40,8 +40,8 @@ function App() {
           <Route path="/programmes" element={<ProgrammesPage />} />
           <Route path="/programmes/ai-900" element={<ProgrammeAi900Page />} />
           <Route path="/algo-trading" element={<AlgoTradingPage />} />
-          <Route path="/mentors" element={<MentorsPage />} />
-          <Route path="/research" element={<ResearchPage />} />
+          <Route path="/ai-and-trading" element={<AIandTrading />} />
+          <Route path="/governance-risk" element={<GovernanceRiskPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/alphaedge-1Year" element={<AlphaEdgeOneYearPage />} />
