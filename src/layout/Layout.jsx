@@ -155,12 +155,12 @@ export default function Layout({ title, description, keywords, children }) {
               aria-label="AlphaEdge home page"
             >
               <img
-                // src="/AlphaEdge.jpg"
-                src="/logocropped.jpeg"
+                src="/AlphaEdge.jpg"
+                // src="/logocropped.jpeg"
                 alt="AlphaEdge"
                 className="h-10 w-auto object-contain"
               />
-
+{/* 
               <div className="hidden sm:block">
                 <div className="text-sm font-bold tracking-[0.15em] text-[var(--text-primary)]">
                   ALPHAEDGE
@@ -169,7 +169,7 @@ export default function Layout({ title, description, keywords, children }) {
                 <div className="text-[8px] uppercase tracking-[0.25em] text-[var(--text-muted)]">
                   Capital • AI • Research
                 </div>
-              </div>
+              </div> */}
             </Link>
 
             {/* ================================================== */}
