@@ -40,7 +40,7 @@ function BulletList({ items }) {
 
 function CardGrid({ cards, cols = 'md:grid-cols-2' }) {
   return (
-    <div className={`grid gap-6 ${cols}`}>
+    <div className={`grid grid-cols-1 gap-6 ${cols}`}>
       {cards.map(([title, text], i) => (
         <Reveal key={title} delay={(i % 3) * 100} className={T.card}>
           <div className="mb-5 h-1 w-10 rounded-full bg-[#ef4444]" />
@@ -57,7 +57,7 @@ function FlowRow({ label, steps, start = 1, cols = 'xl:grid-cols-5' }) {
   return (
     <div>
       {label && <p className="mb-4 text-sm font-semibold text-[var(--accent-strong)]">{label}</p>}
-      <div className={`grid gap-4 md:grid-cols-2 ${cols}`}>
+      <div className={`grid grid-cols-1 gap-4 md:grid-cols-2 ${cols}`}>
         {steps.map(([title, text], i) => (
           <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
             <span className="inline-flex rounded-md bg-[var(--accent)]/15 px-2.5 py-1 text-sm font-bold text-[var(--accent-strong)]">
@@ -85,7 +85,7 @@ function DataTable({ heads, rows }) {
         <Reveal
           key={row[0]}
           delay={(i % 3) * 60}
-          className="grid gap-3 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
+          className="grid grid-cols-1 gap-3 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <div className="text-base font-semibold text-[var(--accent-strong)]">{row[0]}</div>
           {row.slice(1).map((cell, j) => (
@@ -304,7 +304,7 @@ export default function GovernanceRiskPage() {
         <div id="why-now" className="scroll-mt-24">
           <SectionHeader eyebrow="Why now" title="The Indian algo desk changed in 2026" />
         </div>
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {whyNow.map(([title, text], i) => (
             <Reveal key={title} delay={i * 120} className={T.cardAlt}>
               <p className="text-3xl font-black tracking-tight text-[var(--accent-strong)] sm:text-4xl">{title}</p>
@@ -335,7 +335,7 @@ export default function GovernanceRiskPage() {
         </Block>
 
         <Block title="Proving the edge: walk-forward testing">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
             <ChartCard
               title="Train, test, roll forward"
               legend={[
@@ -361,7 +361,7 @@ export default function GovernanceRiskPage() {
           title="MCP: one standard plug for every tool"
           intro="An open standard that lets any AI app connect to your data and tools. Think of it as USB-C for AI."
         >
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
             <div className="space-y-4">
               {mcpLeft.map(([title, text], i) => (
                 <Reveal key={title} delay={i * 100} className={`${T.cardAlt} !p-5`}>
@@ -398,7 +398,7 @@ export default function GovernanceRiskPage() {
               label="Orchestrator"
               text="Splits the task, gathers results, writes the trade proposal."
             />
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
               {agents.map(([title, text], i) => (
                 <Reveal key={title} delay={(i % 5) * 80} className={`${T.cardAlt} !p-5`}>
                   <h4 className="text-base font-semibold text-[var(--accent-strong)]">{title}</h4>
@@ -415,7 +415,7 @@ export default function GovernanceRiskPage() {
         </Block>
 
         <Block title="What makes AI “agentic”">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div className="space-y-4">
               <FlowRow steps={agentFlow} cols="" />
               <Reveal className={T.inner}>
@@ -440,7 +440,7 @@ export default function GovernanceRiskPage() {
         <div id="governance" className="scroll-mt-24">
           <SectionHeader eyebrow="Governance" title="Guardrails for AI on the trading desk" />
         </div>
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Reveal className={T.card}>
             <h3 className={T.h3}>The rules, as of October 2026</h3>
             <ul className="mt-6 space-y-5">

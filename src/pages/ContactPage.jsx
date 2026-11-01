@@ -21,11 +21,11 @@ export default function ContactPage() {
           <div className="rounded-[24px] sm:rounded-[28px] border border-[var(--border-soft)] bg-[var(--surface)] p-6 sm:p-8">
             <h2 className="text-2xl font-bold tracking-[-0.04em] text-[var(--text-primary)] sm:text-3xl sm:tracking-[-0.05em]">Get in touch</h2>
             <div className="mt-4 sm:mt-6 space-y-3 sm:space-y-5 text-sm sm:text-base leading-6 sm:leading-7 text-[var(--text-secondary)]">
-              <p>Email: <a href="mailto:hello@alphaedge.in" className="text-[var(--accent)]">hr@alphaedge.in</a></p>
+              <p>Email: <a href="mailto:hello@alphaedge.in" className="text-[var(--accent)]">info@stratneetiintl.in</a></p>
               <p>Phone: <a href="tel:+919999999999" className="text-[var(--accent)]">+91 99999 99999</a></p>
-              <p>Location: Mumbai, India</p>
+              <p>Location: Delhi, India</p>
                <a
-        href={`https://mail.google.com/mail/?view=cm&fs=1&to=zaidiqbal901@gmail.com&su=${encodeURIComponent(
+        href={`https://mail.google.com/mail/?view=cm&fs=1&to=info@stratneetiintl.in&su=${encodeURIComponent(
             'AlphaEdge Course Application'
         )}&body=${encodeURIComponent(
             `Hello AlphaEdge HR Team,

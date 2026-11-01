@@ -66,7 +66,7 @@ function BulletList({ items, icon: Icon = Check }) {
 /* Cards with a title and a line of text. */
 function CardGrid({ cards, cols = 'md:grid-cols-2 xl:grid-cols-3', small = false }) {
   return (
-    <div className={`grid gap-6 ${cols}`}>
+    <div className={`grid grid-cols-1 gap-6 ${cols}`}>
       {cards.map(([title, text], i) => (
         <Reveal key={title} delay={(i % 3) * 100} className={`${T.card} ${small ? '!p-5' : ''}`}>
           <h4 className={small ? 'text-base font-semibold text-[var(--accent-strong)]' : T.h3}>{title}</h4>
@@ -82,7 +82,7 @@ function FlowRow({ label, steps, start = 1, cols = 'xl:grid-cols-4' }) {
   return (
     <div>
       {label && <p className="mb-4 text-sm font-semibold text-[var(--accent-strong)]">{label}</p>}
-      <div className={`grid gap-4 md:grid-cols-2 ${cols}`}>
+      <div className={`grid grid-cols-1 gap-4 md:grid-cols-2 ${cols}`}>
         {steps.map(([title, text], i) => (
           <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
             <span className="inline-flex rounded-md bg-[var(--accent)]/15 px-2.5 py-1 text-sm font-bold text-[var(--accent-strong)]">
@@ -110,7 +110,7 @@ function DataTable({ heads, rows }) {
         <Reveal
           key={row[0]}
           delay={(i % 4) * 60}
-          className="grid gap-3 border-b border-[var(--border-soft)] px-4 py-5 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
+          className="grid grid-cols-1 gap-3 border-b border-[var(--border-soft)] px-4 py-5 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <div className="text-base font-semibold text-[var(--accent-strong)]">{row[0]}</div>
           {row.slice(1).map((cell, j) => (
@@ -157,17 +157,17 @@ function NetworkChart() {
   const inputs = ['Returns', 'RSI', 'OI change', 'India VIX', 'FII flow'];
   const ys = inputs.map((_, i) => 40 + i * 55);
   const xs = [150, 290, 410];
-  const OUT = { x: 545, y: 150 };
+  const OUT = { x: 530, y: 150 };
 
   return (
     <svg
       ref={ref}
-      viewBox="0 0 680 300"
-      className="h-auto w-full min-w-[520px]"
+      viewBox="0 0 700 300"
+      className="h-auto w-full"
       role="img"
       aria-label="Illustration: five inputs feed two hidden layers of nodes, which combine into one output, the probability the market goes up"
     >
-      <g style={fadeStyle(show, anim, 200)} stroke={AXIS} strokeOpacity="0.3" strokeWidth="1">
+      <g style={fadeStyle(show, anim, 200)} stroke={AXIS} strokeOpacity="0.3" strokeWidth="1.5">
         {[0, 1].map((layer) =>
           ys.flatMap((y1, a) => ys.map((y2, b) => (
             <line key={`${layer}-${a}-${b}`} x1={xs[layer]} y1={y1} x2={xs[layer + 1]} y2={y2} />
@@ -180,22 +180,22 @@ function NetworkChart() {
 
       {inputs.map((label, i) => (
         <g key={label} style={fadeStyle(show, anim, i * 80)}>
-          <text x="128" y={ys[i] + 4} textAnchor="end" fill="var(--text-secondary)" fontSize="13">
+          <text x="130" y={ys[i] + 7} textAnchor="end" fill="var(--text-secondary)" fontSize="20">
             {label}
           </text>
-          <circle cx={xs[0]} cy={ys[i]} r="9" fill={C.accent} />
+          <circle cx={xs[0]} cy={ys[i]} r="11" fill={C.accent} />
         </g>
       ))}
 
       <g style={fadeStyle(show, anim, 500)}>
         {[1, 2].map((layer) =>
-          ys.map((y) => <circle key={`${layer}-${y}`} cx={xs[layer]} cy={y} r="9" fill={C.blue} fillOpacity="0.85" />),
+          ys.map((y) => <circle key={`${layer}-${y}`} cx={xs[layer]} cy={y} r="11" fill={C.blue} fillOpacity="0.85" />),
         )}
       </g>
 
       <g style={fadeStyle(show, anim, 900)}>
-        <circle cx={OUT.x} cy={OUT.y} r="18" fill={C.amber} />
-        <text x={OUT.x + 28} y={OUT.y + 5} fill="var(--text-primary)" fontSize="14" fontWeight="700">
+        <circle cx={OUT.x} cy={OUT.y} r="21" fill={C.amber} />
+        <text x={OUT.x + 30} y={OUT.y + 7} fill="var(--text-primary)" fontSize="19" fontWeight="700">
           P(up) = 0.64
         </text>
       </g>
@@ -214,7 +214,7 @@ function EmbeddingChart() {
     <svg
       ref={ref}
       viewBox="0 0 440 260"
-      className="h-auto w-full min-w-[360px]"
+      className="h-auto w-full"
       role="img"
       aria-label="Illustration: passages with similar meaning sit close together, and the query lands next to the margin pressure group"
     >
@@ -222,13 +222,13 @@ function EmbeddingChart() {
       {clusters.map((c, ci) => (
         <g key={c.color} style={fadeStyle(show, anim, ci * 250)}>
           {c.pts.map(([x, y]) => (
-            <circle key={`${x}-${y}`} cx={x} cy={y} r="9" fill={c.color} fillOpacity="0.9" />
+            <circle key={`${x}-${y}`} cx={x} cy={y} r="10" fill={c.color} fillOpacity="0.9" />
           ))}
         </g>
       ))}
       <g style={fadeStyle(show, anim, 1000)}>
-        <circle cx="150" cy="100" r="13" fill="none" stroke="var(--text-primary)" strokeWidth="2.5" />
-        <text x="150" y="70" textAnchor="middle" fill="var(--text-secondary)" fontSize="12">
+        <circle cx="150" cy="100" r="13" fill="none" stroke="var(--text-primary)" strokeWidth="3" />
+        <text x="150" y="68" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">
           Your query
         </text>
       </g>
@@ -489,7 +489,7 @@ export default function AIandTrading() {
         </div>
 
         <Block first title="Rule-based algo versus learned algo">
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Reveal className={T.cardAlt}>
               <h4 className={T.h3}>Rule-based: what you run today</h4>
               <div className="mt-4">
@@ -539,7 +539,7 @@ export default function AIandTrading() {
         </Block>
 
         <Block title="Neural networks, in one picture">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
             <ChartCard
               caption="Illustration, not a real model."
               legend={[
@@ -557,7 +557,7 @@ export default function AIandTrading() {
         </Block>
 
         <Block id="lstm" title="Algorithm 4: LSTM volatility forecaster for options">
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {lstmCards.map(([title, text], i) => (
               <Reveal key={title} delay={i * 120} className={T.card}>
                 <div className="mb-5 h-1 w-10 rounded-full bg-[var(--accent)]" />
@@ -566,7 +566,7 @@ export default function AIandTrading() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
             <Reveal className={T.card}>
               <h4 className={T.h3}>Decision rule</h4>
               <div className="mt-5">
@@ -599,7 +599,7 @@ export default function AIandTrading() {
           <DataTable heads={['Technique', 'What it does', 'Use it on the desk for']} rows={techniques} />
           <Reveal className="mt-8">
             <p className="mb-4 text-sm font-semibold text-[var(--accent-strong)]">Treat prompts as code</p>
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
               {promptsAreCode.map((item) => (
                 <div key={item} className={`${T.inner} flex items-center gap-3 text-base text-[var(--text-primary)]`}>
                   <Check />
@@ -611,7 +611,7 @@ export default function AIandTrading() {
         </Block>
 
         <Block title="Same model, very different answers">
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <Reveal className={T.cardAlt}>
               <h4 className={T.h3}>Weak prompt</h4>
               <div className="mt-4">
@@ -644,7 +644,7 @@ export default function AIandTrading() {
 
         <Block id="sentiment" title="Algorithm 5: announcement sentiment as a feature">
           <FlowRow steps={sentimentFlow} cols="xl:grid-cols-5" />
-          <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+          <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
             <Reveal className={T.cardAlt}>
               <CodeBlock lines={sentimentPrompt} />
             </Reveal>
@@ -665,7 +665,7 @@ export default function AIandTrading() {
         </div>
 
         <Block first title="Embeddings: search by meaning">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
             <div>
               <ol className="space-y-5">
                 {embeddingSteps.map((line, i) => (
@@ -716,7 +716,7 @@ export default function AIandTrading() {
           title="MCP: one standard plug for every tool"
           intro="An open standard that lets any AI app connect to your data and tools. Think of it as USB-C for AI."
         >
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
             <div className="space-y-4">
               {mcpLeft.map(([title, text], i) => (
                 <Reveal key={title} delay={i * 100} className={`${T.card} !p-5`}>
@@ -754,7 +754,7 @@ export default function AIandTrading() {
         </div>
 
         <Block first title="What makes AI “agentic”">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
             <div className="space-y-4">
               <FlowRow steps={agentFlow} cols="" />
               <Reveal className={T.inner}>
@@ -780,7 +780,7 @@ export default function AIandTrading() {
               label="Orchestrator"
               text="Splits the task, gathers results, writes the trade proposal."
             />
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
               {agents.map(([title, text], i) => (
                 <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
                   <h4 className="text-base font-semibold text-[var(--accent-strong)]">{title}</h4>

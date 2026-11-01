@@ -76,7 +76,7 @@ function PairsChart() {
     <svg
       ref={ref}
       viewBox="0 0 520 240"
-      className="h-auto w-full min-w-[480px]"
+      className="h-auto w-full"
       role="img"
       aria-label="Illustration: the spread z-score crosses +2 and the pair is shorted, crosses minus 2 and the pair is bought, and both trades exit at zero"
     >
@@ -88,14 +88,14 @@ function PairsChart() {
       ].map(([y, label]) => (
         <g key={label}>
           <line x1="40" y1={y} x2="510" y2={y} stroke={AXIS} strokeOpacity="0.5" strokeDasharray={label === '0' ? '0' : '4 5'} />
-          <text x="8" y={y + 4} fill={AXIS} fontSize="12">
+          <text x="8" y={y + 4} fill={AXIS} fontSize="15">
             {label}
           </text>
         </g>
       ))}
-      <line x1="40" y1="14" x2="510" y2="14" stroke="#ef4444" strokeOpacity="0.35" strokeDasharray="2 5" />
+      <line x1="40" y1="18" x2="510" y2="18" stroke="#ef4444" strokeOpacity="0.35" strokeDasharray="2 5" />
       <line x1="40" y1="226" x2="510" y2="226" stroke="#ef4444" strokeOpacity="0.35" strokeDasharray="2 5" />
-      <text x="510" y="10" textAnchor="end" fill="#ef4444" fontSize="11">
+      <text x="510" y="12" textAnchor="end" fill="#ef4444" fontSize="14">
         Stop ±3.5
       </text>
 
@@ -103,23 +103,23 @@ function PairsChart() {
         d="M40 120 C70 112 90 28 122 26 S165 96 185 120 S235 214 268 208 S315 140 335 120 S385 92 405 94 S470 120 510 120"
         fill="none"
         stroke="var(--text-primary)"
-        strokeWidth="2.5"
+        strokeWidth="3"
         strokeLinecap="round"
         {...draw()}
       />
 
       <g {...pop(500)}>
-        <circle cx="103" cy="50" r="6" fill={C.amber} />
-        <circle cx="185" cy="120" r="6" fill={C.accent} />
+        <circle cx="103" cy="50" r="7" fill={C.amber} />
+        <circle cx="185" cy="120" r="7" fill={C.accent} />
       </g>
       <g {...pop(1000)}>
-        <circle cx="250" cy="190" r="6" fill={C.blue} />
-        <circle cx="335" cy="120" r="6" fill={C.accent} />
+        <circle cx="250" cy="190" r="7" fill={C.blue} />
+        <circle cx="335" cy="120" r="7" fill={C.accent} />
       </g>
-      <text x="103" y="40" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">
+      <text x="103" y="40" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">
         Short A, long B
       </text>
-      <text x="250" y="178" textAnchor="middle" fill="var(--text-secondary)" fontSize="11" transform="translate(0 0)">
+      <text x="250" y="178" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">
         Long A, short B
       </text>
     </svg>
@@ -187,11 +187,17 @@ function MetricTable() {
         <Reveal
           key={metric}
           delay={(i % 3) * 60}
-          className="grid gap-1 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
+          className="grid grid-cols-1 gap-2 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <div className="text-base font-semibold text-[var(--accent-strong)]">{metric}</div>
-          <div className="text-sm leading-6 text-[var(--text-secondary)]">{meaning}</div>
-          <div className="text-sm leading-6 text-[var(--text-primary)]">{rule}</div>
+          <div className="text-sm leading-6 text-[var(--text-secondary)]">
+            <span className="block text-xs font-semibold text-[var(--text-muted)] sm:hidden">Plain meaning</span>
+            {meaning}
+          </div>
+          <div className="text-sm leading-6 text-[var(--text-primary)]">
+            <span className="block text-xs font-semibold text-[var(--text-muted)] sm:hidden">Rule of thumb</span>
+            {rule}
+          </div>
         </Reveal>
       ))}
     </div>
@@ -346,7 +352,7 @@ export default function AlgoTradingPage() {
       {/* ============================ ALGORITHM 1 ============================ */}
       <Section alt>
         <AlgoHeader id="algo-1" eyebrow="Algorithm 1 · Classification" title="NIFTY next-day direction classifier" />
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
           <Reveal className={T.cardAlt}>
             <StepList steps={classifierSteps} />
           </Reveal>
@@ -362,7 +368,7 @@ export default function AlgoTradingPage() {
       {/* ============================ ALGORITHM 2 ============================ */}
       <Section>
         <AlgoHeader id="algo-2" eyebrow="Algorithm 2 · Unsupervised learning" title="Market regime detection" />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr_1fr] lg:items-stretch">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)_minmax(0,1fr)] lg:items-stretch">
           <Reveal className={T.card}>
             <h3 className={T.h3}>Inputs, daily</h3>
             <ul className="mt-5 space-y-3">
@@ -405,7 +411,7 @@ export default function AlgoTradingPage() {
       {/* ============================ ALGORITHM 3 ============================ */}
       <Section alt>
         <AlgoHeader id="algo-3" eyebrow="Algorithm 3 · Statistical arbitrage" title="Pairs trading with cointegration" />
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
           <Reveal className={T.cardAlt}>
             <StepList steps={pairsSteps} />
           </Reveal>
@@ -427,7 +433,7 @@ export default function AlgoTradingPage() {
       {/* ============================ VALIDATION ============================ */}
       <Section>
         <AlgoHeader id="validation" eyebrow="Module 2 · Validation" title="Proving the edge: walk-forward testing" />
-        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
           <ChartCard
             title="Train, test, roll forward"
             legend={[
@@ -444,7 +450,7 @@ export default function AlgoTradingPage() {
       {/* ============================ ALGORITHM 4 ============================ */}
       <Section alt>
         <AlgoHeader id="algo-4" eyebrow="Algorithm 4 · Deep learning" title="LSTM volatility forecaster for options" />
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           {lstmCards.map(([title, text], i) => (
             <Reveal key={title} delay={i * 120} className={T.cardAlt}>
               <div className="mb-5 h-1 w-10 rounded-full bg-[var(--accent)]" />
@@ -454,7 +460,7 @@ export default function AlgoTradingPage() {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           <Reveal className={T.cardAlt}>
             <h3 className={T.h3}>Decision rule</h3>
             <ul className="mt-5 space-y-4">
@@ -484,7 +490,7 @@ export default function AlgoTradingPage() {
       {/* ============================ ALGORITHM 5 ============================ */}
       <Section>
         <AlgoHeader id="algo-5" eyebrow="Algorithm 5 · Generative AI" title="Announcement sentiment as a feature" />
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-5">
           {sentimentSteps.map(([title, text], i) => (
             <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
               <span className="inline-flex rounded-md bg-[var(--accent)]/15 px-2.5 py-1 text-sm font-bold text-[var(--accent-strong)]">
@@ -496,7 +502,7 @@ export default function AlgoTradingPage() {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <Reveal className={T.card}>
             <CodeBlock code={sentimentCode} />
           </Reveal>
@@ -521,7 +527,7 @@ export default function AlgoTradingPage() {
           {agentSchedule.map(([time, task, detail]) => (
             <div
               key={time}
-              className="grid gap-1 border-b border-[var(--border-soft)] px-5 py-5 last:border-b-0 sm:grid-cols-[100px_160px_1fr] sm:items-baseline sm:gap-6 sm:px-8"
+              className="grid grid-cols-1 gap-1 border-b border-[var(--border-soft)] px-5 py-5 last:border-b-0 md:grid-cols-[90px_150px_minmax(0,1fr)] md:items-baseline md:gap-6 md:px-8"
             >
               <time className="text-lg font-bold tabular-nums text-[var(--accent-strong)]">{time}</time>
               <p className="text-lg font-semibold text-[var(--text-primary)]">{task}</p>
