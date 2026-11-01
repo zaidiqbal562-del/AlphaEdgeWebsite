@@ -141,22 +141,22 @@ export default function Footer() {
               className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs sm:text-sm"
               style={{ fontFamily: mono, color: SOFT }}
             >
-              <a
+              {/* <a
                 href="https://alphaedge.in"
                 className="transition-colors hover:text-[#ee8238]"
               >
                 alphaedge.in
-              </a>
+              </a> */}
 
-              <span aria-hidden="true" style={{ color: MUTED }}>
+              {/* <span aria-hidden="true" style={{ color: MUTED }}>
                 ·
-              </span>
+              </span> */}
 
               <a
-                href="mailto:hello@alphaedge.in"
+                href="mailto:info@stratneetiintl.in"
                 className="break-all transition-colors hover:text-[#ee8238]"
               >
-                hello@alphaedge.in
+                info@stratneetiintl.in
               </a>
             </div>
 
@@ -166,7 +166,8 @@ export default function Footer() {
               style={{ color: MUTED }}
             >
               For education only; not investment advice. Trading in securities
-              and derivatives carries risk of loss. Backtested results do not
+              and derivatives carries risk of loss. 
+              Backtested results do not
               guarantee future performance.
             </p>
           </div>

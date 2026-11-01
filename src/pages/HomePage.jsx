@@ -98,15 +98,15 @@ export default function HomePage() {
   const aboutPillars = [
     {
       title: 'AI, ML and deep learning',
-      text: '[Production models we have built, e.g., forecasting, NLP, risk scoring — with scale and outcome]',
+      text: 'Production models we have built, e.g., forecasting, NLP, risk scoring — with scale and outcome',
     },
     {
       title: 'Data engineering at market scale',
-      text: '[Tick-data platforms, real-time pipelines, data volumes handled]',
+      text: 'Tick-data platforms, real-time pipelines, data volumes handled',
     },
     {
       title: 'Indian capital markets',
-      text: '[Desks and products — equity, F&O, quant research — plus publications or patents]',
+      text: 'Desks and products — equity, F&O, quant research — plus publications or patents',
     },
   ];
 
