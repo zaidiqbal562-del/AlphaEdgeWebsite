@@ -1,97 +1,33 @@
 import { Link } from 'react-router-dom';
 import Layout from '../layout/Layout';
 import NumberCounter from '../components/NumberCounter';
-import useInView from '../hooks/useInView';
+import { T as BaseT, Reveal, Section, SectionHeader, Check } from '../components/ui';
+import { ChartCard, TermTimeline } from '../components/Ai900Charts';
+import {
+  RegulatoryTimeline,
+  AlgoThresholdMeter,
+  ModulePathRail,
+  CapstoneFlow,
+} from '../components/HomeCharts';
+import { ai900ProgrammeData } from '../data/ai900Data';
 
-/* ------------------------------------------------------------------ */
-/* Design tokens: every section below uses these, so the page looks    */
-/* the same in dark and light mode and nothing is hard-coded.          */
-/* ------------------------------------------------------------------ */
-
+/* Shared tokens come from ui.jsx; only the hero buttons are home-specific. */
 const T = {
-  // Card on the normal page background
-  card: 'rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 sm:p-8',
-  // Card placed inside an "alt" (tinted) section
-  cardAlt: 'rounded-2xl border border-[var(--border-soft)] bg-[var(--page-bg)] p-6 sm:p-8',
-  eyebrow: 'text-sm font-semibold text-[var(--accent-strong)]',
-  h2: 'mt-3 text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl',
-  lead: 'mt-4 max-w-2xl text-base leading-7 text-[var(--text-secondary)] sm:text-lg',
-  h3: 'text-xl font-semibold text-[var(--text-primary)]',
-  body: 'mt-3 text-base leading-7 text-[var(--text-secondary)]',
+  ...BaseT,
   btnPrimary:
-    'inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:brightness-110 sm:w-auto',
+    'inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text--950 shadow-lg transition hover:brightness-110 sm:w-auto',
   btnSecondary:
     'inline-flex w-full items-center justify-center rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-sm font-bold text-white backdrop-blur transition hover:bg-white/15 sm:w-auto',
 };
 
-/* ------------------------------------------------------------------ */
-/* Scroll reveal: fades and lifts an element into place every time it  */
-/* enters the viewport (pass once to play only the first time).        */
-/* Honors "reduce motion" automatically.                               */
-/* ------------------------------------------------------------------ */
-
-function Reveal({ children, delay = 0, className = '', as: Tag = 'div', once = false }) {
-  // once = false -> the animation replays every time the element re-enters the screen
-  const [ref, inView] = useInView({ once });
-
-  return (
-    <Tag
-      ref={ref}
-      style={{ transitionDelay: inView ? `${delay}ms` : '0ms' }}
-      className={`transition-all duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none ${
-        inView ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-      } ${className}`}
-    >
-      {children}
-    </Tag>
-  );
-}
-
-function Section({ alt = false, children }) {
-  return (
-    <section
-      className={
-        alt
-          ? 'border-y border-[var(--border-soft)] bg-[var(--surface-strong)] py-16 sm:py-24'
-          : 'py-16 sm:py-24'
-      }
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
-    </section>
-  );
-}
-
-function SectionHeader({ eyebrow, title, description, action }) {
-  return (
-    <Reveal className="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <p className={T.eyebrow}>{eyebrow}</p>
-        <h2 className={T.h2}>{title}</h2>
-        {description && <p className={T.lead}>{description}</p>}
-      </div>
-      {action}
-    </Reveal>
-  );
-}
-
-function Check() {
-  return (
-    <span
-      aria-hidden="true"
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/15 text-sm font-bold text-[var(--accent-strong)]"
-    >
-      ✓
-    </span>
-  );
-}
-
-function CapstoneBanner({ children }) {
+function CapstoneBanner({ children, extra }) {
   return (
     <Reveal className="mt-8 rounded-2xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-6 sm:p-8">
       <p className="text-sm font-semibold text-[var(--accent-strong)]">Capstone</p>
       <p className="mt-2 text-xl font-semibold leading-snug text-[var(--text-primary)] sm:text-2xl">
         {children}
       </p>
+      {extra}
     </Reveal>
   );
 }
@@ -282,9 +218,15 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
           <Reveal className={`${T.card} flex flex-col`}>
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-[var(--accent)] text-2xl font-black text-slate-950">
-                α
-              </div>
+              
+<div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl">
+  <img
+    src="/logocropped.jpeg"
+    alt="AlphaEdge Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
+
               <div>
                 <p className="text-xl font-black tracking-wide text-[var(--text-primary)]">ALPHAEDGE</p>
                 <p className="text-xs text-[var(--text-muted)]">Quant and financial engineering academy</p>
@@ -331,6 +273,17 @@ export default function HomePage() {
           ))}
         </div>
 
+        <ChartCard
+          alt
+          className="mt-6"
+          title="Key dates behind the shift"
+          caption="The dates cited in the sources below, spaced in proportion to the time between them."
+        >
+          <RegulatoryTimeline />
+          <div className="my-8 border-t border-[var(--border-soft)]" />
+          <AlgoThresholdMeter />
+        </ChartCard>
+
         <Reveal
           as="p"
           className="mt-12 max-w-4xl text-2xl font-bold leading-snug text-[var(--text-primary)] sm:text-3xl"
@@ -370,6 +323,8 @@ export default function HomePage() {
       <Section alt>
         <SectionHeader eyebrow="Course map" title="Six modules, one capstone" />
 
+        <ModulePathRail modules={courseModules} />
+
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {courseModules.map((module, i) => (
             <Reveal key={module.code} delay={(i % 3) * 120} className={T.cardAlt}>
@@ -402,7 +357,7 @@ export default function HomePage() {
           ))}
         </div>
 
-        <CapstoneBanner>
+        <CapstoneBanner extra={<CapstoneFlow />}>
           Build, backtest and paper-trade one ML + LLM signal on NSE data — then defend it before a mock
           risk committee.
         </CapstoneBanner>
@@ -441,6 +396,13 @@ export default function HomePage() {
             </Reveal>
           ))}
         </div>
+        <ChartCard
+          className="mt-6"
+          title="Four terms across 52 weeks"
+          caption="Each bar is sized by the number of weeks the term covers."
+        >
+          <TermTimeline terms={ai900ProgrammeData.terms} />
+        </ChartCard>
       </Section>
 
       {/* ============================ RESEARCH ============================ */}

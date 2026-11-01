@@ -26,7 +26,7 @@ function usePrefersReducedMotion() {
 }
 
 /* Charts replay their animation every time they scroll into view. */
-function useChart() {
+export function useChart() {
   const [ref, inView] = useInView({ once: false, threshold: 0.3, rootMargin: '0px' });
   const reduce = usePrefersReducedMotion();
   return { ref, show: inView || reduce, anim: !reduce };

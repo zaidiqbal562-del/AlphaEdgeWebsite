@@ -1,440 +1,470 @@
 import Layout from '../layout/Layout';
+import { T, Reveal, Section, SectionHeader, Check, Banner } from '../components/ui';
+import { ChartCard, useChart } from '../components/Ai900Charts';
 
-const slides = [
-  {
-    theme: 'dark',
-    eyebrow: 'WHY NOW',
-    title: 'The Indian algo desk changed in 2026',
-    variant: 'threeCards',
-    cards: [
-      {
-        title: '1 Apr 2026',
-        text: 'SEBI\'s framework for safer retail algo trading became fully applicable to all stock brokers.'
-      },
-      {
-        title: 'Algo ID',
-        text: 'Every algo order carries an exchange-issued tag. Above 10 orders per second per exchange, the strategy must be registered.'
-      },
-      {
-        title: 'AI rules',
-        text: 'SEBI has consulted on responsible AI/ML use and signalled human oversight and kill switches.'
-      }
-    ],
-    footer: 'Sources: SEBI circular, 30 Sep 2025 • NSE implementation standards, 5 May 2025 • SEBI AI/ML consultation, 20 Jun 2025',
-    accent: 'text-[#ea7b39]'
-  },
-  {
-    theme: 'light',
-    eyebrow: 'THE MENTAL MODEL',
-    title: 'The trading ML pipeline, end to end',
-    variant: 'pipeline',
-    head: [
-      ['RESEARCH • build the model', '01', 'Collect', 'Bhavcopy, ticks, option chain, news'],
-      ['RESEARCH • build the model', '02', 'Clean', 'Splits, bonuses, holidays, gaps'],
-      ['RESEARCH • build the model', '03', 'Features', 'Returns, RSI, OI, VIX, flows'],
-      ['RESEARCH • build the model', '04', 'Label', 'What to predict, over what horizon'],
-      ['RESEARCH • build the model', '05', 'Train', 'Fit on the past only']
-    ],
-    production: [
-      ['PRODUCTION • earn the right to trade', '06', 'Walk-forward', 'Retrain and test, window by window'],
-      ['PRODUCTION • earn the right to trade', '07', 'Costs', 'STT, brokerage, GST, stamp, slippage'],
-      ['PRODUCTION • earn the right to trade', '08', 'Paper trade', 'Live data, no money at risk'],
-      ['PRODUCTION • earn the right to trade', '09', 'Go live', 'Small size, hard limits, kill switch'],
-      ['PRODUCTION • earn the right to trade', '10', 'Monitor', 'Drift, decay, retrain triggers']
-    ]
-  },
-  {
-    theme: 'dark',
-    eyebrow: 'BEFORE ANY MODEL',
-    title: 'Four ways a great backtest lies to you',
-    variant: 'fourCards',
-    cards: [
-      {
-        title: 'Look-ahead bias',
-        text: 'Using today\'s close to trade today\'s open, or results data before the announcement time.'
-      },
-      {
-        title: 'Survivorship bias',
-        text: 'Testing only on today\'s NIFTY 50 members ignores the stocks that were dropped along the way.'
-      },
-      {
-        title: 'Data snooping',
-        text: 'Try 500 parameter sets and keep the best one — some will win by luck alone.'
-      },
-      {
-        title: 'Ignoring costs',
-        text: 'STT, exchange charges, GST, stamp duty and slippage can erase a thin intraday edge.'
-      }
-    ]
-  },
-  {
-    theme: 'light',
-    eyebrow: 'MODULE 2 • VALIDATION',
-    title: 'Proving the edge: walk-forward testing',
-    variant: 'walkForward',
-    train: ['Fold 1', 'Fold 2', 'Fold 3', 'Fold 4', 'Fold 5'],
-    table: [
-      ['Sharpe ratio', 'Return per unit of risk', '> 1, net'],
-      ['Sortino ratio', 'Return ÷ downside risk', '> 1.5, net'],
-      ['Max drawdown', 'Worst fall from a peak', 'Survivable'],
-      ['Hit rate', 'Share of winning trades', 'Read with R:R'],
-      ['Profit factor', 'Profits ÷ losses', '> 1.3'],
-      ['Calmar ratio', 'Yearly return ÷ max DD', '> 1']
-    ],
-    note: 'The model never sees the test months while it learns. Then the window rolls forward — exactly as it would live.'
-  },
-  {
-    theme: 'dark',
-    eyebrow: 'MODULE 5 • MODEL CONTEXT PROTOCOL',
-    title: 'MCP: one standard plug for every tool',
-    variant: 'mcp',
-    left: [
-      ['Market data', 'Quotes, OHLC, option chain'],
-      ['Backtest engine', 'Run a strategy, return metrics'],
-      ['Broker API', 'Positions and P&L — read-only']
-    ],
-    right: [
-      ['Risk database', 'Limits, exposure, margin'],
-      ['Research store', 'RAG over filings and circulars'],
-      ['News feed', 'Announcements and headlines']
-    ],
-    center: 'AI assistant or agent speaks MCP',
-    note: 'Build each tool once; any model or agent can use it. Orders stay behind human approval.'
-  },
-  {
-    theme: 'light',
-    eyebrow: 'MODULE 6 • MULTI-AGENT SYSTEMS',
-    title: 'A multi-agent research desk',
-    variant: 'multiAgent',
-    orchestrator: 'ORCHESTRATOR Splits the task, gathers results, writes the trade proposal',
-    agents: [
-      ['Data', 'Pulls prices, OI and flows via MCP'],
-      ['Analyst', 'Reads filings and concalls via RAG'],
-      ['Quant', 'Runs backtests; reports Sharpe and drawdown'],
-      ['Risk', 'Checks exposure, margin and loss limits'],
-      ['Compliance', 'Checks the plan against SEBI and exchange rules']
-    ],
-    human: 'HUMAN Portfolio manager reviews, edits and approves — or rejects',
-    execution: 'EXECUTION Through the broker\'s approved algo channel, tagged with its Algo ID'
-  },
-  {
-    theme: 'light',
-    eyebrow: 'MODULE 6 • AGENTIC AI',
-    title: 'What makes AI “agentic”',
-    variant: 'agentic',
-    flow: [
-      ['1 PLAN', 'Break the goal into steps'],
-      ['2 ACT', 'Call a tool via MCP'],
-      ['3 OBSERVE', 'Read the result it got back'],
-      ['4 REFLECT', 'Goal met? If not, loop again']
-    ],
-    goal: '“Find F&O stocks with unusual OI build-up; check results dates”',
-    list: [
-      ['Brain', 'An LLM that reasons and picks the next step'],
-      ['Tools', 'Reached through MCP: data, backtests, documents'],
-      ['Memory', 'Vector database plus a log of past steps'],
-      ['Guardrails', 'Limits, permissions and human approval']
-    ]
-  },
-  {
-    theme: 'light',
-    eyebrow: 'Governance',
-    title: 'Guardrails for AI on the trading desk',
-    variant: 'governance',
-    rules: [
-      'Retail algo framework fully applicable to all brokers since 1 April 2026',
-      'Every algo order carries an exchange-issued Algo ID',
-      'Above 10 orders per second per exchange, the strategy must be registered',
-      'API access only through broker-supervised, static-IP-whitelisted set-ups',
-      'SEBI’s AI/ML principles: governance, disclosure, testing, fairness, data privacy'
-    ],
-    add: [
-      'Kill switch, tested regularly',
-      'Hard limits on position, loss and order rate',
-      'Human approval for any AI-proposed order',
-      'Model register: owner, version, data, last test',
-      'Audit log of prompts, tool calls and outputs',
-      'Drift monitoring with automatic re-risking'
-    ],
-    note: 'Regulations change — check the latest SEBI and NSE circulars before any deployment.'
-  }
-];
+/* ------------------------------------------------------------------ */
+/* Shared bits (same tokens as ui.jsx, no new colours)                 */
+/* ------------------------------------------------------------------ */
 
-function FooterLine() {
+const C = { accent: 'var(--accent)', amber: '#f59e0b' };
+
+/* A titled block inside a section (one per original slide). */
+function Block({ id, title, intro, first = false, children }) {
   return (
-    <div className="mt-10 pt-6 text-[15px] font-medium uppercase tracking-[0.22em] text-[#1d334b] opacity-80">
-      AI for the Trading Desk • ALPHAEDGE
+    <div id={id} className={`${first ? '' : 'mt-16 sm:mt-20'} scroll-mt-24`}>
+      <Reveal as="h3" className="text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl">
+        {title}
+      </Reveal>
+      {intro && (
+        <Reveal as="p" delay={80} className={`${T.lead} !max-w-3xl`}>
+          {intro}
+        </Reveal>
+      )}
+      <div className="mt-8">{children}</div>
     </div>
   );
 }
 
-function ThreeCardSlide({ slide }) {
+function BulletList({ items }) {
   return (
-    <div className="rounded-[20px] border border-[#0f2438]/10 bg-[#091f30] p-4 sm:p-6">
-      <div className="grid gap-5 lg:grid-cols-3">
-        {slide.cards.map((card) => (
-          <div key={card.title} className="rounded-[18px] border border-slate-600 bg-[#122d41] p-5 text-slate-100">
-            <h3 className="text-[clamp(2rem,2.7vw,4rem)] font-black leading-none tracking-[-0.06em] text-[#ea7b39]">{card.title}</h3>
-            <p className="mt-4 text-[17px] leading-8 text-slate-100">{card.text}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-7 text-[16px] leading-8 text-slate-200">{slide.footer}</div>
-    </div>
+    <ul className="space-y-4">
+      {items.map((item) => (
+        <li key={item} className="flex items-start gap-3 text-base leading-7 text-[var(--text-secondary)]">
+          <Check />
+          <span className="pt-0.5">{item}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-function PipelineSlide({ slide }) {
+function CardGrid({ cards, cols = 'md:grid-cols-2' }) {
   return (
-    <>
-      <div className="mb-6 text-[15px] font-semibold uppercase tracking-[0.2em] text-[#c66e3a]">RESEARCH • build the model</div>
-      <div className="grid gap-4 lg:grid-cols-5">
-        {slide.head.map(([label, num, title, text]) => (
-          <div key={num} className="rounded-[18px] border border-slate-300 bg-[#f5f0ea] p-4 shadow-sm text-[#0f2438]">
-            <div className="text-[12px] font-semibold uppercase tracking-[0.22em] text-[#c66e3a]">{num}</div>
-            <h3 className="mt-3 text-[26px] font-semibold">{title}</h3>
-            <p className="mt-3 text-[16px] leading-7">{text}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-8 mb-6 text-[15px] font-semibold uppercase tracking-[0.2em] text-[#c66e3a]">PRODUCTION • earn the right to trade</div>
-      <div className="grid gap-4 lg:grid-cols-5">
-        {slide.production.map(([label, num, title, text]) => (
-          <div key={num} className="rounded-[18px] border border-slate-300 bg-[#f5f0ea] p-4 shadow-sm text-[#0f2438]">
-            <div className="text-[12px] font-semibold uppercase tracking-[0.22em] text-[#c66e3a]">{num}</div>
-            <h3 className="mt-3 text-[26px] font-semibold">{title}</h3>
-            <p className="mt-3 text-[16px] leading-7">{text}</p>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-function FourCardSlide({ slide }) {
-  return (
-    <div className="grid gap-5 lg:grid-cols-2">
-      {slide.cards.map((card) => (
-        <div key={card.title} className="rounded-[20px] border border-slate-700 bg-[#091f30] p-5 text-slate-100 shadow-sm">
-          <h3 className="text-[32px] font-semibold text-[#f5f0ea]">{card.title}</h3>
-          <p className="mt-4 text-[18px] leading-8 text-slate-100">{card.text}</p>
-        </div>
+    <div className={`grid gap-6 ${cols}`}>
+      {cards.map(([title, text], i) => (
+        <Reveal key={title} delay={(i % 3) * 100} className={T.card}>
+          <div className="mb-5 h-1 w-10 rounded-full bg-[#ef4444]" />
+          <h4 className={T.h3}>{title}</h4>
+          <p className={T.body}>{text}</p>
+        </Reveal>
       ))}
     </div>
   );
 }
 
-function WalkForwardSlide({ slide }) {
+/* Numbered cards, because the content is a real sequence. */
+function FlowRow({ label, steps, start = 1, cols = 'xl:grid-cols-5' }) {
   return (
-    <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-      <div>
-        <div className="mb-6 flex items-center gap-3 text-[18px] font-medium text-[#0f2438]">
-          <span className="inline-block h-4 w-4 rounded-[4px] bg-[#1e5fa5]" /> Train
-          <span className="ml-4 inline-block h-4 w-4 rounded-[4px] bg-[#ea7b39]" /> Test
-        </div>
-        <div className="space-y-4">
-          {slide.train.map((fold, idx) => (
-            <div key={fold} className="flex items-center gap-4 text-[18px] text-[#0f2438]">
-              <span className="w-12">{fold}</span>
-              <div className="relative h-10 flex-1 rounded-sm bg-[#dfe3e7]">
-                <div className="absolute inset-y-0 left-0 rounded-sm bg-[#1e5fa5]" style={{ width: `${80 - idx * 5}%`, opacity: 0.95 }} />
-                <div className="absolute inset-y-0 right-0 rounded-sm bg-[#ea7b39]" style={{ width: `${28 - idx * 3}%` }} />
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 text-[16px] leading-8 text-[#0f2438]">
-          {slide.note}
-        </div>
-      </div>
-
-      <div className="overflow-hidden rounded-[18px] border border-slate-300 bg-[#f5f0ea] shadow-sm">
-        <div className="grid grid-cols-[1fr_1fr_1fr] bg-[#091f30] text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-100">
-          <div className="px-4 py-3">Metric</div>
-          <div className="px-4 py-3">Plain meaning</div>
-          <div className="px-4 py-3">Rule of thumb</div>
-        </div>
-        {slide.table.map(([metric, meaning, rule]) => (
-          <div key={metric} className="grid grid-cols-[1fr_1fr_1fr] border-t border-slate-300 text-[15px] text-[#0f2438]">
-            <div className="px-4 py-3 font-medium">{metric}</div>
-            <div className="px-4 py-3">{meaning}</div>
-            <div className="px-4 py-3">{rule}</div>
-          </div>
+    <div>
+      {label && <p className="mb-4 text-sm font-semibold text-[var(--accent-strong)]">{label}</p>}
+      <div className={`grid gap-4 md:grid-cols-2 ${cols}`}>
+        {steps.map(([title, text], i) => (
+          <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
+            <span className="inline-flex rounded-md bg-[var(--accent)]/15 px-2.5 py-1 text-sm font-bold text-[var(--accent-strong)]">
+              {start + i}
+            </span>
+            <h4 className="mt-4 text-lg font-semibold text-[var(--text-primary)]">{title}</h4>
+            <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{text}</p>
+          </Reveal>
         ))}
       </div>
     </div>
   );
 }
 
-function McpSlide({ slide }) {
+/* Three-column table: header row on desktop, labelled rows on mobile. */
+function DataTable({ heads, rows }) {
   return (
-    <>
-      <div className="mb-5 text-[18px] italic text-slate-100">An open standard that lets any AI app connect to your data and tools — think of it as USB-C for AI.</div>
-      <div className="grid gap-5 lg:grid-cols-[1fr_0.7fr_1fr] lg:items-center">
-        <div className="space-y-4">
-          {slide.left.map(([title, text]) => (
-            <div key={title} className="rounded-[18px] border border-slate-600 bg-[#122d41] p-4 text-slate-100">
-              <div className="text-[24px] font-semibold">{title}</div>
-              <div className="mt-2 text-[16px] leading-7 text-slate-200">{text}</div>
+    <div className={`${T.card} overflow-hidden !p-0`}>
+      <div className="hidden grid-cols-3 gap-4 border-b border-[var(--border-soft)] bg-[var(--surface-strong)] px-6 py-4 text-sm font-semibold text-[var(--text-muted)] sm:grid">
+        {heads.map((h) => (
+          <div key={h}>{h}</div>
+        ))}
+      </div>
+      {rows.map((row, i) => (
+        <Reveal
+          key={row[0]}
+          delay={(i % 3) * 60}
+          className="grid gap-3 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
+        >
+          <div className="text-base font-semibold text-[var(--accent-strong)]">{row[0]}</div>
+          {row.slice(1).map((cell, j) => (
+            <div key={j} className="text-sm leading-6 text-[var(--text-secondary)]">
+              <span className="block text-xs font-semibold text-[var(--text-muted)] sm:hidden">{heads[j + 1]}</span>
+              {cell}
             </div>
           ))}
-        </div>
-
-        <div className="rounded-[18px] bg-[#ea7b39] p-5 text-center text-[#091f30] shadow-[0_20px_40px_rgba(234,123,57,0.25)]">
-          <div className="text-[18px] font-medium">⊙</div>
-          <div className="mt-3 text-[30px] font-bold leading-none">AI assistant</div>
-          <div className="mt-2 text-[30px] font-bold leading-none">or agent</div>
-          <div className="mt-3 text-[18px] font-semibold">speaks MCP</div>
-        </div>
-
-        <div className="space-y-4">
-          {slide.right.map(([title, text]) => (
-            <div key={title} className="rounded-[18px] border border-slate-600 bg-[#122d41] p-4 text-slate-100">
-              <div className="text-[24px] font-semibold">{title}</div>
-              <div className="mt-2 text-[16px] leading-7 text-slate-200">{text}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-8 text-[18px] leading-8 text-slate-100">{slide.note}</div>
-    </>
-  );
-}
-
-function MultiAgentSlide({ slide }) {
-  return (
-    <>
-      <div className="rounded-[18px] border border-slate-600 bg-[#091f30] px-5 py-4 text-[18px] font-semibold text-slate-100">
-        {slide.orchestrator}
-      </div>
-      <div className="mt-8 grid gap-4 lg:grid-cols-5">
-        {slide.agents.map(([title, text]) => (
-          <div key={title} className="rounded-[18px] border border-slate-300 bg-[#f5f0ea] p-4 shadow-sm text-[#0f2438]">
-            <div className="text-[24px] font-semibold">{title}</div>
-            <div className="mt-3 text-[16px] leading-7">{text}</div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-8 rounded-[18px] border border-slate-600 bg-[#ea7b39] px-5 py-4 text-[18px] font-semibold text-[#091f30]">
-        {slide.human}
-      </div>
-      <div className="mt-8 rounded-[18px] border border-slate-400 bg-transparent px-5 py-4 text-[18px] leading-8 text-[#0f2438]">
-        {slide.execution}
-      </div>
-    </>
-  );
-}
-
-function AgenticSlide({ slide }) {
-  return (
-    <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-      <div className="grid gap-4 lg:grid-cols-2">
-        {slide.flow.map(([label, text]) => (
-          <div key={label} className="rounded-[18px] border border-slate-400 bg-[#f5f0ea] p-4 text-[#0f2438] shadow-sm">
-            <div className="text-[12px] font-semibold uppercase tracking-[0.2em] text-[#1d5fa5]">{label}</div>
-            <div className="mt-3 text-[18px] leading-8">{text}</div>
-          </div>
-        ))}
-        <div className="rounded-[18px] bg-[#091f30] p-5 text-slate-100 lg:col-span-2">
-          <div className="text-[14px] font-semibold uppercase tracking-[0.18em] text-[#ea7b39]">Goal</div>
-          <div className="mt-4 text-[20px] leading-8">{slide.goal}</div>
-        </div>
-      </div>
-      <div className="space-y-5 text-[#0f2438]">
-        {slide.list.map(([title, text]) => (
-          <div key={title} className="flex items-start gap-3 text-[18px] leading-8">
-            <span className="mt-2 text-[#ea7b39]">✦</span>
-            <div>
-              <div className="font-semibold">{title}</div>
-              <div>{text}</div>
-            </div>
-          </div>
-        ))}
-      </div>
+        </Reveal>
+      ))}
     </div>
   );
 }
 
-function GovernanceSlide({ slide }) {
+function RoleBar({ label, text, tone }) {
+  const styles =
+    tone === 'accent'
+      ? 'border-[var(--accent)]/40 bg-[var(--accent)]/10'
+      : tone === 'amber'
+        ? 'border-[#f59e0b]/50 bg-[#f59e0b]/10'
+        : 'border-[var(--border-soft)] bg-[var(--surface)]';
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div className="rounded-[18px] border border-slate-300 bg-[#f5f0ea] p-6 shadow-sm">
-        <h2 className="text-[28px] font-semibold text-[#0f2438]">The rules, as of October 2026</h2>
-        <div className="mt-7 space-y-6">
-          {slide.rules.map((rule) => (
-            <div key={rule} className="flex gap-4">
-              <div className="mt-1 h-9 w-[3px] bg-[#c66e3a]" />
-              <p className="text-[17px] leading-8 text-[#0f2438]">{rule}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+    <Reveal className={`rounded-2xl border p-5 sm:p-6 ${styles}`}>
+      <p className="text-sm font-semibold text-[var(--text-primary)]">{label}</p>
+      <p className="mt-1 text-base leading-7 text-[var(--text-secondary)]">{text}</p>
+    </Reveal>
+  );
+}
 
-      <div className="rounded-[18px] border border-slate-700 bg-[#091f30] p-6 shadow-sm">
-        <h2 className="text-[28px] font-semibold text-white">What good desks add</h2>
-        <ul className="mt-7 space-y-5 text-[17px] leading-8 text-slate-100">
-          {slide.add.map((item) => (
-            <li key={item} className="flex items-start gap-3">
-              <span className="mt-1 text-[#ea7b39]">✓</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+/* ------------------------------------------------------------------ */
+/* Illustration                                                        */
+/* ------------------------------------------------------------------ */
+
+function WalkForwardFolds() {
+  const { ref, show, anim } = useChart();
+  return (
+    <div ref={ref} role="img" aria-label="Five folds: a training window followed by an unseen test window, rolling forward in time">
+      <div className="space-y-3">
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div key={i} className="flex items-center gap-4">
+            <span className="w-14 shrink-0 text-sm text-[var(--text-muted)]">Fold {i + 1}</span>
+            <div className="relative h-8 flex-1 overflow-hidden rounded-lg bg-[var(--surface-strong)]">
+              <div
+                className="absolute top-0 h-full origin-left rounded-lg"
+                style={{
+                  left: `${i * 9}%`,
+                  width: '52%',
+                  background: C.accent,
+                  opacity: 0.85,
+                  transform: `scaleX(${show ? 1 : 0})`,
+                  transition: anim ? `transform 700ms ease-out ${show ? i * 150 : 0}ms` : 'none',
+                }}
+              />
+              <div
+                className="absolute top-0 h-full rounded-lg"
+                style={{
+                  left: `${i * 9 + 52}%`,
+                  width: '14%',
+                  background: C.amber,
+                  opacity: show ? 0.95 : 0,
+                  transition: anim ? `opacity 500ms ease-out ${show ? i * 150 + 500 : 0}ms` : 'none',
+                }}
+              />
+            </div>
+          </div>
+        ))}
       </div>
+      <p className={`${T.small} mt-5`}>
+        The model never sees the test months while it learns. Then the window rolls forward, exactly as it would live.
+      </p>
     </div>
   );
 }
 
-function RenderSlide({ slide }) {
-  if (slide.variant === 'threeCards') return <ThreeCardSlide slide={slide} />;
-  if (slide.variant === 'pipeline') return <PipelineSlide slide={slide} />;
-  if (slide.variant === 'fourCards') return <FourCardSlide slide={slide} />;
-  if (slide.variant === 'walkForward') return <WalkForwardSlide slide={slide} />;
-  if (slide.variant === 'mcp') return <McpSlide slide={slide} />;
-  if (slide.variant === 'multiAgent') return <MultiAgentSlide slide={slide} />;
-  if (slide.variant === 'agentic') return <AgenticSlide slide={slide} />;
-  if (slide.variant === 'governance') return <GovernanceSlide slide={slide} />;
-  return null;
-}
+/* ------------------------------------------------------------------ */
+/* Content                                                             */
+/* ------------------------------------------------------------------ */
+
+const whyNow = [
+  ['1 Apr 2026', 'SEBI’s framework for safer retail algo trading became fully applicable to all stock brokers.'],
+  ['Algo ID', 'Every algo order carries an exchange-issued tag. Above 10 orders per second per exchange, the strategy must be registered.'],
+  ['AI rules', 'SEBI has consulted on responsible AI/ML use and signalled human oversight and kill switches.'],
+];
+const sources =
+  'Sources: SEBI circular, 30 Sep 2025 · NSE implementation standards, 5 May 2025 · SEBI AI/ML consultation, 20 Jun 2025';
+
+const research = [
+  ['Collect', 'Bhavcopy, ticks, option chain, news'],
+  ['Clean', 'Splits, bonuses, holidays, gaps'],
+  ['Features', 'Returns, RSI, OI, VIX, flows'],
+  ['Label', 'What to predict, over what horizon'],
+  ['Train', 'Fit on the past only'],
+];
+const production = [
+  ['Walk-forward', 'Retrain and test, window by window'],
+  ['Costs', 'STT, brokerage, GST, stamp, slippage'],
+  ['Paper trade', 'Live data, no money at risk'],
+  ['Go live', 'Small size, hard limits, kill switch'],
+  ['Monitor', 'Drift, decay, retrain triggers'],
+];
+
+const backtestLies = [
+  ['Look-ahead bias', 'Using today’s close to trade today’s open, or results data before the announcement time.'],
+  ['Survivorship bias', 'Testing only on today’s NIFTY 50 members ignores the stocks that were dropped along the way.'],
+  ['Data snooping', 'Try 500 parameter sets and keep the best one: some will win by luck alone.'],
+  ['Ignoring costs', 'STT, exchange charges, GST, stamp duty and slippage can erase a thin intraday edge.'],
+];
+
+const metrics = [
+  ['Sharpe ratio', 'Return per unit of risk', '> 1, net'],
+  ['Sortino ratio', 'Return ÷ downside risk', '> 1.5, net'],
+  ['Max drawdown', 'Worst fall from a peak', 'Survivable'],
+  ['Hit rate', 'Share of winning trades', 'Read with R:R'],
+  ['Profit factor', 'Profits ÷ losses', '> 1.3'],
+  ['Calmar ratio', 'Yearly return ÷ max drawdown', '> 1'],
+];
+
+const mcpLeft = [
+  ['Market data', 'Quotes, OHLC, option chain'],
+  ['Backtest engine', 'Run a strategy, return metrics'],
+  ['Broker API', 'Positions and P&L, read-only'],
+];
+const mcpRight = [
+  ['Risk database', 'Limits, exposure, margin'],
+  ['Research store', 'RAG over filings and circulars'],
+  ['News feed', 'Announcements and headlines'],
+];
+
+const agents = [
+  ['Data', 'Pulls prices, OI and flows via MCP'],
+  ['Analyst', 'Reads filings and concalls via RAG'],
+  ['Quant', 'Runs backtests; reports Sharpe and drawdown'],
+  ['Risk', 'Checks exposure, margin and loss limits'],
+  ['Compliance', 'Checks the plan against SEBI and exchange rules'],
+];
+
+const agentFlow = [
+  ['Plan', 'Break the goal into steps'],
+  ['Act', 'Call a tool via MCP'],
+  ['Observe', 'Read the result it got back'],
+  ['Reflect', 'Goal met? If not, loop again'],
+];
+const agentParts = [
+  'Brain: an LLM that reasons and picks the next step',
+  'Tools: reached through MCP: data, backtests, documents',
+  'Memory: vector database plus a log of past steps',
+  'Guardrails: limits, permissions and human approval',
+];
+
+const rules = [
+  'Retail algo framework fully applicable to all brokers since 1 April 2026',
+  'Every algo order carries an exchange-issued Algo ID',
+  'Above 10 orders per second per exchange, the strategy must be registered',
+  'API access only through broker-supervised, static-IP-whitelisted set-ups',
+  'SEBI’s AI/ML principles: governance, disclosure, testing, fairness, data privacy',
+];
+const goodDesks = [
+  'Kill switch, tested regularly',
+  'Hard limits on position, loss and order rate',
+  'Human approval for any AI-proposed order',
+  'Model register: owner, version, data, last test',
+  'Audit log of prompts, tool calls and outputs',
+  'Drift monitoring with automatic re-risking',
+];
+
+const index = [
+  ['why-now', 'Why now'],
+  ['research', 'Research discipline'],
+  ['agents', 'Tools and agents'],
+  ['governance', 'Guardrails'],
+];
+
+/* ------------------------------------------------------------------ */
+/* Page                                                                */
+/* ------------------------------------------------------------------ */
 
 export default function GovernanceRiskPage() {
   return (
-    <Layout title="Governance & Risk | AlphaEdge" description="Governance and risk guardrails for AI on the trading desk.">
-      <div className="bg-[#f0eee7]">
-        {slides.map((slide, index) => {
-          const dark = slide.theme === 'dark';
-          const isDarkSlide = dark;
+    <Layout
+      title="Governance & Risk | AlphaEdge"
+      description="Governance and risk guardrails for AI on the trading desk: the 2026 SEBI algo framework, backtest discipline, tool and agent design, and the controls good desks add."
+    >
+      {/* ============================ HERO ============================ */}
+      <Section>
+        <Reveal as="p" className={T.eyebrow}>
+          Governance and risk
+        </Reveal>
+        <Reveal
+          as="h1"
+          delay={100}
+          className="mt-3 max-w-4xl text-4xl font-black leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl"
+        >
+          Guardrails for AI on the trading desk
+        </Reveal>
+        <Reveal as="p" delay={200} className={`${T.lead} !max-w-3xl sm:!text-xl sm:!leading-8`}>
+          What changed for Indian algo trading in 2026, how to prove an edge before risking money, and the controls
+          that keep tools and agents inside the rules.
+        </Reveal>
+        <Reveal delay={300} className="mt-8">
+          <nav aria-label="On this page" className="flex flex-wrap gap-3">
+            {index.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </Reveal>
+      </Section>
 
-          return (
-            <section
-              key={`${slide.title}-${index}`}
-              className={`${isDarkSlide ? 'bg-[#071d2f]' : 'bg-[#f0eee7]'} px-4 py-8 sm:px-6 lg:px-8`}
+      {/* ============================ WHY NOW ============================ */}
+      <Section alt>
+        <div id="why-now" className="scroll-mt-24">
+          <SectionHeader eyebrow="Why now" title="The Indian algo desk changed in 2026" />
+        </div>
+        <div className="grid gap-6 lg:grid-cols-3">
+          {whyNow.map(([title, text], i) => (
+            <Reveal key={title} delay={i * 120} className={T.cardAlt}>
+              <p className="text-3xl font-black tracking-tight text-[var(--accent-strong)] sm:text-4xl">{title}</p>
+              <p className={T.body}>{text}</p>
+            </Reveal>
+          ))}
+        </div>
+        <Reveal as="p" className={`${T.muted} mt-6 leading-6`}>
+          {sources}
+        </Reveal>
+      </Section>
+
+      {/* ============================ RESEARCH DISCIPLINE ============================ */}
+      <Section>
+        <div id="research" className="scroll-mt-24">
+          <SectionHeader eyebrow="Before any model" title="Prove the edge before you trade it" />
+        </div>
+
+        <Block first title="The trading ML pipeline, end to end">
+          <div className="space-y-10">
+            <FlowRow label="Research: build the model" steps={research} />
+            <FlowRow label="Production: earn the right to trade" steps={production} start={6} />
+          </div>
+        </Block>
+
+        <Block title="Four ways a great backtest lies to you">
+          <CardGrid cards={backtestLies} />
+        </Block>
+
+        <Block title="Proving the edge: walk-forward testing">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+            <ChartCard
+              title="Train, test, roll forward"
+              legend={[
+                { label: 'Train (past only)', color: 'var(--accent)' },
+                { label: 'Test (unseen)', color: '#f59e0b' },
+              ]}
             >
-              <div className="mx-auto max-w-[1500px]">
-                <div className={`mb-6 text-[14px] font-semibold uppercase tracking-[0.28em] ${dark ? 'text-[#ea7b39]' : 'text-[#c66e3a]'}`}>
-                  {slide.eyebrow}
-                </div>
+              <WalkForwardFolds />
+            </ChartCard>
+            <DataTable heads={['Metric', 'Plain meaning', 'Rule of thumb']} rows={metrics} />
+          </div>
+        </Block>
+      </Section>
 
-                <h1 className={`mb-8 text-[clamp(2.8rem,4vw,6rem)] font-black leading-[0.95] tracking-[-0.06em] ${dark ? 'text-white' : 'text-[#0f2438]'}`}>
-                  {slide.title}
-                </h1>
+      {/* ============================ TOOLS AND AGENTS ============================ */}
+      <Section alt>
+        <div id="agents" className="scroll-mt-24">
+          <SectionHeader eyebrow="Modules 5 and 6 · MCP and agents" title="Connected tools, bounded agents" />
+        </div>
 
-                <div className={dark ? 'text-slate-100' : 'text-[#0f2438]'}>
-                  <RenderSlide slide={slide} />
-                </div>
+        <Block
+          first
+          title="MCP: one standard plug for every tool"
+          intro="An open standard that lets any AI app connect to your data and tools. Think of it as USB-C for AI."
+        >
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center">
+            <div className="space-y-4">
+              {mcpLeft.map(([title, text], i) => (
+                <Reveal key={title} delay={i * 100} className={`${T.cardAlt} !p-5`}>
+                  <h4 className="text-base font-semibold text-[var(--text-primary)]">{title}</h4>
+                  <p className={T.small}>{text}</p>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal
+              delay={150}
+              className="rounded-2xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-6 text-center sm:p-8"
+            >
+              <p className="text-2xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">
+                AI assistant or agent
+              </p>
+              <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">speaks MCP</p>
+            </Reveal>
+            <div className="space-y-4">
+              {mcpRight.map(([title, text], i) => (
+                <Reveal key={title} delay={i * 100} className={`${T.cardAlt} !p-5`}>
+                  <h4 className="text-base font-semibold text-[var(--text-primary)]">{title}</h4>
+                  <p className={T.small}>{text}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+          <Banner>Build each tool once; any model or agent can use it. Orders stay behind human approval.</Banner>
+        </Block>
 
-                {slide.note && (
-                  <div className={`mt-10 text-[clamp(1.4rem,2vw,2.4rem)] font-medium italic tracking-[-0.04em] ${dark ? 'text-slate-100' : 'text-[#0f2438]'}`}>
-                    {slide.note}
-                  </div>
-                )}
+        <Block title="A multi-agent research desk">
+          <div className="space-y-4">
+            <RoleBar
+              tone="accent"
+              label="Orchestrator"
+              text="Splits the task, gathers results, writes the trade proposal."
+            />
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+              {agents.map(([title, text], i) => (
+                <Reveal key={title} delay={(i % 5) * 80} className={`${T.cardAlt} !p-5`}>
+                  <h4 className="text-base font-semibold text-[var(--accent-strong)]">{title}</h4>
+                  <p className={T.small}>{text}</p>
+                </Reveal>
+              ))}
+            </div>
+            <RoleBar tone="amber" label="Human" text="Portfolio manager reviews, edits and approves, or rejects." />
+            <RoleBar
+              label="Execution"
+              text="Through the broker’s approved algo channel, tagged with its Algo ID."
+            />
+          </div>
+        </Block>
 
-                <FooterLine />
+        <Block title="What makes AI “agentic”">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
+            <div className="space-y-4">
+              <FlowRow steps={agentFlow} cols="" />
+              <Reveal className={T.inner}>
+                <p className="text-sm font-semibold text-[var(--accent-strong)]">Example goal</p>
+                <p className="mt-2 text-base leading-7 text-[var(--text-primary)]">
+                  “Find F&amp;O stocks with unusual OI build-up; check results dates”
+                </p>
+              </Reveal>
+            </div>
+            <Reveal delay={150} className={T.cardAlt}>
+              <h4 className={T.h3}>What an agent is made of</h4>
+              <div className="mt-5">
+                <BulletList items={agentParts} />
               </div>
-            </section>
-          );
-        })}
-      </div>
+            </Reveal>
+          </div>
+        </Block>
+      </Section>
+
+      {/* ============================ GOVERNANCE ============================ */}
+      <Section>
+        <div id="governance" className="scroll-mt-24">
+          <SectionHeader eyebrow="Governance" title="Guardrails for AI on the trading desk" />
+        </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Reveal className={T.card}>
+            <h3 className={T.h3}>The rules, as of October 2026</h3>
+            <ul className="mt-6 space-y-5">
+              {rules.map((rule) => (
+                <li
+                  key={rule}
+                  className="border-l-2 border-[var(--accent)] pl-4 text-base leading-7 text-[var(--text-secondary)]"
+                >
+                  {rule}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={150} className={T.cardAlt}>
+            <h3 className={T.h3}>What good desks add</h3>
+            <div className="mt-6">
+              <BulletList items={goodDesks} />
+            </div>
+          </Reveal>
+        </div>
+        <Banner label="Before any deployment">
+          Regulations change. Check the latest SEBI and NSE circulars first.
+        </Banner>
+      </Section>
     </Layout>
   );
 }

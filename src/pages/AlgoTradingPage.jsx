@@ -1,65 +1,168 @@
-import { Link } from 'react-router-dom';
 import Layout from '../layout/Layout';
+import { T, Reveal, Section, SectionHeader, Check, Banner } from '../components/ui';
+import { ChartCard, useChart } from '../components/Ai900Charts';
 
-function NumberedList({ items }) {
+/* ------------------------------------------------------------------ */
+/* Page-level helpers (same tokens as ui.jsx, no new colours)          */
+/* ------------------------------------------------------------------ */
+
+const C = { accent: 'var(--accent)', blue: '#3b82f6', amber: '#f59e0b', violet: '#a855f7' };
+const AXIS = 'var(--text-muted)';
+
+/* Numbered because the content really is a sequence. "Label — text" is split for scanning. */
+function StepList({ steps }) {
   return (
-    <div className="space-y-5">
-      {items.map(([number, text], index) => (
-        <div key={index} className="flex items-start gap-4 text-[15px] leading-8 text-slate-100 sm:text-[17px] sm:leading-9">
-          <span className="mt-[2px] inline-flex min-w-[2.2rem] items-center justify-center text-base font-semibold text-[#f59e0b] sm:text-lg">{number}</span>
-          <span>{text}</span>
-        </div>
+    <ol className="space-y-5">
+      {steps.map(([label, text], i) => (
+        <li key={label} className="flex items-start gap-4">
+          <span
+            aria-hidden="true"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-[var(--accent)] bg-[var(--surface-strong)] text-xs font-bold text-[var(--accent-strong)]"
+          >
+            {i + 1}
+          </span>
+          <p className="pt-1 text-base leading-7 text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text-primary)]">{label}.</span> {text}
+          </p>
+        </li>
       ))}
+    </ol>
+  );
+}
+
+function CodeBlock({ code, note }) {
+  return (
+    <div>
+      <pre
+        className={`${T.inner} overflow-x-auto font-mono text-xs leading-6 text-[var(--text-primary)] sm:text-sm sm:leading-7`}
+      >
+        <code>{code}</code>
+      </pre>
+      {note && <p className={T.small}>{note}</p>}
     </div>
   );
 }
 
-function AlgorithmCallout({ title, children, className = '' }) {
+function AlgoHeader({ id, eyebrow, title, description, alt }) {
   return (
-    <div className={`rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5 shadow-[inset_0_1px_0_rgba(148,163,184,0.08)] ${className}`}>
-      <h3 className="text-xl font-semibold text-white sm:text-2xl">{title}</h3>
-      <div className="mt-4">{children}</div>
+    <div id={id} className="scroll-mt-24">
+      <SectionHeader eyebrow={eyebrow} title={title} description={description} />
     </div>
   );
 }
 
-function TrendChart() {
+/* ------------------------------------------------------------------ */
+/* Charts                                                              */
+/* ------------------------------------------------------------------ */
+
+function PairsChart() {
+  const { ref, show, anim } = useChart();
+  const draw = (delay = 0, duration = 1500) => ({
+    pathLength: 1,
+    strokeDasharray: 1,
+    style: {
+      strokeDashoffset: show ? 0 : 1.02,
+      transition: anim ? `stroke-dashoffset ${duration}ms ease-out ${show ? delay : 0}ms` : 'none',
+    },
+  });
+  const pop = (delay) => ({
+    style: {
+      opacity: show ? 1 : 0,
+      transition: anim ? `opacity 500ms ease-out ${show ? delay : 0}ms` : 'none',
+    },
+  });
+
   return (
-    <svg viewBox="0 0 520 220" className="h-[200px] w-full" role="img" aria-label="Pairs trading chart">
-      <line x1="0" y1="160" x2="520" y2="160" stroke="rgba(148,163,184,0.6)" strokeWidth="1.5" strokeDasharray="4 6" />
-      <line x1="0" y1="60" x2="520" y2="60" stroke="rgba(148,163,184,0.6)" strokeWidth="1.5" strokeDasharray="4 6" />
-      <path d="M 40 120 L 130 80 L 210 150 L 300 72 L 390 130 L 470 90" fill="none" stroke="#f5f3ee" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx="40" cy="120" r="6" fill="#8dbdff" />
-      <circle cx="210" cy="150" r="6" fill="#8dbdff" />
-      <circle cx="470" cy="90" r="6" fill="#f59e0b" />
-      <circle cx="300" cy="72" r="6" fill="#f59e0b" />
-      <path d="M 130 80 L 210 150 L 300 72" fill="none" stroke="#f59e0b" strokeWidth="2" strokeOpacity="0.5" />
-      <path d="M 300 72 L 390 130 L 470 90" fill="none" stroke="#8dbdff" strokeWidth="2" strokeOpacity="0.5" />
-      <text x="185" y="35" fill="#f59e0b" fontSize="12" fontWeight="700">Long</text>
-      <text x="330" y="35" fill="#8dbdff" fontSize="12" fontWeight="700">Short</text>
+    <svg
+      ref={ref}
+      viewBox="0 0 520 240"
+      className="h-auto w-full min-w-[480px]"
+      role="img"
+      aria-label="Illustration: the spread z-score crosses +2 and the pair is shorted, crosses minus 2 and the pair is bought, and both trades exit at zero"
+    >
+      {/* bands */}
+      {[
+        [50, '+2'],
+        [120, '0'],
+        [190, '−2'],
+      ].map(([y, label]) => (
+        <g key={label}>
+          <line x1="40" y1={y} x2="510" y2={y} stroke={AXIS} strokeOpacity="0.5" strokeDasharray={label === '0' ? '0' : '4 5'} />
+          <text x="8" y={y + 4} fill={AXIS} fontSize="12">
+            {label}
+          </text>
+        </g>
+      ))}
+      <line x1="40" y1="14" x2="510" y2="14" stroke="#ef4444" strokeOpacity="0.35" strokeDasharray="2 5" />
+      <line x1="40" y1="226" x2="510" y2="226" stroke="#ef4444" strokeOpacity="0.35" strokeDasharray="2 5" />
+      <text x="510" y="10" textAnchor="end" fill="#ef4444" fontSize="11">
+        Stop ±3.5
+      </text>
+
+      <path
+        d="M40 120 C70 112 90 28 122 26 S165 96 185 120 S235 214 268 208 S315 140 335 120 S385 92 405 94 S470 120 510 120"
+        fill="none"
+        stroke="var(--text-primary)"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        {...draw()}
+      />
+
+      <g {...pop(500)}>
+        <circle cx="103" cy="50" r="6" fill={C.amber} />
+        <circle cx="185" cy="120" r="6" fill={C.accent} />
+      </g>
+      <g {...pop(1000)}>
+        <circle cx="250" cy="190" r="6" fill={C.blue} />
+        <circle cx="335" cy="120" r="6" fill={C.accent} />
+      </g>
+      <text x="103" y="40" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">
+        Short A, long B
+      </text>
+      <text x="250" y="178" textAnchor="middle" fill="var(--text-secondary)" fontSize="11" transform="translate(0 0)">
+        Long A, short B
+      </text>
     </svg>
   );
 }
 
-function WalkForwardChart() {
+function WalkForwardFolds() {
+  const { ref, show, anim } = useChart();
   return (
-    <div className="w-full max-w-[520px]">
-      <div className="mb-4 flex items-center gap-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-200 sm:text-[11px]">
-        <div className="flex items-center gap-2"><span className="inline-block h-3 w-3 rounded-[4px] bg-[#3b82f6]" /> Train</div>
-        <div className="flex items-center gap-2"><span className="inline-block h-3 w-3 rounded-[4px] bg-[#f59e0b]" /> Test</div>
-      </div>
+    <div ref={ref} role="img" aria-label="Five folds: a training window followed by an unseen test window, rolling forward in time">
       <div className="space-y-3">
-        {[1, 2, 3, 4, 5].map((fold) => (
-          <div key={fold} className="flex items-center gap-4">
-            <span className="w-12 text-sm text-slate-300">Fold {fold}</span>
-            <div className="relative h-8 flex-1 overflow-hidden rounded-[8px] bg-slate-700/70">
-              <div className="absolute left-0 top-0 h-full w-[58%] rounded-[8px] bg-[#3b82f6]" />
-              <div className="absolute right-0 top-0 h-full w-[42%] rounded-[8px] bg-[#f59e0b]" />
+        {[0, 1, 2, 3, 4].map((i) => (
+          <div key={i} className="flex items-center gap-4">
+            <span className="w-14 shrink-0 text-sm text-[var(--text-muted)]">Fold {i + 1}</span>
+            <div className="relative h-8 flex-1 overflow-hidden rounded-lg bg-[var(--surface-strong)]">
+              <div
+                className="absolute top-0 h-full origin-left rounded-lg"
+                style={{
+                  left: `${i * 9}%`,
+                  width: '52%',
+                  background: C.accent,
+                  opacity: 0.85,
+                  transform: `scaleX(${show ? 1 : 0})`,
+                  transition: anim ? `transform 700ms ease-out ${show ? i * 150 : 0}ms` : 'none',
+                }}
+              />
+              <div
+                className="absolute top-0 h-full rounded-lg"
+                style={{
+                  left: `${i * 9 + 52}%`,
+                  width: '14%',
+                  background: C.amber,
+                  opacity: show ? 0.95 : 0,
+                  transition: anim ? `opacity 500ms ease-out ${show ? i * 150 + 500 : 0}ms` : 'none',
+                }}
+              />
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-6 text-sm italic leading-7 text-slate-300">The model never sees the test months while it learns. Then the window rolls forward — exactly as it would live.</div>
+      <p className={`${T.small} mt-5`}>
+        The model never sees the test months while it learns. Then the window rolls forward, exactly as it would live.
+      </p>
     </div>
   );
 }
@@ -71,260 +174,81 @@ function MetricTable() {
     ['Max drawdown', 'Worst fall from a peak', 'Survivable'],
     ['Hit rate', 'Share of winning trades', 'Read with R:R'],
     ['Profit factor', 'Profits ÷ losses', '> 1.3'],
-    ['Calmar ratio', 'Yearly return ÷ max DD', '> 1'],
+    ['Calmar ratio', 'Yearly return ÷ max drawdown', '> 1'],
   ];
-
   return (
-    <div className="overflow-hidden rounded-[18px] border border-slate-500/50 bg-[#f6f1ea]/5 backdrop-blur-sm">
-      <div className="grid grid-cols-[1.1fr_1.2fr_0.8fr] border-b border-slate-400/40 bg-[#0f253b]/80 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-200">
-        <div className="px-4 py-3">Metric</div>
-        <div className="px-4 py-3">Plain meaning</div>
-        <div className="px-4 py-3">Rule of thumb</div>
+    <div className={`${T.card} overflow-hidden !p-0`}>
+      <div className="hidden grid-cols-3 gap-4 border-b border-[var(--border-soft)] bg-[var(--surface-strong)] px-6 py-4 text-sm font-semibold text-[var(--text-muted)] sm:grid">
+        <div>Metric</div>
+        <div>Plain meaning</div>
+        <div>Rule of thumb</div>
       </div>
-      {rows.map(([metric, meaning, rule]) => (
-        <div key={metric} className="grid grid-cols-[1.1fr_1.2fr_0.8fr] border-b border-slate-400/20 last:border-b-0 text-sm text-slate-200">
-          <div className="px-4 py-3">{metric}</div>
-          <div className="px-4 py-3 text-slate-300">{meaning}</div>
-          <div className="px-4 py-3 text-slate-200">{rule}</div>
-        </div>
+      {rows.map(([metric, meaning, rule], i) => (
+        <Reveal
+          key={metric}
+          delay={(i % 3) * 60}
+          className="grid gap-1 border-b border-[var(--border-soft)] px-4 py-4 last:border-b-0 sm:grid-cols-3 sm:gap-4 sm:px-6"
+        >
+          <div className="text-base font-semibold text-[var(--accent-strong)]">{metric}</div>
+          <div className="text-sm leading-6 text-[var(--text-secondary)]">{meaning}</div>
+          <div className="text-sm leading-6 text-[var(--text-primary)]">{rule}</div>
+        </Reveal>
       ))}
     </div>
   );
 }
 
-function AlgorithmTemplate({ label, title, children, accent = 'bg-[#f59e0b]' }) {
-  return (
-    <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-      <div className="mx-auto max-w-[1500px]">
-        <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-          <span>Algorithm {label}</span>
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-          <span className="text-slate-200">{title}</span>
-        </div>
-        <div className="mb-6 text-[clamp(2.5rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">{children}</div>
-      </div>
-    </section>
-  );
-}
+/* ------------------------------------------------------------------ */
+/* Content                                                             */
+/* ------------------------------------------------------------------ */
 
-export default function AlgoTradingPage() {
-  return (
-    <Layout
-      title="Algorithms | AlphaEdge"
-      description="Learn systematic algorithm design, validation, deep learning, generative AI and agentic trading workflows at AlphaEdge."
-    >
-      <div className="bg-[#f2efe9]">
-        <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 1</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-slate-200">Classification</span>
-            </div>
-            <h1 className="mb-8 text-[clamp(2.8rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">NIFTY next-day direction classifier</h1>
+const classifierSteps = [
+  ['Data', '10 years of NIFTY 50 daily bars, India VIX, FII/DII flows and the GIFT Nifty gap.'],
+  ['Label', '1 if tomorrow’s close beats today’s by more than costs, else 0.'],
+  ['Features', '1, 5 and 20-day returns, RSI, ATR, VIX change, PCR and 5-day FII flow.'],
+  ['Train', 'LightGBM with walk-forward: train on 3 years, test the next 3 months, roll.'],
+  ['Signal', 'Long above 58% probability, short below 42%, otherwise flat.'],
+  ['Risk', 'Size by volatility, set a daily loss limit, exit by the close.'],
+];
 
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="space-y-6 text-slate-100">
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">01</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Data — 10 years of NIFTY 50 daily bars, India VIX, FII/DII flows, GIFT Nifty gap.</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">02</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Label — 1 if tomorrow&apos;s close beats today&apos;s by more than costs, else 0.</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">03</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Features — 1/5/20-day returns, RSI, ATR, VIX change, PCR, 5-day FII flow.</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">04</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Train — LightGBM, walk-forward: train on 3 years, test the next 3 months, roll.</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">05</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Signal — long above 58% probability, short below 42%, otherwise flat.</p>
-                </div>
-                <div className="flex gap-4">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">06</span>
-                  <p className="max-w-[36rem] text-[17px] leading-8 text-slate-100">Risk — size by volatility, daily loss limit, exit by the close.</p>
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-slate-600/70 bg-slate-800/60 p-5 shadow-[inset_0_1px_0_rgba(148,163,184,0.08)]">
-                <pre className="overflow-x-auto text-[12px] leading-7 text-slate-200 sm:text-[14px] lg:text-[15px]">
-{`for w in walk_forward(train="3y", test="3m"):
+const classifierCode = `for w in walk_forward(train="3y", test="3m"):
     m = LGBMClassifier(max_depth=4)
     m.fit(X[w.train], y[w.train])
     p = m.predict_proba(X[w.test])[:, 1]
     sig = where(p > 0.58, 1,
                where(p < 0.42, -1, 0))
     pnl += backtest(sig, costs=NSE_COSTS)
-    report(pnl) # Sharpe, max DD, hit rate`}
-                </pre>
-                <p className="mt-5 text-base leading-7 text-slate-300">
-                  Illustrative parameters. Tune them inside walk-forward windows — never on the full history.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+    report(pnl)  # Sharpe, max DD, hit rate`;
 
-        <section className="mx-auto max-w-[1600px] bg-[#f3efe7] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 2</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-[#152338]">Unsupervised learning</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4.2vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-[#0b1b2a]">Market regime detection</h2>
+const regimeInputs = [
+  '20-day return',
+  '20-day volatility',
+  'India VIX level',
+  'Breadth: % of stocks above 50-DMA',
+];
 
-            <div className="grid gap-6 lg:grid-cols-[0.95fr_0.7fr_1.05fr]">
-              <div className="rounded-[22px] border border-slate-400 bg-[#f8f4ee] p-6 shadow-sm">
-                <div className="mb-5 text-[11px] font-semibold uppercase tracking-[0.26em] text-[#1c3c5d]">Inputs • daily</div>
-                <ul className="space-y-3 text-[17px] leading-8 text-[#0b1b2a]">
-                  <li>• 20-day return</li>
-                  <li>• 20-day volatility</li>
-                  <li>• India VIX level</li>
-                  <li>• Breadth: % of stocks above 50-DMA</li>
-                </ul>
-              </div>
+const regimes = [
+  ['Calm trend', 'Momentum and breakouts, full size.'],
+  ['Range-bound', 'Mean reversion and option selling.'],
+  ['Stress', 'Cut size, hedge, or stay flat.'],
+];
 
-              <div className="flex items-center justify-center">
-                <div className="w-full max-w-[300px] rounded-[18px] bg-[#021d2d] p-7 text-center text-white shadow-[0_20px_45px_rgba(2,20,30,0.25)]">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b]">Model</div>
-                  <div className="mt-4 text-[28px] font-semibold leading-[1.1] text-white">Hidden Markov model or K-Means</div>
-                  <div className="mt-5 text-base leading-7 text-slate-300">3 states, retrained monthly</div>
-                </div>
-              </div>
+const pairsSteps = [
+  ['Pick', 'Two same-sector F&O stocks, for example two large private banks.'],
+  ['Test', 'Cointegration on 1 year of data (Engle-Granger, p < 0.05).'],
+  ['Hedge', 'Regress A on B to get β; spread = A − β × B.'],
+  ['Score', 'z = (spread − 60-day mean) ÷ 60-day standard deviation.'],
+  ['Trade', 'z above +2: short A, long B. Below −2: the reverse. Exit at 0.'],
+  ['Protect', 'Stop beyond ±3.5 or after 20 days; re-test the pair monthly.'],
+];
 
-              <div className="space-y-4">
-                {[
-                  ['Calm trend', 'Momentum and breakouts, full size'],
-                  ['Range-bound', 'Mean reversion, option selling'],
-                  ['Stress', 'Cut size, hedge, or stay flat'],
-                ].map(([title, copy]) => (
-                  <div key={title} className="rounded-[20px] border border-slate-400 bg-[#f8f4ee] p-5 text-[#0b1b2a] shadow-sm">
-                    <div className="text-2xl font-semibold">{title}</div>
-                    <div className="mt-2 text-lg leading-7 text-slate-700">{copy}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
+const lstmCards = [
+  ['Input · 60 days', 'NIFTY returns, realised volatility, India VIX, ATM IV and PCR.'],
+  ['Model', 'LSTM, 2 layers × 64 units, dropout 0.2.'],
+  ['Output', 'Forecast of the next 5 days of realised volatility.'],
+];
 
-            <div className="mt-8 rounded-[18px] border border-slate-400 bg-[#e7e0d7] px-5 py-4 text-[20px] leading-8 text-[#0b1b2a]">
-              Most strategies work in one regime and bleed in another. <span className="font-bold">The regime model decides which strategy may trade today.</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 3</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-slate-200">Statistical arbitrage</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">Pairs trading with cointegration</h2>
-
-            <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-              <div className="space-y-5">
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">01</span>
-                  <span>Pick — two same-sector F&O stocks, e.g., two large private banks.</span>
-                </div>
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">02</span>
-                  <span>Test — cointegration on 1 year of data (Engle-Granger, p &lt; 0.05).</span>
-                </div>
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">03</span>
-                  <span>Hedge — regress A on B to get β; spread = A − β × B.</span>
-                </div>
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">04</span>
-                  <span>Score — z = (spread − 60-day mean) ÷ 60-day std.</span>
-                </div>
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">05</span>
-                  <span>Trade — z above +2: short A, long B. Below −2: the reverse. Exit at 0.</span>
-                </div>
-                <div className="flex gap-4 text-[17px] leading-8 text-slate-100">
-                  <span className="mt-[6px] text-lg font-semibold text-[#f59e0b]">06</span>
-                  <span>Protect — stop beyond ±3.5 or after 20 days; re-test the pair monthly.</span>
-                </div>
-              </div>
-
-              <div className="rounded-[24px] border border-slate-600/70 bg-slate-800/60 p-5 shadow-[inset_0_1px_0_rgba(148,163,184,0.08)]">
-                <TrendChart />
-                <div className="mt-5 text-[15px] leading-7 text-slate-200">
-                  <span className="text-[#f59e0b] font-semibold">Orange dot:</span> z crosses +2, short the spread • <span className="text-[#8dbdff] font-semibold">Blue dot:</span> z crosses −2, long the spread • <span className="text-slate-100 font-semibold">Grey dot:</span> back to 0, exit
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-[1600px] bg-[#f3efe7] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Module 2</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-[#152338]">Validation</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4.2vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-[#0b1b2a]">Proving the edge: walk-forward testing</h2>
-
-            <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-              <div className="pt-2">
-                <WalkForwardChart />
-              </div>
-
-              <div>
-                <MetricTable />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 4</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-slate-200">Deep learning</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">LSTM volatility forecaster for options</h2>
-
-            <div className="grid gap-6 lg:grid-cols-3">
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8fb3ff]">Input • 60 days</div>
-                <div className="mt-4 text-[18px] leading-8 text-slate-100">NIFTY returns, realised vol, India VIX, ATM IV, PCR</div>
-              </div>
-
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8fb3ff]">Model</div>
-                <div className="mt-4 text-[18px] leading-8 text-slate-100">LSTM, 2 layers × 64 units, dropout 0.2</div>
-              </div>
-
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8fb3ff]">Output</div>
-                <div className="mt-4 text-[18px] leading-8 text-slate-100">Forecast of next-5-day realised volatility</div>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <h3 className="text-[28px] font-bold text-white">Decision rule</h3>
-                <div className="mt-4 space-y-5 text-[17px] leading-8 text-slate-100">
-                  <div className="flex gap-3"><span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#f59e0b]" /><span>IV well above forecast → options look rich → defined-risk selling, e.g., iron condor</span></div>
-                  <div className="flex gap-3"><span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#f59e0b]" /><span>IV well below forecast → options look cheap → long straddle or strangle</span></div>
-                </div>
-                <div className="mt-5 text-[15px] leading-7 text-slate-300">Filters: skip RBI policy, Budget and results days; cap loss per trade.</div>
-              </div>
-
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <pre className="overflow-x-auto text-[12px] leading-7 text-slate-200 sm:text-[14px]">
-{`model = Sequential([
+const lstmCode = `model = Sequential([
     LSTM(64, return_sequences=True),
     Dropout(0.2),
     LSTM(64),
@@ -332,101 +256,284 @@ export default function AlgoTradingPage() {
 ])
 
 model.fit(X_60d, y_vol5d, epochs=50)
-edge = atm_iv - model.predict(X_today)`}
-                </pre>
-              </div>
-            </div>
-          </div>
-        </section>
+edge = atm_iv - model.predict(X_today)`;
 
-        <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 5</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-slate-200">Generative AI</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">Announcement sentiment as a feature</h2>
+const sentimentSteps = [
+  ['Collect', 'NSE announcements and news, timestamped.'],
+  ['Score', 'LLM returns JSON: type, sentiment, materiality.'],
+  ['Validate', 'Schema check; humans audit a sample.'],
+  ['Aggregate', 'Per stock, per day, decay-weighted.'],
+  ['Feed', 'New features go into the Algorithm 1 model.'],
+];
 
-            <div className="grid gap-5 lg:grid-cols-5">
-              {[
-                ['1 Collect', 'NSE announcements and news, timestamped'],
-                ['2 Score', 'LLM returns JSON: type, sentiment, materiality'],
-                ['3 Validate', 'Schema check; humans audit a sample'],
-                ['4 Aggregate', 'Per stock, per day, decay-weighted'],
-                ['5 Feed', 'New features into the Algorithm 1 model'],
-              ].map(([title, text]) => (
-                <div key={title} className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                  <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8fb3ff]">{title}</div>
-                  <div className="mt-4 text-[17px] leading-8 text-slate-100">{text}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5 text-[15px] leading-7 text-slate-100">
-                <pre className="overflow-x-auto text-[13px] leading-7 sm:text-[15px]">
-{`SYSTEM: Indian equity analyst. JSON only.
+const sentimentCode = `SYSTEM: Indian equity analyst. JSON only.
 USER: Classify this NSE announcement:
-<"announcement_text">
-  {"type": "order_win",
-   "sentiment": 0.7,
-   "materiality": 4,
-   "reason": "order ~ 8% of revenue"}`}
-                </pre>
-              </div>
+<announcement_text>
 
-              <div className="rounded-[22px] border border-slate-600/80 bg-slate-800/60 p-5">
-                <h3 className="text-[26px] font-bold text-white">Rules that keep it honest</h3>
-                <ul className="mt-5 space-y-4 text-[17px] leading-8 text-slate-100">
-                  <li>• Use announcement time, not processing time</li>
-                  <li>• Temperature 0; freeze the model version</li>
-                  <li>• Keep it only if it adds out-of-sample value</li>
-                  <li>• Log every prompt and output for audit</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+{"type": "order_win",
+ "sentiment": 0.7,
+ "materiality": 4,
+ "reason": "order ~ 8% of revenue"}`;
 
-        <section className="mx-auto max-w-[1600px] bg-[#020f1d] px-4 py-8 sm:px-6 lg:px-8 lg:py-14">
-          <div className="mx-auto max-w-[1500px]">
-            <div className="mb-8 flex items-center gap-4 text-[14px] font-semibold uppercase tracking-[0.28em] text-[#f59e0b] sm:text-[16px]">
-              <span>Algorithm 6</span>
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#f59e0b]" />
-              <span className="text-slate-200">Agentic AI</span>
-            </div>
-            <h2 className="mb-8 text-[clamp(2.8rem,4vw,5rem)] font-black leading-[0.95] tracking-[-0.06em] text-white">Pre-market brief agent, every trading day</h2>
+const sentimentRules = [
+  'Use announcement time, not processing time',
+  'Temperature 0; freeze the model version',
+  'Keep the feature only if it adds out-of-sample value',
+  'Log every prompt and output for audit',
+];
 
-            <div className="space-y-0 overflow-hidden rounded-[20px] border border-slate-600/80 bg-slate-800/60">
-              {[
-                ['07:30', 'Collect', 'GIFT Nifty, global indices, crude and USD/INR via MCP data servers'],
-                ['07:45', 'Read', 'Overnight NSE announcements and watchlist news, sentiment-scored'],
-                ['08:00', 'Analyse', 'Previous day&apos;s FII/DII flows, OI build-up, India VIX and today&apos;s regime'],
-                ['08:15', 'Draft', 'Ranked events, key levels, risks and suggested strategy switches'],
-                ['08:45', 'Human review', 'Desk head edits and approves the brief'],
-                ['09:00', 'Pre-open', 'Team trades the plan; the agent has logged every source it used'],
-              ].map(([time, task, detail], index) => (
-                <div key={`${time}-${task}`} className="grid gap-4 border-b border-slate-600/80 px-5 py-5 sm:grid-cols-[110px_1.2fr_3fr] sm:items-center sm:px-7">
-                  <div className="text-[18px] font-bold text-[#f59e0b]">{time}</div>
-                  <div className="text-[20px] font-semibold text-white">{task}</div>
-                  <div className="text-[18px] leading-8 text-slate-200">{detail}</div>
-                </div>
+const agentSchedule = [
+  ['07:30', 'Collect', 'GIFT Nifty, global indices, crude and USD/INR via MCP data servers.'],
+  ['07:45', 'Read', 'Overnight NSE announcements and watchlist news, sentiment-scored.'],
+  ['08:00', 'Analyse', 'Previous day’s FII/DII flows, OI build-up, India VIX and today’s regime.'],
+  ['08:15', 'Draft', 'Ranked events, key levels, risks and suggested strategy switches.'],
+  ['08:45', 'Human review', 'Desk head edits and approves the brief.'],
+  ['09:00', 'Pre-open', 'Team trades the plan; the agent has logged every source it used.'],
+];
+
+const index = [
+  ['algo-1', 'Direction classifier'],
+  ['algo-2', 'Regime detection'],
+  ['algo-3', 'Pairs trading'],
+  ['validation', 'Walk-forward testing'],
+  ['algo-4', 'LSTM volatility'],
+  ['algo-5', 'Announcement sentiment'],
+  ['algo-6', 'Pre-market agent'],
+];
+
+/* ------------------------------------------------------------------ */
+/* Page                                                                */
+/* ------------------------------------------------------------------ */
+
+export default function AlgoTradingPage() {
+  return (
+    <Layout
+      title="Algorithms | AlphaEdge"
+      description="Six worked algorithms for the trading desk: classification, regime detection, pairs trading, LSTM volatility, LLM sentiment and an agentic pre-market brief, with walk-forward validation."
+    >
+      {/* ============================ HERO ============================ */}
+      <Section>
+        <Reveal as="p" className={T.eyebrow}>
+          AI for the trading desk
+        </Reveal>
+        <Reveal
+          as="h1"
+          delay={100}
+          className="mt-3 max-w-4xl text-4xl font-black leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl"
+        >
+          Six algorithms, built from data to desk
+        </Reveal>
+        <Reveal as="p" delay={200} className={`${T.lead} !max-w-3xl sm:!text-xl sm:!leading-8`}>
+          Each one is a complete recipe on Indian market data: the inputs, the model, the signal and the risk
+          control. Parameters are illustrative; the method is what you learn to defend.
+        </Reveal>
+
+        <Reveal delay={300} className="mt-8">
+          <nav aria-label="On this page" className="flex flex-wrap gap-3">
+            {index.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="rounded-full border border-[var(--border-soft)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent-strong)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </Reveal>
+      </Section>
+
+      {/* ============================ ALGORITHM 1 ============================ */}
+      <Section alt>
+        <AlgoHeader id="algo-1" eyebrow="Algorithm 1 · Classification" title="NIFTY next-day direction classifier" />
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+          <Reveal className={T.cardAlt}>
+            <StepList steps={classifierSteps} />
+          </Reveal>
+          <Reveal delay={150} className={T.cardAlt}>
+            <CodeBlock
+              code={classifierCode}
+              note="Illustrative parameters. Tune them inside walk-forward windows, never on the full history."
+            />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ============================ ALGORITHM 2 ============================ */}
+      <Section>
+        <AlgoHeader id="algo-2" eyebrow="Algorithm 2 · Unsupervised learning" title="Market regime detection" />
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr_1fr] lg:items-stretch">
+          <Reveal className={T.card}>
+            <h3 className={T.h3}>Inputs, daily</h3>
+            <ul className="mt-5 space-y-3">
+              {regimeInputs.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-base leading-7 text-[var(--text-secondary)]">
+                  <Check />
+                  <span className="pt-0.5">{item}</span>
+                </li>
               ))}
-            </div>
+            </ul>
+          </Reveal>
 
-            <div className="mt-8 rounded-[18px] border border-slate-600/80 bg-[#0a1a2a] px-5 py-4 text-[20px] leading-8 text-slate-100">
-              The agent prepares; humans decide. <span className="font-bold text-[#f59e0b]">Read-only tools</span> — it never places orders.
-            </div>
-          </div>
-        </section>
+          <Reveal
+            delay={120}
+            className="flex flex-col justify-center rounded-2xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-6 text-center sm:p-8"
+          >
+            <p className={T.eyebrow}>Model</p>
+            <p className="mt-3 text-2xl font-bold leading-tight tracking-tight text-[var(--text-primary)]">
+              Hidden Markov model or K-Means
+            </p>
+            <p className="mt-3 text-base leading-7 text-[var(--text-secondary)]">3 states, retrained monthly</p>
+          </Reveal>
 
-        <footer className="mx-auto max-w-[1600px] bg-[#f3efe7] px-4 py-10 text-[20px] text-[#0c1e2d] sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-[1500px] pt-6 text-[15px] font-medium uppercase tracking-[0.25em] text-[#11273d] sm:text-[17px]">
-            AI for the Trading Desk • ALPHAEDGE
+          <div className="space-y-4">
+            {regimes.map(([title, copy], i) => (
+              <Reveal key={title} delay={240 + i * 100} className={`${T.card} !p-5`}>
+                <h3 className={T.h3}>{title}</h3>
+                <p className={T.small}>{copy}</p>
+              </Reveal>
+            ))}
           </div>
-        </footer>
-      </div>
+        </div>
+
+        <Banner>
+          Most strategies work in one regime and bleed in another.{' '}
+          <strong>The regime model decides which strategy may trade today.</strong>
+        </Banner>
+      </Section>
+
+      {/* ============================ ALGORITHM 3 ============================ */}
+      <Section alt>
+        <AlgoHeader id="algo-3" eyebrow="Algorithm 3 · Statistical arbitrage" title="Pairs trading with cointegration" />
+        <div className="grid gap-6 lg:grid-cols-[1.1fr_1fr]">
+          <Reveal className={T.cardAlt}>
+            <StepList steps={pairsSteps} />
+          </Reveal>
+          <ChartCard
+            alt
+            title="The spread z-score"
+            caption="Illustration, not real data. Enter at ±2, exit at 0, stop out beyond ±3.5."
+            legend={[
+              { label: 'Short the spread', color: '#f59e0b' },
+              { label: 'Long the spread', color: '#3b82f6' },
+              { label: 'Exit at 0', color: 'var(--accent)' },
+            ]}
+          >
+            <PairsChart />
+          </ChartCard>
+        </div>
+      </Section>
+
+      {/* ============================ VALIDATION ============================ */}
+      <Section>
+        <AlgoHeader id="validation" eyebrow="Module 2 · Validation" title="Proving the edge: walk-forward testing" />
+        <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <ChartCard
+            title="Train, test, roll forward"
+            legend={[
+              { label: 'Train (past only)', color: 'var(--accent)' },
+              { label: 'Test (unseen)', color: '#f59e0b' },
+            ]}
+          >
+            <WalkForwardFolds />
+          </ChartCard>
+          <MetricTable />
+        </div>
+      </Section>
+
+      {/* ============================ ALGORITHM 4 ============================ */}
+      <Section alt>
+        <AlgoHeader id="algo-4" eyebrow="Algorithm 4 · Deep learning" title="LSTM volatility forecaster for options" />
+        <div className="grid gap-6 lg:grid-cols-3">
+          {lstmCards.map(([title, text], i) => (
+            <Reveal key={title} delay={i * 120} className={T.cardAlt}>
+              <div className="mb-5 h-1 w-10 rounded-full bg-[var(--accent)]" />
+              <h3 className={T.h3}>{title}</h3>
+              <p className={T.body}>{text}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal className={T.cardAlt}>
+            <h3 className={T.h3}>Decision rule</h3>
+            <ul className="mt-5 space-y-4">
+              <li className="flex items-start gap-3 text-base leading-7 text-[var(--text-secondary)]">
+                <Check />
+                <span className="pt-0.5">
+                  IV well above forecast: options look rich. Sell defined-risk premium, for example an iron condor.
+                </span>
+              </li>
+              <li className="flex items-start gap-3 text-base leading-7 text-[var(--text-secondary)]">
+                <Check />
+                <span className="pt-0.5">
+                  IV well below forecast: options look cheap. Buy a long straddle or strangle.
+                </span>
+              </li>
+            </ul>
+            <p className={`${T.small} mt-5`}>
+              Filters: skip RBI policy, Budget and results days, and cap the loss per trade.
+            </p>
+          </Reveal>
+          <Reveal delay={150} className={T.cardAlt}>
+            <CodeBlock code={lstmCode} />
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ============================ ALGORITHM 5 ============================ */}
+      <Section>
+        <AlgoHeader id="algo-5" eyebrow="Algorithm 5 · Generative AI" title="Announcement sentiment as a feature" />
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+          {sentimentSteps.map(([title, text], i) => (
+            <Reveal key={title} delay={(i % 5) * 80} className={`${T.card} !p-5`}>
+              <span className="inline-flex rounded-md bg-[var(--accent)]/15 px-2.5 py-1 text-sm font-bold text-[var(--accent-strong)]">
+                {i + 1}
+              </span>
+              <h3 className="mt-4 text-lg font-semibold text-[var(--text-primary)]">{title}</h3>
+              <p className="mt-2 text-sm leading-6 text-[var(--text-secondary)]">{text}</p>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <Reveal className={T.card}>
+            <CodeBlock code={sentimentCode} />
+          </Reveal>
+          <Reveal delay={150} className={T.card}>
+            <h3 className={T.h3}>Rules that keep it honest</h3>
+            <ul className="mt-5 space-y-4">
+              {sentimentRules.map((rule) => (
+                <li key={rule} className="flex items-start gap-3 text-base leading-7 text-[var(--text-secondary)]">
+                  <Check />
+                  <span className="pt-0.5">{rule}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </Section>
+
+      {/* ============================ ALGORITHM 6 ============================ */}
+      <Section alt>
+        <AlgoHeader id="algo-6" eyebrow="Algorithm 6 · Agentic AI" title="Pre-market brief agent, every trading day" />
+        <Reveal className={`${T.cardAlt} overflow-hidden !p-0`}>
+          {agentSchedule.map(([time, task, detail]) => (
+            <div
+              key={time}
+              className="grid gap-1 border-b border-[var(--border-soft)] px-5 py-5 last:border-b-0 sm:grid-cols-[100px_160px_1fr] sm:items-baseline sm:gap-6 sm:px-8"
+            >
+              <time className="text-lg font-bold tabular-nums text-[var(--accent-strong)]">{time}</time>
+              <p className="text-lg font-semibold text-[var(--text-primary)]">{task}</p>
+              <p className="text-base leading-7 text-[var(--text-secondary)]">{detail}</p>
+            </div>
+          ))}
+        </Reveal>
+
+        <Banner label="Boundary">
+          The agent prepares; humans decide. Its tools are read-only, so it never places orders.
+        </Banner>
+      </Section>
     </Layout>
   );
 }

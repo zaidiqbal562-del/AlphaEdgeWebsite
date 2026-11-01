@@ -1,28 +1,76 @@
 import { useState } from 'react';
 import Layout from '../layout/Layout';
+import { T, Reveal, Section, SectionHeader } from '../components/ui';
+
+/* Where applications are sent. Change this to your real endpoint. */
+const APPLY_ENDPOINT = '/api/careers';
+
+const areas = [
+  ['Research', 'Help us conduct cutting-edge research in quantitative finance and AI systems.'],
+  ['Engineering', 'Build production-grade systems for research, trading and learning infrastructure.'],
+  ['Education', 'Mentor and teach the next generation of quantitative professionals.'],
+];
+
+const experienceLevels = [
+  ['0-2', '0–2 years'],
+  ['2-5', '2–5 years'],
+  ['5-10', '5–10 years'],
+  ['10+', '10+ years'],
+];
+
+const positions = [
+  'Quantitative Researcher',
+  'Machine Learning Engineer',
+  'Software Engineer',
+  'Data Engineer',
+  'Trading Systems Engineer',
+  'Research Analyst',
+  'Stock Trader',
+  'Instructor / Mentor',
+  'Other',
+];
+
+const emptyForm = {
+  fullName: '',
+  email: '',
+  phone: '',
+  linkedIn: '',
+  experience: '',
+  position: '',
+  resume: null,
+  coverLetter: '',
+  agreed: false,
+};
+
+const inputClass =
+  'w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-base text-[var(--text-primary)] outline-none transition placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] focus-visible:ring-2 focus-visible:ring-[var(--accent)]/30';
+
+function Field({ id, label, required = false, hint, children }) {
+  return (
+    <div>
+      <label htmlFor={id} className="mb-2 block text-sm font-semibold text-[var(--text-primary)]">
+        {label}
+        {required && <span aria-hidden="true"> *</span>}
+        {hint && <span className="ml-2 text-sm font-normal text-[var(--text-muted)]">{hint}</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
 
 export default function CareersPage() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    linkedIn: '',
-    experience: '',
-    position: '',
-    resume: null,
-    coverLetter: '',
-    agreed: false,
-  });
-
+  const [formData, setFormData] = useState(emptyForm);
+  const [fileKey, setFileKey] = useState(0); /* resets the file input after a successful send */
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked, files } = e.target;
-    setFormData(prev => ({
+    setSubmitted(false);
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value
+      [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] || null : value,
     }));
   };
 
@@ -30,35 +78,23 @@ export default function CareersPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSubmitted(false);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('fullName', formData.fullName);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('linkedIn', formData.linkedIn);
-      formDataToSend.append('experience', formData.experience);
-      formDataToSend.append('position', formData.position);
-      formDataToSend.append('coverLetter', formData.coverLetter);
-      if (formData.resume) {
-        formDataToSend.append('resume', formData.resume);
-      }
+      const body = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'agreed' || value === null || value === '') return;
+        body.append(key, value);
+      });
+
+      const res = await fetch(APPLY_ENDPOINT, { method: 'POST', body });
+      if (!res.ok) throw new Error(`Request failed with ${res.status}`);
 
       setSubmitted(true);
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        linkedIn: '',
-        experience: '',
-        position: '',
-        resume: null,
-        coverLetter: '',
-        agreed: false,
-      });
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (err) {
-      setError('An error occurred. Please try again.');
+      setFormData(emptyForm);
+      setFileKey((k) => k + 1);
+    } catch {
+      setError('We could not send your application. Please try again, or email hello@alphaedge.in.');
     } finally {
       setLoading(false);
     }
@@ -70,180 +106,233 @@ export default function CareersPage() {
       description="Join AlphaEdge and be part of a premier research-led institute. We're looking for passionate individuals in quantitative finance, engineering, and AI."
       keywords="careers, jobs, hiring, quantitative finance, AI, trading, research"
     >
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--text-muted)]">Join us</p>
-          <h1 className="mt-4 text-4xl font-black tracking-[-0.06em] text-[var(--text-primary)] sm:text-5xl">
-            Build the future of quantitative finance and AI.
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-[var(--text-secondary)]">
-            AlphaEdge is building a world-class team of researchers, engineers, and practitioners. We're looking for exceptional talent to join us on our mission to advance quantitative finance and applied AI.
-          </p>
+      {/* ============================ HERO ============================ */}
+      <Section>
+        <Reveal as="p" className={T.eyebrow}>
+          Join us
+        </Reveal>
+        <Reveal
+          as="h1"
+          delay={100}
+          className="mt-3 max-w-4xl text-4xl font-black leading-[1.1] tracking-tight text-[var(--text-primary)] sm:text-5xl lg:text-6xl"
+        >
+          Build the future of quantitative finance and AI
+        </Reveal>
+        <Reveal as="p" delay={200} className={`${T.lead} !max-w-3xl sm:!text-xl sm:!leading-8`}>
+          AlphaEdge is building a team of researchers, engineers and practitioners. We’re looking for exceptional
+          people to help advance quantitative finance and applied AI.
+        </Reveal>
+        <Reveal delay={300} className="mt-8">
+          <a
+            href="#apply"
+            className="inline-flex items-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-6 py-3 text-sm font-semibold text-[var(--accent-strong)] transition-colors hover:bg-[var(--accent)]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+          >
+            Apply now
+          </a>
+        </Reveal>
+      </Section>
+
+      {/* ============================ AREAS ============================ */}
+      <Section alt>
+        <SectionHeader eyebrow="Where you could work" title="Three ways to contribute" />
+        <div className="grid gap-6 md:grid-cols-3">
+          {areas.map(([title, text], i) => (
+            <Reveal key={title} delay={i * 120} className={T.cardAlt}>
+              <div className="mb-5 h-1 w-10 rounded-full bg-[var(--accent)]" />
+              <h3 className={T.h3}>{title}</h3>
+              <p className={T.body}>{text}</p>
+            </Reveal>
+          ))}
         </div>
-      </section>
+      </Section>
 
-      <section className="mx-auto max-w-4xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="rounded-[28px] border border-[var(--border-soft)] bg-[var(--surface)] p-8">
-          <h2 className="text-3xl font-bold tracking-[-0.05em] text-[var(--text-primary)] mb-8">Submit Your Application</h2>
+      {/* ============================ APPLICATION ============================ */}
+      <Section>
+        <div id="apply" className="mx-auto max-w-3xl scroll-mt-24">
+          <SectionHeader
+            eyebrow="Application"
+            title="Submit your application"
+            description="Fields marked * are required."
+          />
 
-          {submitted && (
-            <div className="mb-8 rounded-xl border border-emerald-500/50 bg-emerald-500/10 p-4">
-              <p className="text-sm font-semibold text-emerald-400">✓ Application submitted successfully! We'll review your profile and get back to you soon.</p>
-            </div>
-          )}
-
-          {error && (
-            <div className="mb-8 rounded-xl border border-rose-500/50 bg-rose-500/10 p-4">
-              <p className="text-sm font-semibold text-rose-400">✗ {error}</p>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Full Name *</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                  placeholder="Your full name"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Email *</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                  placeholder="your@email.com"
-                />
-              </div>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Phone *</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                  placeholder="+1 (555) 000-0000"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">LinkedIn Profile</label>
-                <input
-                  type="url"
-                  name="linkedIn"
-                  value={formData.linkedIn}
-                  onChange={handleChange}
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                  placeholder="linkedin.com/in/yourprofile"
-                />
-              </div>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Years of Experience *</label>
-                <select
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] transition-colors focus:border-[var(--accent)] focus:outline-none"
+          <Reveal className={T.card}>
+            {submitted && (
+              <div
+                role="status"
+                className="mb-8 flex items-start gap-3 rounded-xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-4"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/15 text-sm font-bold text-[var(--accent-strong)]"
                 >
-                  <option value="">Select experience level</option>
-                  <option value="0-2">0-2 years</option>
-                  <option value="2-5">2-5 years</option>
-                  <option value="5-10">5-10 years</option>
-                  <option value="10+">10+ years</option>
-                </select>
+                  ✓
+                </span>
+                <p className="pt-0.5 text-sm leading-6 text-[var(--text-primary)]">
+                  Application submitted. We’ll review your profile and get back to you.
+                </p>
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Position of Interest *</label>
-                <select
-                  name="position"
-                  value={formData.position}
+            )}
+
+            {error && (
+              <div
+                role="alert"
+                className="mb-8 flex items-start gap-3 rounded-xl border border-[#ef4444]/40 bg-[#ef4444]/10 p-4"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#ef4444]/15 text-sm font-bold text-[#ef4444]"
+                >
+                  ✕
+                </span>
+                <p className="pt-0.5 text-sm leading-6 text-[var(--text-primary)]">{error}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <Field id="fullName" label="Full name" required>
+                  <input
+                    id="fullName"
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    autoComplete="name"
+                    className={inputClass}
+                    placeholder="Your full name"
+                  />
+                </Field>
+                <Field id="email" label="Email" required>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    autoComplete="email"
+                    className={inputClass}
+                    placeholder="you@example.com"
+                  />
+                </Field>
+              </div>
+
+              <div className="grid gap-6 sm:grid-cols-2">
+                <Field id="phone" label="Phone" required>
+                  <input
+                    id="phone"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    autoComplete="tel"
+                    className={inputClass}
+                    placeholder="+91 98765 43210"
+                  />
+                </Field>
+                <Field id="linkedIn" label="LinkedIn profile">
+                  <input
+                    id="linkedIn"
+                    type="url"
+                    name="linkedIn"
+                    value={formData.linkedIn}
+                    onChange={handleChange}
+                    className={inputClass}
+                    placeholder="https://linkedin.com/in/yourprofile"
+                  />
+                </Field>
+              </div>
+
+              <div className="grid gap-6 sm:grid-cols-2">
+                <Field id="experience" label="Years of experience" required>
+                  <select
+                    id="experience"
+                    name="experience"
+                    value={formData.experience}
+                    onChange={handleChange}
+                    required
+                    className={inputClass}
+                  >
+                    <option value="">Select experience level</option>
+                    {experienceLevels.map(([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+                <Field id="position" label="Position of interest" required>
+                  <select
+                    id="position"
+                    name="position"
+                    value={formData.position}
+                    onChange={handleChange}
+                    required
+                    className={inputClass}
+                  >
+                    <option value="">Select a position</option>
+                    {positions.map((p) => (
+                      <option key={p} value={p}>
+                        {p}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              </div>
+
+              <Field id="resume" label="Resume" hint="PDF or Word">
+                <input
+                  key={fileKey}
+                  id="resume"
+                  type="file"
+                  name="resume"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleChange}
+                  className={`${inputClass} cursor-pointer file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:bg-[var(--accent)]/15 file:px-4 file:py-1.5 file:text-sm file:font-semibold file:text-[var(--accent-strong)]`}
+                />
+              </Field>
+
+              <Field id="coverLetter" label="Cover letter or message">
+                <textarea
+                  id="coverLetter"
+                  name="coverLetter"
+                  value={formData.coverLetter}
+                  onChange={handleChange}
+                  rows={5}
+                  className={inputClass}
+                  placeholder="Tell us why you’re interested in joining AlphaEdge."
+                />
+              </Field>
+
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  name="agreed"
+                  id="agreed"
+                  checked={formData.agreed}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                >
-                  <option value="">Select a position</option>
-                  <option value="Quantitative Researcher">Quantitative Researcher</option>
-                  <option value="Machine Learning Engineer">Machine Learning Engineer</option>
-                  <option value="Software Engineer">Software Engineer</option>
-                  <option value="Instructor">Stock Trader</option>
-                  <option value="Data Engineer">Data Engineer</option>
-                  <option value="Trading Systems">Trading Systems Engineer</option>
-                  <option value="Research Analyst">Research Analyst</option>
-                  <option value="Instructor">Instructor / Mentor</option>
-                  <option value="Other">Other</option>
-                </select>
+                  className="mt-1 h-4 w-4 shrink-0 rounded accent-[var(--accent)]"
+                />
+                <label htmlFor="agreed" className="text-sm leading-6 text-[var(--text-secondary)]">
+                  I agree that AlphaEdge can store and process my information for recruitment purposes.
+                  <span aria-hidden="true"> *</span>
+                </label>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-semibold text-[var(--text-primary)] mb-2">Cover Letter / Message</label>
-              <textarea
-                name="coverLetter"
-                value={formData.coverLetter}
-                onChange={handleChange}
-                rows="5"
-                className="w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] px-4 py-3 text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-colors focus:border-[var(--accent)] focus:outline-none"
-                placeholder="Tell us why you're interested in joining AlphaEdge..."
-              />
-            </div>
-
-            <div className="flex items-start gap-3">
-              <input
-                type="checkbox"
-                name="agreed"
-                id="agreed"
-                checked={formData.agreed}
-                onChange={handleChange}
-                required
-                className="mt-1 rounded border-[var(--border-soft)] bg-[var(--surface-strong)] accent-[var(--accent)]"
-              />
-              <label htmlFor="agreed" className="text-sm text-[var(--text-secondary)]">
-                I agree that AlphaEdge can store and process my information for recruitment purposes. *
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.35)] transition-all hover:shadow-[0_0_45px_rgba(16,185,129,0.5)] active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Submitting...' : 'Submit Application'}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {loading ? 'Submitting…' : 'Submit application'}
+              </button>
+            </form>
+          </Reveal>
         </div>
-
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-6">
-            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Research</h3>
-            <p className="mt-2 text-sm text-[var(--text-secondary)]">Help us conduct cutting-edge research in quantitative finance and AI systems.</p>
-          </div>
-          <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-6">
-            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Engineering</h3>
-            <p className="mt-2 text-sm text-[var(--text-secondary)]">Build production-grade systems for research, trading, and learning infrastructure.</p>
-          </div>
-          <div className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] p-6">
-            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Education</h3>
-            <p className="mt-2 text-sm text-[var(--text-secondary)]">Mentor and teach the next generation of quantitative professionals.</p>
-          </div>
-        </div>
-      </section>
+      </Section>
     </Layout>
   );
 }
