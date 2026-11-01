@@ -6,7 +6,7 @@ export default function BrochureButton() {
   const handleDownloadBrochure = () => {
     setDownloading(true);
 
-    window.open('/alphaedge-1Year', '_blank', 'noopener,noreferrer');
+    window.open('/alphaedge-1Year.html', '_blank', 'noopener,noreferrer');
 
     setTimeout(() => {
       setDownloading(false);

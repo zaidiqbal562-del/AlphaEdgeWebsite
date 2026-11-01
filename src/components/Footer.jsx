@@ -44,14 +44,14 @@ export default function Footer() {
     script.type = 'text/javascript';
     script.innerHTML = JSON.stringify({
       symbols: [
-        { proName: 'NSE:NIFTY', title: 'Nifty 50' },
-        { proName: 'NSE:BANKNIFTY', title: 'Bank Nifty' },
-        { proName: 'BSE:SENSEX', title: 'Sensex' },
+        // { proName: 'NSE:NIFTY', title: 'Nifty 50' },
+        // { proName: 'NSE:BANKNIFTY', title: 'Bank Nifty' },
+       { proName: 'BSE:SENSEX', title: 'Sensex' },
         { proName: 'TVC:GOLD', title: 'Gold' },
         { proName: 'TVC:USOIL', title: 'Crude Oil' },
-        { proName: 'NSE:RELIANCE', title: 'Reliance' },
-        { proName: 'NSE:TCS', title: 'TCS' },
-        { proName: 'NSE:HDFCBANK', title: 'HDFC Bank' },
+        { proName: 'BSE:RELIANCE', title: 'Reliance' },
+        { proName: 'BSE:TCS', title: 'TCS' },
+        { proName: 'BSE:HDFCBANK', title: 'HDFC Bank' },
       ],
       showSymbolLogo: true,
       colorTheme: 'dark',

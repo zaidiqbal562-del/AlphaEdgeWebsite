@@ -40,6 +40,7 @@ export default function Layout({ title, description, keywords, children }) {
     return window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
+        // return 'dark'; //keep only this for dark mode
   });
 
   // ================= MOBILE MENU =================
@@ -156,7 +157,7 @@ export default function Layout({ title, description, keywords, children }) {
               aria-label="AlphaEdge home page"
             >
               <img
-                src="/logocroppedbg.png"
+                src="/logocroppedbgpxl.png"
                 alt="AlphaEdge"
                  className="absolute left-0 h-[4.25rem] w-auto max-w-none origin-left object-contain transition-transform duration-200 ease-out hover:scale-105 sm:h-[5.1rem]"
 
