@@ -125,7 +125,7 @@ export default function Layout({ title, description, keywords, children }) {
               'https://linkedin.com/company/alphaedge',
               'https://twitter.com/alphaedge',
             ],
-            image: 'https://alphaedge.in/logocropped.jpeg',
+            image: 'https://alphaedge.in/logocroppedbg.png',
             address: {
               '@type': 'PostalAddress',
               addressCountry: 'IN',
@@ -152,13 +152,14 @@ export default function Layout({ title, description, keywords, children }) {
 
             <Link
               to="/"
-              className="flex shrink-0 items-center gap-2 transition-transform duration-300 hover:scale-105"
+              className="relative flex h-10 w-28 shrink-0 items-center"
               aria-label="AlphaEdge home page"
             >
               <img
-                src="/logocropped.jpeg"
+                src="/logocroppedbg.png"
                 alt="AlphaEdge"
-                className="h-10 w-auto object-contain"
+                 className="absolute left-0 h-[4.25rem] w-auto max-w-none origin-left object-contain transition-transform duration-200 ease-out hover:scale-105 sm:h-[5.1rem]"
+
               />
 {/* 
               <div className="hidden sm:block">

@@ -4,7 +4,7 @@ import { T, Reveal, Section, SectionHeader, Banner } from '../components/ui';
 
 /* Where application emails go, and where the brochure lives. */
 const ADMISSIONS_EMAIL = 'hello@alphaedge.in';
-const BROCHURE_PATH = '/alphaedge-1Year';
+const BROCHURE_PATH = '/alphaedge-1Year.html';
 
 const applyHref = `mailto:${ADMISSIONS_EMAIL}?subject=${encodeURIComponent(
   'AlphaEdge course application',

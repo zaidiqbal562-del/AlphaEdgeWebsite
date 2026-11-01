@@ -24,9 +24,9 @@ const columns = [
   {
     title: 'Institute',
     links: [
-      { label: 'Mentors', to: '/mentors' },
-      { label: 'Careers', to: '/careers' },
-      { label: 'FAQs', to: '/faq' },
+      // { label: 'Mentors', to: '/mentors' },
+      { label: 'Careers', to: '/careers' }, 
+      { label: 'FAQs', to: '/faq' },  
       { label: 'Admissions', to: '/admissions' },
     ],
   },
@@ -129,9 +129,10 @@ export default function Footer() {
               className="inline-block rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ee8238]"
             >
               <img
-                src="/logocropped.jpeg"
+                src="/logocroppedbg.png"
                 alt="AlphaEdge, quant and financial engineering academy"
-                className="h-9 w-auto max-w-full object-contain sm:h-11"
+                 className="h-20 w-auto max-w-full object-contain sm:h-[6.8rem]"
+
               />
             </Link>
 
@@ -179,7 +180,7 @@ export default function Footer() {
                 className="min-w-0"
               >
                 <h3
-                  className="text-xs font-medium sm:text-sm"
+                  className="text-xs font-medium underline decoration-[#ee8238] underline-offset-4 sm:text-sm"
                   style={{ color: INK }}
                 >
                   {col.title}

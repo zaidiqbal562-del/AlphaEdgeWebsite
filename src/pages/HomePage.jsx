@@ -15,9 +15,9 @@ import { ai900ProgrammeData } from '../data/ai900Data';
 const T = {
   ...BaseT,
   btnPrimary:
-    'inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text--950 shadow-lg transition hover:brightness-110 sm:w-auto',
+    'inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:brightness-110 sm:w-auto',
   btnSecondary:
-    'inline-flex w-full items-center justify-center rounded-full border border-white/40 bg-white/5 px-7 py-3.5 text-sm font-bold text-white backdrop-blur transition hover:bg-white/15 sm:w-auto',
+    'inline-flex w-full items-center justify-center rounded-full border border-[var(--accent)] bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text-slate-950 shadow-lg transition hover:brightness-110 sm:w-auto',
 };
 
 function CapstoneBanner({ children, extra }) {
@@ -221,7 +221,7 @@ export default function HomePage() {
               
 <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl">
   <img
-    src="/logocropped.jpeg"
+    src="/logocroppedbg.png"
     alt="AlphaEdge Logo"
     className="h-full w-full object-contain"
   />

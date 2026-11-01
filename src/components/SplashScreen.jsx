@@ -26,7 +26,7 @@ export default function SplashScreen() {
         {/* Circular logo: 75% of screen */}
         <div className="relative flex h-[75vmin] w-[75vmin] items-center justify-center overflow-hidden rounded-full border border-white/10 bg-slate-950/80 shadow-[0_0_60px_rgba(45,212,191,0.35)]">
           <img
-            src="/logocropped.jpeg"
+            src="/logocroppedbg.png"
             alt="AlphaEdge"
             className="h-full w-full object-contain p-[7vmin]"
           />
