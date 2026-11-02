@@ -266,44 +266,59 @@ export default function Layout({ title, description, keywords, children }) {
 
               {/* ================= THEME TOGGLE ================= */}
 
-              <button
-                type="button"
-                onClick={() =>
-                  setTheme((value) =>
-                    value === 'dark' ? 'light' : 'dark'
-                  )
-                }
-                aria-label="Toggle dark and light mode"
-                aria-pressed={theme === 'dark'}
-                className="group relative inline-flex h-9 w-20 shrink-0 overflow-hidden rounded-full border border-[var(--border-soft)] bg-[var(--surface)] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-all duration-300 ease-out hover:border-[var(--text-muted)]"
-              >
-                <span
-                  className={`absolute inset-y-1 w-7 rounded-full bg-[var(--accent)]/90 shadow-[0_8px_20px_rgba(15,23,42,0.18)] transition-all duration-300 ease-out ${
-                    theme === 'dark' ? 'translate-x-0 left-1' : 'translate-x-11 left-auto right-1'
-                  }`}
-                />
+            {/* ================= THEME TOGGLE ================= */}
 
-                <span
-                  className={`relative z-10 flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 ${
-                    theme === 'dark' ? 'text-slate-950' : 'text-[var(--text-primary)]'
-                  }`}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`h-4 w-4 transition-all duration-300 ${theme === 'dark' ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
-                    <path d="M21 12.8A9 9 0 0 1 11.2 3a9 9 0 1 0 9.8 9.8Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
+<button 
+  type="button"
+  onClick={() =>
+    setTheme((value) => (value === 'dark' ? 'light' : 'dark'))
+  }
+  aria-label={
+    theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+  }
+  title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+  className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--border-soft)] bg-[var(--surface)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
+>
+  {/* Sun: shown in dark mode */}
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className={`absolute h-[18px] w-[18px] transition-all duration-300 ease-out ${
+      theme === 'dark'
+        ? 'rotate-0 scale-100 opacity-100'
+        : 'rotate-90 scale-50 opacity-0'
+    }`}
+  >
+    <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.7" />
+    <path
+      d="M12 2.5v2.1M12 19.4v2.1M21.5 12h-2.1M4.6 12H2.5M18.6 5.4l-1.5 1.5M7 17l-1.5 1.5M18.6 18.6l-1.5-1.5M7 7 5.5 5.5"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+    />
+  </svg>
 
-                <span
-                  className={`relative z-10 ml-auto flex h-7 w-7 items-center justify-center rounded-full transition-all duration-300 ${
-                    theme === 'light' ? 'text-amber-600' : 'text-[var(--text-muted)]'
-                  }`}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={`h-4 w-4 transition-all duration-300 ${theme === 'light' ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}>
-                    <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.7"/>
-                    <path d="M12 2.5v2.1M12 19.4v2.1M21.5 12h-2.1M4.6 12H2.5M18.6 5.4l-1.5 1.5M7 17l-1.5 1.5M18.6 18.6l-1.5-1.5M7 7 5.5 5.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"/>
-                  </svg>
-                </span>
-              </button>
+  {/* Moon: shown in light mode */}
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className={`absolute h-[18px] w-[18px] transition-all duration-300 ease-out ${
+      theme === 'light'
+        ? 'rotate-0 scale-100 opacity-100'
+        : '-rotate-90 scale-50 opacity-0'
+    }`}
+  >
+    <path
+      d="M21 12.8A9 9 0 0 1 11.2 3a9 9 0 1 0 9.8 9.8Z"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+</button>
 
               {/* ================= APPLY BUTTON ================= */}
 
