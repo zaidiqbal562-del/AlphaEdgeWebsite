@@ -102,7 +102,7 @@ export default function Footer() {
               <img
                 src="/logocroppedbg.png"
                 alt="AlphaEdge, quant and financial engineering academy"
-                 className="h-20 w-auto max-w-full object-contain sm:h-[6.8rem]"
+                 className="h-20 w-auto max-w-full -translate-x-[15%] object-contain sm:h-[6.8rem]"
 
               />
             </Link>
