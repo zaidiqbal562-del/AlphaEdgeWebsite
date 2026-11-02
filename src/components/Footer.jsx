@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { useEffect } from 'react';
 
 const NAVY = '#0e1a2b';
 const INK = '#f3efe8';
@@ -36,36 +35,7 @@ const linkClass =
   'inline-block rounded-sm text-xs leading-5 text-[#b9c4d4] transition-colors hover:text-[#ee8238] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ee8238] sm:text-sm';
 
 export default function Footer() {
-  useEffect(() => {
-    // Load TradingView script only once
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-    script.async = true;
-    script.type = 'text/javascript';
-    script.innerHTML = JSON.stringify({
-      symbols: [
-        // { proName: 'NSE:NIFTY', title: 'Nifty 50' },
-        // { proName: 'NSE:BANKNIFTY', title: 'Bank Nifty' },
-       { proName: 'BSE:SENSEX', title: 'Sensex' },
-        { proName: 'TVC:GOLD', title: 'Gold' },
-        { proName: 'TVC:USOIL', title: 'Crude Oil' },
-        { proName: 'BSE:RELIANCE', title: 'Reliance' },
-        { proName: 'BSE:TCS', title: 'TCS' },
-        { proName: 'BSE:HDFCBANK', title: 'HDFC Bank' },
-      ],
-      showSymbolLogo: true,
-      colorTheme: 'dark',
-      isTransparent: true,
-      displayMode: 'adaptive',
-      locale: 'en',
-    });
-
-    const container = document.getElementById('tradingview-ticker');
-    if (container) {
-      container.innerHTML = '';
-      container.appendChild(script);
-    }
-  }, []);
+  // TradingView market-data loader disabled.
 
   return (
     <footer
@@ -85,7 +55,7 @@ export default function Footer() {
         />
       </Helmet>
 
-      {/* ===== TRADINGVIEW TICKER TAPE (TOP OF FOOTER) ===== */}
+      {/* TradingView market-data ticker disabled.
       <div className="border-b border-white/10 bg-[#0e1a2b]">
         <div
           id="tradingview-ticker"
@@ -95,6 +65,7 @@ export default function Footer() {
           <div className="tradingview-widget-container__widget"></div>
         </div>
       </div>
+      */}
 
       {/* Main footer content */}
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
