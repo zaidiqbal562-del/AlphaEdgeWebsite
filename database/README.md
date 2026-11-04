@@ -6,6 +6,7 @@ The Admissions form stores submissions in Aiven MySQL through the Vercel functio
 2. In the Aiven SQL console, run [`schema.sql`](schema.sql).
 3. In the Aiven connection information, copy the MySQL service URI (in `mysql://user:password@host:port/database` form) and download its CA certificate.
 4. In Vercel, open **Project Settings → Environment Variables** and add `MYSQL_URL` (the service URI) and `AIVEN_CA_CERT` (the full PEM certificate). Add them to every environment where you want the form enabled, then redeploy.
+5. To view applications at `/enquiries_view`, set a long, random `ENQUIRIES_ADMIN_TOKEN` environment variable in Vercel and redeploy. The page asks for this key, keeps it only in memory, and the API checks it before returning applicant data. Do not make the records endpoint public.
 
 To inspect applications, run this query in the Aiven SQL console:
 

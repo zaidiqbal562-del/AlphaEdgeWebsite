@@ -1,3 +1,4 @@
+import { timingSafeEqual } from 'node:crypto';
 import mysql from 'mysql2/promise';
 
 let pool;
@@ -34,9 +35,47 @@ function text(value, maxLength) {
   return typeof value === 'string' ? value.trim().slice(0, maxLength) : '';
 }
 
+function hasAdminAccess(req) {
+  const expectedToken = process.env.ENQUIRIES_ADMIN_TOKEN;
+  const authorization = req.headers.authorization;
+  if (!expectedToken || typeof authorization !== 'string' || !authorization.startsWith('Bearer ')) {
+    return false;
+  }
+
+  const provided = Buffer.from(authorization.slice(7));
+  const expected = Buffer.from(expectedToken);
+  return provided.length === expected.length && timingSafeEqual(provided, expected);
+}
+
 export default async function handler(req, res) {
+  if (req.method === 'GET') {
+    if (!hasAdminAccess(req)) {
+      return res.status(401).json({ error: 'Access denied.' });
+    }
+
+    try {
+      const database = getPool();
+      const [applications] = await database.execute(
+        `SELECT id, full_name, email, phone, city, qualification, programme,
+                resume_url, created_at
+         FROM admissions_applications
+         ORDER BY created_at DESC
+         LIMIT 100`,
+      );
+      return res.status(200).json({ applications });
+    } catch (error) {
+      console.error('Admissions records could not be loaded:', error.message);
+      const status = error.message.includes('environment is not configured') ? 503 : 500;
+      return res.status(status).json({
+        error: status === 503
+          ? 'Enquiries access is not configured.'
+          : 'Could not load enquiries.',
+      });
+    }
+  }
+
   if (req.method !== 'POST') {
-    res.setHeader('Allow', 'POST');
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
