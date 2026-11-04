@@ -12,6 +12,7 @@ const navigation = [
     submenu: [
       { label: 'All Programmes', href: '/programmes' },
       { label: 'AI-900', href: '/programmes/ai-900' },
+      { label: 'AI & Agents in Finance', href: '/programmes/ai-agents-finance' },
     ],
   },
   { label: 'Algorithms', href: '/algorithm' },
@@ -158,7 +159,7 @@ export default function Layout({ title, description, keywords, children }) {
   aria-label="AlphaEdge home page"
 >
   <img
-    src="/logocroppedbgpxl.png"
+    src="/logocroppedbgpxl.png" //logo top 
     alt="AlphaEdge"
     className="absolute left-0 h-[4.25rem] w-auto max-w-none origin-left scale-[1.7] object-contain transition-transform duration-200 ease-out hover:scale-[1.8] sm:h-[5.1rem]"
   />

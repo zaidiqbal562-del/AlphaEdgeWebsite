@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-
+import MarketTicker from './MarketTicker';
 const NAVY = '#0e1a2b';
 const INK = '#f3efe8';
 const ORANGE = '#ee8238';
@@ -16,6 +16,7 @@ const columns = [
     links: [
       { label: 'All programmes', to: '/programmes' },
       { label: 'AI-900', to: '/programmes/ai-900' },
+      { label: 'AI & Agents in Finance', to: '/programmes/ai-agents-finance' },
       { label: 'Curriculum', to: '/programmes/ai-900#curriculum' },
     ],
   },
@@ -95,6 +96,7 @@ export default function Footer() {
       style={{ background: NAVY, color: INK, fontFamily: body }}
     >
       <Helmet>
+        
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
@@ -102,7 +104,7 @@ export default function Footer() {
           href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap"
         />
       </Helmet>
-
+      <MarketTicker />
       {/* Main footer content */}
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
         {/* Brand statement */}
@@ -191,10 +193,10 @@ export default function Footer() {
 
                 <ContactRow icon={<PhoneIcon />}>
                   <a
-                    href="tel:+919999367573"
+                    href="tel:+919205775137"
                     className={`rounded-sm transition-colors hover:text-[#ee8238] ${focusRing}`}
                   >
-                    +91 99993 67573
+                    +91 92057 75137
                   </a>
                 </ContactRow>
 

@@ -432,6 +432,29 @@ export default function HomePage() {
         </div>
       </Section>
 
+      <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden border-y border-[var(--border-soft)] bg-slate-950/20">
+        <div className="market-pic-marquee flex min-w-max items-center gap-3 p-2 sm:p-3">
+          {[...Array(2)].flatMap(() => [
+            'images (1).jpg.jpeg',
+            'images (2).jpg.jpeg',
+            'images (3).jpg.jpeg',
+            'images (4).jpg.jpeg',
+            'images (5).jpg.jpeg',
+            'images (6).jpg.jpeg',
+            'images (7).jpg.jpeg',
+            'images (8).jpg.jpeg',
+            'images.jpg.jpeg',
+          ]).map((image, index) => (
+            <img
+              key={`${image}-${index}`}
+              src={`/marketpic/${image}`}
+              alt="Market exchange imagery"
+              className="h-20 w-28 rounded-xl object-cover shadow-md sm:h-24 sm:w-36 md:h-28 md:w-44 lg:h-32 lg:w-52"
+            />
+          ))}
+        </div>
+      </div>
+
       {/* ============================ CTA ============================ */}
       <Section>
         <Reveal className="rounded-3xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-8 sm:p-12">
@@ -441,7 +464,10 @@ export default function HomePage() {
               <h2 className="mt-3 max-w-2xl text-3xl font-bold tracking-tight text-[var(--text-primary)] sm:text-4xl">
                 Prepare for quantitative, AI-led decision making in modern capital markets.
               </h2>
+
+              
             </div>
+            
             <Link
               to="/admissions"
               className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-7 py-3.5 text-sm font-bold text-black shadow-lg transition hover:brightness-110"
@@ -449,7 +475,9 @@ export default function HomePage() {
               Apply for next cohort
             </Link>
           </div>
+          
         </Reveal>
+        
       </Section>
     </Layout>
   );

@@ -11,12 +11,29 @@ const programmes = [
     approach: 'Structured, research-led learning that moves from fundamentals to deployment.',
     delivery: '13 modules across 52 weeks, with 1,100 hours covering engineering, modelling and governance.',
     outcome: 'A complete capability stack for building and managing AI systems in finance.',
+    result: 'A practical, production-oriented AI skillset for modern financial systems.',
     href: '/programmes/ai-900',
     badge: 'Flagship programme',
     stats: {
       weeks: 52,
       modules: 13,
       hours: 1100,
+    },
+  },
+  {
+    title: 'AI & Agents in Finance — Certificate Programme',
+    summary:
+      '5-month certificate for finance and technology professionals. Machine learning, forecasting, generative AI, RAG and multi-agent workflows applied to real financial problems — with no prior coding background required.',
+    focus: 'Applying AI, machine learning and autonomous agents to banking, trading and investment use cases.',
+    approach: 'Finance-first learning through weekly live sessions, hands-on practice and an industry-relevant capstone project.',
+    delivery: '8 modules over 5 months, from AI foundations and financial data analytics to FinTech product design and governance.',
+    outcome: 'The ability to build predictive models, RAG pipelines and agent workflows, and to govern them responsibly.',
+    result: 'Practical, finance-ready AI skills, proven through a capstone project and responsible-AI judgement.',
+    href: '/programmes/ai-agents-finance',
+    badge: 'Certificate programme',
+    stats: {
+      weeks: 20,
+      modules: 8,
     },
   },
 ];
@@ -58,8 +75,12 @@ export default function ProgrammesPage() {
                   <span>{programme.stats.weeks} weeks</span>
                   <span className="text-[var(--border-soft)]">•</span>
                   <span>{programme.stats.modules} modules</span>
-                  <span className="text-[var(--border-soft)]">•</span>
-                  <span>{programme.stats.hours} hours</span>
+                  {programme.stats.hours && (
+                    <>
+                      <span className="text-[var(--border-soft)]">•</span>
+                      <span>{programme.stats.hours} hours</span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -111,7 +132,7 @@ export default function ProgrammesPage() {
 
               <div className="mt-4 rounded-lg border border-[var(--border-soft)] bg-[var(--surface-strong)] p-3 text-xs leading-6 text-[var(--text-primary)] sm:mt-6 sm:rounded-2xl sm:p-4 sm:text-base sm:leading-7">
                 <span className="font-semibold text-[var(--accent)]">Result:</span>{' '}
-                <span className="mt-1 block sm:mt-0 sm:inline">A practical, production-oriented AI skillset for modern financial systems.</span>
+                <span className="mt-1 block sm:mt-0 sm:inline">{programme.result}</span>
               </div>
 
               <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:flex-row sm:items-center">

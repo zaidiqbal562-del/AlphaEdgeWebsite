@@ -92,7 +92,7 @@ export default function EnquiriesViewPage() {
         ) : (
           <div className="mt-8">
             <p className="mb-4 text-sm text-[var(--text-muted)]">
-              Showing the latest {applications.length} enquiries (maximum 100).
+              Showing the latest {applications.length} enquiries .
             </p>
             <div className="overflow-x-auto rounded-xl border border-[var(--border-soft)]">
               <table className="min-w-full divide-y divide-[var(--border-soft)] text-left text-sm">

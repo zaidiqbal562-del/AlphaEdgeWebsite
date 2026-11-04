@@ -111,7 +111,7 @@ export default function ContactPage() {
 
                 {/* Phone */}
                 <a
-                  href="tel:+919999367573"
+                  href="tel:+919205775137"
                   className="group flex items-start gap-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--background)] p-4 transition-all duration-200 hover:border-[var(--accent)] sm:p-5"
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--surface)] text-[var(--accent)]">

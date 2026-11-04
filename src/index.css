@@ -72,12 +72,30 @@
   }
 }
 
+@keyframes market-pic-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .media-marquee-track {
   animation: media-marquee 48s linear infinite;
 }
 
+.market-pic-marquee {
+  animation: market-pic-marquee 30s linear infinite;
+  will-change: transform;
+}
+
 .media-marquee:hover .media-marquee-track,
 .media-marquee:focus-within .media-marquee-track {
+  animation-play-state: paused;
+}
+
+.market-pic-marquee:hover {
   animation-play-state: paused;
 }
 

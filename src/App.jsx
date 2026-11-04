@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ProgrammesPage from './pages/ProgrammesPage';
 import ProgrammeAi900Page from './pages/ProgrammeAi900Page';
+import ProgrammeAiAgentsFinancePage from './pages/ProgrammeAiAgentsFinancePage';
 import AlgoTradingPage from './pages/AlgoTradingPage';
 import AIandTrading from './pages/AIandTrading';
 import CareersPage from './pages/CareersPage';
@@ -41,6 +42,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/programmes" element={<ProgrammesPage />} />
           <Route path="/programmes/ai-900" element={<ProgrammeAi900Page />} />
+          <Route path="/programmes/ai-agents-finance" element={<ProgrammeAiAgentsFinancePage />} />
           <Route path="/algorithm" element={<AlgoTradingPage />} />
           <Route path="/ai-and-trading" element={<AIandTrading />} />
           <Route path="/governance-risk" element={<GovernanceRiskPage />} />
