@@ -10,7 +10,7 @@ The Admissions form stores submissions in Aiven MySQL through the Vercel functio
 To inspect applications, run this query in the Aiven SQL console:
 
 ```sql
-SELECT id, full_name, email, phone, city, qualification, programme, created_at
+SELECT id, full_name, email, phone, city, qualification, programme, resume_url, created_at
 FROM admissions_applications
 ORDER BY created_at DESC;
 ```

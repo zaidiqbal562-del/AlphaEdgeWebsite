@@ -6,8 +6,9 @@ CREATE TABLE IF NOT EXISTS admissions_applications (
   city VARCHAR(100) NOT NULL,
   qualification VARCHAR(150) NOT NULL,
   programme VARCHAR(80) NOT NULL,
+  resume_url VARCHAR(1000) NULL,
   consent_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   INDEX admissions_applications_created_at_idx (created_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;         

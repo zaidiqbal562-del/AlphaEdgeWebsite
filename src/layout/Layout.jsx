@@ -152,17 +152,16 @@ export default function Layout({ title, description, keywords, children }) {
 
             {/* ================= LOGO ================= */}
 
-            <Link
-              to="/"
-              className="relative flex h-10 w-28 shrink-0 items-center"
-              aria-label="AlphaEdge home page"
-            >
-              <img
-                src="/logocroppedbgpxl.png"
-                alt="AlphaEdge"
-                 className="absolute left-0 h-[4.25rem] w-auto max-w-none origin-left object-contain transition-transform duration-200 ease-out hover:scale-105 sm:h-[5.1rem]"
-
-              />
+<Link
+  to="/"
+  className="relative flex h-10 w-28 shrink-0 items-center overflow-visible"
+  aria-label="AlphaEdge home page"
+>
+  <img
+    src="/logocroppedbgpxl.png"
+    alt="AlphaEdge"
+    className="absolute left-0 h-[4.25rem] w-auto max-w-none origin-left scale-[1.7] object-contain transition-transform duration-200 ease-out hover:scale-[1.8] sm:h-[5.1rem]"
+  />
 {/* 
               <div className="hidden sm:block">
                 <div className="text-sm font-bold tracking-[0.15em] text-[var(--text-primary)]">

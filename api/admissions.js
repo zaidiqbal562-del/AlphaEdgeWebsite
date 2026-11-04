@@ -57,12 +57,22 @@ export default async function handler(req, res) {
     qualification: text(body.qualification, 150),
     programme: text(body.programme, 80),
   };
+  const resumeUrl = text(body.resumeUrl, 1000);
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(application.email);
   const validPhone = /^[+\d\s().-]{7,30}$/.test(application.phone);
   const requiredFields = Object.values(application).every(Boolean);
+  let validResumeUrl = true;
 
-  if (!requiredFields || !validEmail || !validPhone || body.consent !== true) {
+  if (resumeUrl) {
+    try {
+      validResumeUrl = ['http:', 'https:'].includes(new URL(resumeUrl).protocol);
+    } catch {
+      validResumeUrl = false;
+    }
+  }
+
+  if (!requiredFields || !validEmail || !validPhone || !validResumeUrl || body.consent !== true) {
     return res.status(400).json({ error: 'Check the required fields and consent, then try again.' });
   }
 
@@ -70,8 +80,8 @@ export default async function handler(req, res) {
     const database = getPool();
     await database.execute(
       `INSERT INTO admissions_applications
-        (full_name, email, phone, city, qualification, programme)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+        (full_name, email, phone, city, qualification, programme, resume_url)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         application.fullName,
         application.email,
@@ -79,6 +89,7 @@ export default async function handler(req, res) {
         application.city,
         application.qualification,
         application.programme,
+        resumeUrl || null,
       ],
     );
 
