@@ -233,8 +233,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            <p className="mt-8 text-2xl font-semibold leading-snug text-[var(--text-primary)] sm:text-3xl">
-              We train capital-market professionals to build, test and govern AI-driven trading systems.
+            <p className="mt-6 text-lg font-medium leading-7 text-[var(--text-primary)] sm:text-xl sm:leading-8">
+              At AlphaEdge, we don’t see ourselves as traders, investors or researchers in the traditional sense. We are scientists working across mathematics, statistics, computing, machine learning, economics, finance and artificial intelligence to evolve what we believe could become the greatest risk-neutral money-making system the world has ever seen. And boy, does it work.
             </p>
 
             <ul className="mt-8 space-y-4">

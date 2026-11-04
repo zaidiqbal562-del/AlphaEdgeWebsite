@@ -19,6 +19,7 @@ const navigation = [
   { label: 'Governance & Risk', href: '/governance-risk' },
   { label: 'Careers', href: '/careers' },
   { label: 'Admissions', href: '/admissions' },
+  { label: 'Media', href: '/media' },
   { label: 'FAQ', href: '/faq' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -180,7 +181,7 @@ export default function Layout({ title, description, keywords, children }) {
 
             <nav className="hidden items-center gap-3 xl:flex">
 
-              {navigation.slice(0, 8).map((item) => {
+              {navigation.slice(0, 9).map((item) => {
                 const isActive = location.pathname === item.href;
 
                 const hasSubmenu =

@@ -4,7 +4,7 @@ export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(false), 1600);
+    const timer = setTimeout(() => setIsVisible(false), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -28,7 +28,7 @@ export default function SplashScreen() {
           <img
             src="/logocroppedbg.png"
             alt="AlphaEdge"
-            className="h-full w-full object-contain p-[7vmin]"
+            className="h-full w-full object-contain p-[7vmin] scale-[1.7]"
           />
         </div>
       </div>

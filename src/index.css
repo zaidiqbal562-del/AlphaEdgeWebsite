@@ -66,6 +66,27 @@
   }
 }
 
+@keyframes media-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.media-marquee-track {
+  animation: media-marquee 48s linear infinite;
+}
+
+.media-marquee:hover .media-marquee-track,
+.media-marquee:focus-within .media-marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-marquee-track {
+    animation: none;
+  }
+}
+
 @supports (animation-timeline: view()) {
   .animate-in {
     animation-fill-mode: both;

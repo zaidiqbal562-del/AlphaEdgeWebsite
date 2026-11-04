@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS admissions_applications (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  full_name VARCHAR(120) NOT NULL,
+  email VARCHAR(254) NOT NULL,
+  phone VARCHAR(30) NOT NULL,
+  city VARCHAR(100) NOT NULL,
+  qualification VARCHAR(150) NOT NULL,
+  programme VARCHAR(80) NOT NULL,
+  consent_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  INDEX admissions_applications_created_at_idx (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

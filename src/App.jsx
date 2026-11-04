@@ -18,6 +18,7 @@ import ProjectsPage from './pages/ProjectsPage';
 import CapstonePage from './pages/CapstonePage';
 import AlphaEdgeOneYearPage from './pages/AlphaEdgeOneYearPage';
 import GovernanceRiskPage from './pages/GovernanceRiskPage';
+import MediaPage from './pages/MediaPage';
 
 import './App.css';
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/governance-risk" element={<GovernanceRiskPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
+          <Route path="/media" element={<MediaPage />} />
           <Route path="/alphaedge-1Year" element={<AlphaEdgeOneYearPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/contact" element={<ContactPage />} />
