@@ -170,7 +170,7 @@ export default function HomePage() {
             <Reveal
               as="h1"
               delay={100}
-              className="max-w-4xl text-4xl font-black leading-[1.1] tracking-tight text-white drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl"
+              className="max-w-4xl text-balance text-3xl font-black leading-[1.1] tracking-tight text-white drop-shadow-lg sm:text-5xl md:text-6xl lg:text-7xl"
             >
               Build the next generation of market intelligence.
             </Reveal>
@@ -200,7 +200,7 @@ export default function HomePage() {
                   key={s.label}
                   className="rounded-xl border border-white/25 bg-slate-950/65 p-3 shadow-lg backdrop-blur-md sm:p-5"
                 >
-                  <div className="text-2xl font-black text-white sm:text-3xl">
+                  <div className="text-xl font-black text-white sm:text-3xl">
                     <NumberCounter target={s.target} duration={s.duration} suffix={s.suffix} />
                   </div>
                   <p className="mt-1.5 text-xs font-medium text-slate-200">{s.label}</p>

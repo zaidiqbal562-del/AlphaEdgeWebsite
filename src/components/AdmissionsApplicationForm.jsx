@@ -121,6 +121,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
                 <option value="AI-900">AI-900</option>
                 <option value="Algorithmic Trading">Algorithmic Trading</option>
                 <option value="AI and Trading">AI &amp; Trading</option>
+                <option value="AI and Trading">AI & Agents </option>
                 <option value="Not sure yet">Not sure yet</option>
               </select>
             </div>
