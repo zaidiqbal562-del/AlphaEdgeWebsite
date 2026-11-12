@@ -4,7 +4,7 @@ const SYMBOLS = [
   { proName: 'BSE:NIFTY', title: 'NIFTY 50' },
   { proName: 'BSE:BANKNIFTY', title: 'BANK NIFTY' },
   { proName: 'BSE:SENSEX', title: 'SENSEX' },
-  { proName: 'BSE:CNXIT', title: 'NIFTY IT' },
+  // { proName: 'BSE:CNXIT', title: 'NIFTY IT' },
   { proName: 'BSE:RELIANCE', title: 'Reliance' },
   { proName: 'BSE:HDFCBANK', title: 'HDFC Bank' },
   { proName: 'BSE:TCS', title: 'TCS' },
