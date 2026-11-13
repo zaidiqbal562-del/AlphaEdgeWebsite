@@ -202,10 +202,10 @@ export default function Footer() {
 
                 <ContactRow icon={<MailIcon />}>
                   <a
-                    href="mailto:info@stratneetiintl.in"
+                    href="mailto:info@alphaedge.net.in"
                     className={`break-all rounded-sm transition-colors hover:text-[#ee8238] ${focusRing}`}
                   >
-                    info@stratneetiintl.in
+                    info@alphaedge.net.in
                   </a>
                 </ContactRow>
               </ul>

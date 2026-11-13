@@ -72,7 +72,7 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <a
-                  href="mailto:info@stratneetiintl.in"
+                  href="mailto:info@alphaedge.net.in"
                   className="group flex items-start gap-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--background)] p-4 transition-all duration-200 hover:border-[var(--accent)] sm:p-5"
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[var(--surface)] text-[var(--accent)]">
@@ -97,7 +97,7 @@ export default function ContactPage() {
                       Email us
                     </p>
                     <p className="mt-1 break-all text-sm font-semibold text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)] sm:text-base">
-                      info@stratneetiintl.in
+                      info@alphaedge.net.in
                     </p>
                     <p className="mt-1 text-xs text-[var(--text-muted)]">
                       Send us your programme enquiries
