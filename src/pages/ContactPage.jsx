@@ -8,6 +8,7 @@ export default function ContactPage() {
       title="Contact | AlphaEdge"
       description="Contact AlphaEdge for admissions, programme enquiries and institutional learning partnerships."
     >
+      {/* Contact Page Header */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--text-muted)] sm:text-xs sm:tracking-[0.3em]">
@@ -26,16 +27,19 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+      {/* Contact Information and Admissions Form */}
+      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 sm:pb-16 lg:px-8">
         <div className="grid grid-cols-1 gap-5 sm:gap-6 lg:grid-cols-2">
 
           {/* Contact Information Card */}
           <div className="relative overflow-hidden rounded-[24px] border border-[var(--border-soft)] bg-[var(--surface)] p-6 sm:rounded-[28px] sm:p-8 lg:p-9">
 
-            {/* Decorative accent */}
+            {/* Decorative Accent */}
             <div className="absolute right-0 top-0 h-32 w-32 rounded-full bg-[var(--accent)] opacity-[0.06] blur-3xl" />
 
             <div className="relative">
+
+              {/* Card Heading */}
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-[var(--background)] text-[var(--accent)]">
                   <svg
@@ -57,6 +61,7 @@ export default function ContactPage() {
                   <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
                     Get in touch
                   </p>
+
                   <h2 className="mt-1 text-2xl font-bold tracking-[-0.04em] text-[var(--text-primary)] sm:text-3xl">
                     Contact details
                   </h2>
@@ -96,9 +101,11 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                       Email us
                     </p>
+
                     <p className="mt-1 break-all text-sm font-semibold text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)] sm:text-base">
                       info@alphaedge.net.in
                     </p>
+
                     <p className="mt-1 text-xs text-[var(--text-muted)]">
                       Send us your programme enquiries
                     </p>
@@ -134,9 +141,11 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                       Call us
                     </p>
+
                     <p className="mt-1 text-sm font-semibold text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)] sm:text-base">
                       +91 99993 67573
                     </p>
+
                     <p className="mt-1 text-xs text-[var(--text-muted)]">
                       Connect with our admissions team
                     </p>
@@ -170,12 +179,16 @@ export default function ContactPage() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                       Visit us
                     </p>
+
                     <p className="mt-1 text-sm font-semibold leading-6 text-[var(--text-primary)] sm:text-base">
                       AlphaEdge
                     </p>
+
                     <p className="mt-1 text-sm leading-6 text-[var(--text-secondary)]">
-                      1F-CS-56, Ansal Plaza Mall,<br />
-                      Sector-1, Vaishali,<br />
+                      1F-CS-56, Ansal Plaza Mall,
+                      <br />
+                      Sector-1, Vaishali,
+                      <br />
                       Ghaziabad, Uttar Pradesh – 201010
                     </p>
                   </div>
@@ -189,14 +202,80 @@ export default function ContactPage() {
                   the next step in your learning journey.
                 </p>
               </div>
+
             </div>
           </div>
 
-          {/* Admissions Form */}
+          {/* Admissions Application Form */}
           <AdmissionsApplicationForm compact />
 
         </div>
       </section>
+
+      {/* Google Maps Location Section */}
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 lg:px-8">
+
+        {/* Map Heading */}
+        <div className="mb-6 sm:mb-8">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[var(--text-muted)] sm:text-xs">
+            Find our location
+          </p>
+
+          <h2 className="mt-3 text-2xl font-black tracking-[-0.04em] text-[var(--text-primary)] sm:text-3xl md:text-4xl">
+            Visit AlphaEdge.
+          </h2>
+
+          <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--text-secondary)] sm:text-base">
+            We welcome students, professionals and institutional
+            partners to connect with us at our office in Vaishali,
+            Ghaziabad.
+          </p>
+        </div>
+
+        {/* Google Map */}
+        <div className="group relative overflow-hidden rounded-[24px] border border-[var(--border-soft)] bg-[var(--surface)] shadow-xl sm:rounded-[30px]">
+
+          <iframe
+            title="AlphaEdge Office Location - Google Maps"
+            src="https://www.google.com/maps?q=1F-CS-56%2C+Ansal+Plaza+Mall%2C+Sector-1%2C+Vaishali%2C+Ghaziabad%2C+Uttar+Pradesh+201010&output=embed"
+            width="100%"
+            height="420"
+            style={{ border: 0, display: 'block' }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+
+        </div>
+
+        {/* Directions Link */}
+        <div className="mt-5 flex flex-col gap-4 rounded-2xl border border-[var(--border-soft)] bg-[var(--surface)] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+
+          <div>
+            <h3 className="text-base font-bold text-[var(--text-primary)] sm:text-lg">
+              AlphaEdge Office
+            </h3>
+
+            <p className="mt-1 text-xs leading-6 text-[var(--text-secondary)] sm:text-sm">
+              Ansal Plaza Mall, Sector-1, Vaishali, Ghaziabad,
+              Uttar Pradesh – 201010
+            </p>
+          </div>
+
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=1F-CS-56%2C+Ansal+Plaza+Mall%2C+Sector-1%2C+Vaishali%2C+Ghaziabad%2C+Uttar+Pradesh+201010"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-white transition-all duration-200 hover:opacity-90"
+          >
+            Get Directions
+            <span aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+
+      </section>
+
     </Layout>
   );
 }
