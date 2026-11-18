@@ -1,3 +1,4 @@
+
 import Layout from '../layout/Layout';
 import NumberCounter from '../components/NumberCounter';
 import { T, Reveal, Section, SectionHeader, Banner } from '../components/ui';
@@ -5,6 +6,7 @@ import AdmissionsApplicationForm from '../components/AdmissionsApplicationForm';
 
 /* Where application emails go, and where the brochure lives. */
 const BROCHURE_PATH = '/alphaedge-1Year.html';
+
 const profiles = [
   ['Career changers', 'Professionals transitioning into quantitative finance and AI.'],
   ['Engineers moving into finance', 'Software engineers and data engineers seeking financial expertise.'],
@@ -23,8 +25,10 @@ const stats = [
 
 const primaryBtn =
   'inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-slate-950 transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]';
+
 const secondaryBtn =
   'inline-flex items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-6 py-3 text-sm font-semibold text-[var(--accent-strong)] transition-colors hover:bg-[var(--accent)]/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]';
+
 export default function AdmissionsPage() {
   return (
     <Layout
@@ -36,6 +40,7 @@ export default function AdmissionsPage() {
         <Reveal as="p" className={T.eyebrow}>
           Admissions
         </Reveal>
+
         <Reveal
           as="h1"
           delay={100}
@@ -43,14 +48,17 @@ export default function AdmissionsPage() {
         >
           Admissions for disciplined learners and builders
         </Reveal>
+
         <Reveal as="p" delay={200} className={`${T.lead} !max-w-3xl sm:!text-xl sm:!leading-8`}>
           AlphaEdge welcomes individuals and teams ready to study quantitative finance, applied AI and systematic
           market decision-making with seriousness and structure.
         </Reveal>
+
         <Reveal delay={300} className="mt-8 flex flex-col gap-3 sm:flex-row">
           <a href="#application" className={primaryBtn}>
             Apply now
           </a>
+
           <a href={BROCHURE_PATH} className={secondaryBtn}>
             Open brochure
           </a>
@@ -59,12 +67,18 @@ export default function AdmissionsPage() {
 
       {/* ============================ WHO SHOULD APPLY ============================ */}
       <Section alt>
-        <SectionHeader eyebrow="Who should apply" title="Four kinds of learner we build the programme for" />
+        <SectionHeader
+          eyebrow="Who should apply"
+          title="Four kinds of learner we build the programme for"
+        />
+
         <div className="grid gap-6 md:grid-cols-2">
           {profiles.map(([title, text], i) => (
             <Reveal key={title} delay={(i % 2) * 120} className={T.cardAlt}>
               <div className="mb-5 h-1 w-10 rounded-full bg-[var(--accent)]" />
+
               <h3 className={T.h3}>{title}</h3>
+
               <p className={T.body}>{text}</p>
             </Reveal>
           ))}
@@ -86,10 +100,17 @@ export default function AdmissionsPage() {
                 {stat.static ? (
                   stat.static
                 ) : (
-                  <NumberCounter target={stat.target} duration={stat.duration} suffix={stat.suffix} />
+                  <NumberCounter
+                    target={stat.target}
+                    duration={stat.duration}
+                    suffix={stat.suffix}
+                  />
                 )}
               </p>
-              <p className="mt-2 text-sm text-[var(--text-muted)]">{stat.label}</p>
+
+              <p className="mt-2 text-sm text-[var(--text-muted)]">
+                {stat.label}
+              </p>
             </Reveal>
           ))}
         </div>
@@ -101,19 +122,124 @@ export default function AdmissionsPage() {
         </Reveal>
 
         <Banner label="Next cohort">
-          <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">Book a consultation</h3>
+          <h3 className="text-2xl font-bold tracking-tight text-[var(--text-primary)]">
+            Book a consultation
+          </h3>
+
           <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text-secondary)]">
             Review fit, discuss programme scope and understand the learning pathway that best matches your goals.
           </p>
+
           <a href="#application" className={`${primaryBtn} mt-6`}>
             Apply now
           </a>
         </Banner>
       </Section>
 
+      {/* ============================ APPLICATION FORM ============================ */}
       <Section alt>
         <AdmissionsApplicationForm />
       </Section>
+
+      {/* ============================ GOOGLE MAPS LOCATION ============================ */}
+      <Section>
+        <div className="mx-auto max-w-7xl">
+
+          {/* Section Heading */}
+          <div className="mb-6">
+            <Reveal as="p" className={T.eyebrow}>
+              Find our location
+            </Reveal>
+
+            <Reveal
+              as="h2"
+              delay={100}
+              className="mt-2 text-2xl font-black tracking-[-0.04em] text-[var(--text-primary)] sm:text-3xl"
+            >
+              Visit AlphaEdge.
+            </Reveal>
+
+            <Reveal as="p" delay={200} className={`${T.body} mt-3 max-w-2xl`}>
+              We welcome students, professionals and institutional
+              partners to connect with us at our office in Vaishali,
+              Ghaziabad.
+            </Reveal>
+          </div>
+
+          {/* Compact Map and Location Card */}
+          <Reveal delay={250}>
+            <div className="grid grid-cols-1 gap-5 overflow-hidden rounded-[24px] border border-[var(--border-soft)] bg-[var(--surface)] p-3 sm:gap-6 sm:p-4 lg:grid-cols-[1.5fr_1fr] lg:items-stretch">
+
+              {/* Google Map */}
+              <div className="overflow-hidden rounded-[18px] border border-[var(--border-soft)]">
+                <iframe
+                  title="AlphaEdge Office Location - Google Maps"
+                  src="https://www.google.com/maps?q=1F-CS-56%2C+Ansal+Plaza+Mall%2C+Sector-1%2C+Vaishali%2C+Ghaziabad%2C+Uttar+Pradesh+201010&output=embed"
+                  width="100%"
+                  height="280"
+                  style={{ border: 0, display: 'block' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+
+              {/* Location Information */}
+              <div className="flex flex-col justify-center px-3 py-4 sm:px-5 lg:px-6">
+
+                {/* Location Icon */}
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--border-soft)] bg-[var(--background)] text-[var(--accent)]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="23"
+                    height="23"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                </div>
+
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-muted)]">
+                  Our Office
+                </p>
+
+                <h3 className="mt-2 text-xl font-bold text-[var(--text-primary)] sm:text-2xl">
+                  AlphaEdge
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-[var(--text-secondary)]">
+                  1F-CS-56, Ansal Plaza Mall,
+                  <br />
+                  Sector-1, Vaishali,
+                  <br />
+                  Ghaziabad, Uttar Pradesh – 201010
+                </p>
+
+                {/* Directions */}
+                <div className="mt-5 border-t border-[var(--border-soft)] pt-5">
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=1F-CS-56%2C+Ansal+Plaza+Mall%2C+Sector-1%2C+Vaishali%2C+Ghaziabad%2C+Uttar+Pradesh+201010"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
+                  >
+                    Get Directions
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </Section>
+
     </Layout>
   );
 }
