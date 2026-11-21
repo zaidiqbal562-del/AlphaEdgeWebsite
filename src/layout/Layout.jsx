@@ -22,6 +22,7 @@ const navigation = [
   // { label: 'Careers', href: '/careers' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Media', href: '/media' },
+  
   // { label: 'FAQ', href: '/faq' },
   // { label: 'Contact', href: '/contact' },
 ];
