@@ -17,6 +17,7 @@ const columns = [
 			{ label: 'All programmes', to: '/programmes' },
 			{ label: 'AI & Agents in Finance', to: '/programmes/ai-agents-finance' },
 			{ label: 'Master Programme in AI/ML for Trading & Investment', to: '/programmes/master-programme' },
+			{ label: 'Applied Options & Trading Strategies', to: '/programmes/applied-options' },
 			{ label: 'Curriculum', to: '/programmes/master-programme#curriculum' },
 		],
 	},

@@ -225,6 +225,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
                 <option value="">Select a programme</option>
                 <option value="Master Programme in AI/ML for Trading and Investment">Master Programme in AI/ML for Trading and Investment</option>
                 <option value="Algorithmic Trading">Algorithmic Trading</option>
+                <option value="Applied Options & Trading Strategies with Derivative Analytics">Applied Options & Trading Strategies with Derivative Analytics</option>
               </select>
             </div>
           </div>
@@ -243,7 +244,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
               className="block w-full rounded-xl border border-[var(--border-soft)] bg-[var(--surface-strong)] text-sm text-[var(--text-muted)] file:mr-4 file:border-0 file:bg-[var(--accent)] file:px-4 file:py-3 file:text-sm file:font-semibold file:text-slate-950"
             />
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              {application.resume ? `Selected: ${application.resume.name}` : 'Choose a PDF, DOC, or DOCX file (maximum 5 MB).'}
+              {application.resume ? `Selected: ${application.resume.name}` : 'Choose a PDF file '}
             </p>
           </div>
 

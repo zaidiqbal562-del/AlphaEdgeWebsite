@@ -9,6 +9,7 @@ import AboutPage from './pages/AboutPage';
 import ProgrammesPage from './pages/ProgrammesPage';
 import ProgrammeAi900Page from './pages/ProgrammeAi900Page';
 import ProgrammeAiAgentsFinancePage from './pages/ProgrammeAiAgentsFinancePage';
+import AppliedOptionsProgrammePage from './pages/AppliedOptionsProgrammePage';
 import AlgoTradingPage from './pages/AlgoTradingPage';
 import AIandTrading from './pages/AIandTrading';
 import CareersPage from './pages/CareersPage';
@@ -21,6 +22,7 @@ import AlphaEdgeOneYearPage from './pages/AlphaEdgeOneYearPage';
 import GovernanceRiskPage from './pages/GovernanceRiskPage';
 import MediaPage from './pages/MediaPage';
 import EnquiriesViewPage from './pages/EnquiriesViewPage';
+import AuthPage from './pages/AuthPage';
 
 import './App.css';
 
@@ -43,6 +45,7 @@ function App() {
           <Route path="/programmes" element={<ProgrammesPage />} />
           <Route path="/programmes/master-programme" element={<ProgrammeAi900Page />} />
           <Route path="/programmes/ai-agents-finance" element={<ProgrammeAiAgentsFinancePage />} />
+          <Route path="/programmes/applied-options" element={<AppliedOptionsProgrammePage />} />
           <Route path="/algorithm" element={<AlgoTradingPage />} />
           <Route path="/ai-and-trading" element={<AIandTrading />} />
           <Route path="/governance-risk" element={<GovernanceRiskPage />} />
@@ -52,11 +55,14 @@ function App() {
           <Route path="/alphaedge-1Year" element={<AlphaEdgeOneYearPage />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<AuthPage mode="login" />} />
+          <Route path="/signup" element={<AuthPage mode="signup" />} />
           <Route path="/enquiries_view" element={<EnquiriesViewPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/capstone" element={<CapstonePage />} />
           <Route path="/old-master-programme-route" element={<Navigate to="/new-master-programme-route" replace />} />
           <Route path="/programmes/ai-900" element={<Navigate to="/programmes/master-programme" replace />} />
+          <Route path="/auth" element={<AuthPage />} />
         </Routes>
       </Router>
     </HelmetProvider>

@@ -14,6 +14,7 @@ const navigation = [
       { label: 'All Programmes', href: '/programmes' },
       { label: 'Master Programme in AI/ML for Trading & Investment', href: '/programmes/master-programme' },
       { label: 'AI & Agents in Finance', href: '/programmes/ai-agents-finance' },
+      { label: 'Applied Options & Trading Strategies', href: '/programmes/applied-options' },
     ],
   },
   { label: 'Algorithms', href: '/algorithm' },
@@ -22,6 +23,7 @@ const navigation = [
   // { label: 'Careers', href: '/careers' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Media', href: '/media' },
+  // { label: 'Login', href: '/login' },
   
   // { label: 'FAQ', href: '/faq' },
   // { label: 'Contact', href: '/contact' },
@@ -54,6 +56,38 @@ export default function Layout({ title, description, keywords, children }) {
   // ================= MOBILE PROGRAMMES =================
 
   const [mobileProgrammesOpen, setMobileProgrammesOpen] = useState(false);
+  const [authUser, setAuthUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('alphaedge_auth') || '{}').user || null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    fetch('/api/auth', { credentials: 'include' })
+      .then((response) => response.ok ? response.json() : null)
+      .then((result) => {
+        if (result?.user) {
+          setAuthUser(result.user);
+        } else {
+          setAuthUser(null);
+          localStorage.removeItem('alphaedge_auth');
+        }
+      })
+      .catch(() => {});
+  }, [location.pathname]);
+
+  const logout = async () => {
+    await fetch('/api/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ action: 'logout' }),
+    }).catch(() => {});
+    localStorage.removeItem('alphaedge_auth');
+    setAuthUser(null);
+  };
 
   // ================= THEME EFFECT =================
 
@@ -267,6 +301,26 @@ export default function Layout({ title, description, keywords, children }) {
 
             <div className="flex items-center gap-3">
 
+              {/* ================= SIGN IN / USER ================= */}
+
+              {authUser ? (
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="hidden max-w-32 truncate rounded-full border border-[var(--border-soft)] px-3 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var,--accent] sm:block"
+                  title={`${authUser.name} · ${authUser.role} — Sign out`}
+                >
+                  Sign out
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="hidden rounded-full border border-[var(--border-soft)] px-3 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var,--accent] sm:inline-flex"
+                >
+                  Login
+                </Link>
+              )}
+
               {/* ================= THEME TOGGLE ================= */}
 
             {/* ================= THEME TOGGLE ================= */}
@@ -423,7 +477,7 @@ export default function Layout({ title, description, keywords, children }) {
                             className={`flex flex-1 items-center rounded-xl px-4 py-3.5 text-sm font-medium transition-all duration-200 ${
                               isActive
                                 ? 'bg-[var(--accent)]/10 text-[var(--accent)]'
-                                : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--accent)]'
+                                : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var,--accent]'
                             }`}
                           >
                             {item.label}
@@ -441,7 +495,7 @@ export default function Layout({ title, description, keywords, children }) {
                             className={`ml-1 flex h-12 w-12 items-center justify-center rounded-xl text-sm transition-all duration-200 ${
                               isActive
                                 ? 'text-[var(--accent)]'
-                                : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--accent)]'
+                                : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var,--accent]'
                             }`}
                             aria-label="Toggle programmes submenu"
                             aria-expanded={mobileProgrammesOpen}
@@ -482,7 +536,7 @@ export default function Layout({ title, description, keywords, children }) {
                                   className={`flex items-center rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
                                     subActive
                                       ? 'text-[var(--accent)]'
-                                      : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--accent)]'
+                                      : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var,--accent]'
                                   }`}
                                 >
                                   {subitem.label}
@@ -506,7 +560,7 @@ export default function Layout({ title, description, keywords, children }) {
                       className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-medium transition-all duration-200 ${
                         isActive
                           ? 'bg-[var(--accent)]/10 text-[var(--accent)]'
-                          : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var(--accent)]'
+                          : 'text-[var(--text-secondary)] hover:bg-[var(--surface)] hover:text-[var,--accent]'
                       }`}
                     >
                       <span>{item.label}</span>
@@ -525,6 +579,25 @@ export default function Layout({ title, description, keywords, children }) {
                 })}
 
               </nav>
+
+              {/* ================= SIGN IN / USER ================= */}
+
+              {authUser ? (
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="mt-4 flex w-full items-center justify-center rounded-full border border-[var(--border-soft)] px-6 py-3.5 text-sm font-semibold text-[var(--text-secondary)]"
+                >
+                  Sign out · {authUser.name}
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="mt-4 flex w-full items-center justify-center rounded-full border border-[var(--border-soft)] px-6 py-3.5 text-sm font-semibold text-[var(--text-secondary)]"
+                >
+                  Login / Sign up
+                </Link>
+              )}
 
               {/* ================= MOBILE APPLY ================= */}
 
