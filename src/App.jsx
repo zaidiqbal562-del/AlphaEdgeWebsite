@@ -23,6 +23,7 @@ import GovernanceRiskPage from './pages/GovernanceRiskPage';
 import MediaPage from './pages/MediaPage';
 import EnquiriesViewPage from './pages/EnquiriesViewPage';
 import AuthPage from './pages/AuthPage';
+import AdminDashboardPage from './pages/AdminDashboardPage';
 
 import './App.css';
 
@@ -58,11 +59,11 @@ function App() {
           <Route path="/login" element={<AuthPage mode="login" />} />
           <Route path="/signup" element={<AuthPage mode="signup" />} />
           <Route path="/enquiries_view" element={<EnquiriesViewPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/capstone" element={<CapstonePage />} />
+          <Route path="/admin" element={<AdminDashboardPage />} />
           <Route path="/old-master-programme-route" element={<Navigate to="/new-master-programme-route" replace />} />
           <Route path="/programmes/ai-900" element={<Navigate to="/programmes/master-programme" replace />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
         </Routes>
       </Router>
     </HelmetProvider>

@@ -304,7 +304,16 @@ export default function Layout({ title, description, keywords, children }) {
               {/* ================= SIGN IN / USER ================= */}
 
               {authUser ? (
-                <button
+                <>
+                  {authUser.role === 'admin' && (
+                    <Link
+                      to="/admin"
+                      className="hidden rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-3 py-2 text-xs font-semibold text-[var(--accent)] transition hover:bg-[var(--accent)]/15 sm:inline-flex"
+                    >
+                      Admin
+                    </Link>
+                  )}
+                  <button
                   type="button"
                   onClick={logout}
                   className="hidden max-w-32 truncate rounded-full border border-[var(--border-soft)] px-3 py-2 text-xs font-semibold text-[var(--text-secondary)] transition hover:border-[var(--accent)] hover:text-[var,--accent] sm:block"
@@ -312,6 +321,7 @@ export default function Layout({ title, description, keywords, children }) {
                 >
                   Sign out
                 </button>
+                </>
               ) : (
                 <Link
                   to="/login"
@@ -583,13 +593,23 @@ export default function Layout({ title, description, keywords, children }) {
               {/* ================= SIGN IN / USER ================= */}
 
               {authUser ? (
-                <button
-                  type="button"
-                  onClick={logout}
-                  className="mt-4 flex w-full items-center justify-center rounded-full border border-[var(--border-soft)] px-6 py-3.5 text-sm font-semibold text-[var(--text-secondary)]"
-                >
-                  Sign out · {authUser.name}
-                </button>
+                <>
+                  {authUser.role === 'admin' && (
+                    <Link
+                      to="/admin"
+                      className="mt-4 flex w-full items-center justify-center rounded-full border border-[var(--accent)]/40 bg-[var(--accent)]/10 px-6 py-3.5 text-sm font-semibold text-[var(--accent)]"
+                    >
+                      Admin Dashboard
+                    </Link>
+                  )}
+                  <button
+                    type="button"
+                    onClick={logout}
+                    className="mt-3 flex w-full items-center justify-center rounded-full border border-[var(--border-soft)] px-6 py-3.5 text-sm font-semibold text-[var(--text-secondary)]"
+                  >
+                    Sign out · {authUser.name}
+                  </button>
+                </>
               ) : (
                 <Link
                   to="/login"
