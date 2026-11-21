@@ -1,6 +1,6 @@
 export const ai900ProgrammeData = {
-  code: 'AI-900',
-  title: 'Master Programme in Applied Artificial Intelligence for Financial Systems',
+  code: 'MASTER-PROGRAMME',
+  title: 'Master Programme in AI/ML for Trading and Investment',
   duration: '52 weeks · 4 terms',
   load: '20–22 hrs/week · 1,100 hours',
   modules: '13 · plus 17-week capstone',

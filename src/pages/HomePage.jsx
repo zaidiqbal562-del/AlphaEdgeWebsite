@@ -3,6 +3,7 @@ import Layout from '../layout/Layout';
 import NumberCounter from '../components/NumberCounter';
 import { T as BaseT, Reveal, Section, SectionHeader, Check } from '../components/ui';
 import { ChartCard, TermTimeline } from '../components/Ai900Charts';
+// import MarketTicker from '../components/MarketTicker';
 import {
   RegulatoryTimeline,
   AlgoThresholdMeter,
@@ -186,8 +187,8 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={300} className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <Link to="/programmes/ai-900" className={T.btnPrimary}>
-                Explore AI-900
+              <Link to="/programmes/master-programme" className={T.btnPrimary}>
+                Explore Master Programme
               </Link>
               <Link to="/contact" className={T.btnSecondary}>
                 Book a consultation
@@ -210,7 +211,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+              {/* <MarketTicker /> */}
       {/* ============================ ABOUT ============================ */}
       <Section>
         <SectionHeader eyebrow="About AlphaEdge" title="Industry depth meets research rigor" />
@@ -411,7 +412,7 @@ export default function HomePage() {
           eyebrow="Research desk"
           title="Fresh thinking from the lab"
           action={
-            <Link to="/programmes/ai-900" className="text-sm font-semibold text-[var(--accent-strong)] hover:underline">
+            <Link to="/programmes/master-programme" className="text-sm font-semibold text-[var(--accent-strong)] hover:underline">
               Read more
             </Link>
           }

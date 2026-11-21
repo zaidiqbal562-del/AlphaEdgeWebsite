@@ -3,7 +3,7 @@ import Layout from '../layout/Layout';
 const faqs = [
   {
     question: 'What is the time commitment?',
-    answer: 'The AI-900 programme is a 52-week full-time immersive course. Participants are expected to commit 30-40 hours per week of structured learning, projects and mentorship.'
+    answer: 'The Master Programme in AI/ML for Trading and Investment is a 52-week full-time immersive course. Participants are expected to commit 30-40 hours per week of structured learning, projects and mentorship.'
   },
   {
     question: 'What is the prerequisite experience?',

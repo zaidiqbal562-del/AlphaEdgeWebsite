@@ -40,6 +40,31 @@ export default function EnquiriesViewPage() {
     setError('');
   };
 
+  const downloadResume = async (application) => {
+    setError('');
+    try {
+      const response = await fetch(`/api/admissions?resume=${application.id}`, {
+        headers: { Authorization: `Bearer ${accessKey}` },
+      });
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        throw new Error(result.error || 'Could not download resume.');
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = application.resume_filename || 'resume';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (downloadError) {
+      setError(downloadError.message || 'Could not download resume.');
+    }
+  };
+
   return (
     <Layout
       title="Admissions Enquiries | AlphaEdge"
@@ -114,7 +139,15 @@ export default function EnquiriesViewPage() {
                       <td className="px-4 py-3">{application.qualification}</td>
                       <td className="whitespace-nowrap px-4 py-3">{application.programme}</td>
                       <td className="px-4 py-3">
-                        {application.resume_url ? (
+                        {application.resume_filename ? (
+                          <button
+                            type="button"
+                            onClick={() => downloadResume(application)}
+                            className="text-[var(--accent)] underline hover:text-[var(--accent-strong)]"
+                          >
+                            {application.resume_filename}
+                          </button>
+                        ) : application.resume_url ? (
                           <a href={application.resume_url} target="_blank" rel="noreferrer" className="text-[var(--accent)] underline">
                             Open resume
                           </a>

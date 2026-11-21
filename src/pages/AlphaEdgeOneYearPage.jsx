@@ -39,10 +39,10 @@ export default function AlphaEdgeOneYearPage() {
   return (
     <>
       <Helmet>
-        <title>AlphaEdge AI-900 Brochure</title>
+        <title>AlphaEdge Master Programme in AI/ML for Trading and Investment Brochure</title>
         <meta
           name="description"
-          content="AlphaEdge AI-900 brochure — a 52-week master programme in applied artificial intelligence for financial systems."
+          content="AlphaEdge Master Programme in AI/ML for Trading and Investment — a 52-week programme covering applied AI, machine learning and quantitative finance."
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

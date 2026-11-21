@@ -94,7 +94,7 @@ export default function CareersPage() {
       setFormData(emptyForm);
       setFileKey((k) => k + 1);
     } catch {
-      setError('We could not send your application. Please try again, or email hello@alphaedge.in.');
+      setError('We could not send your application. Please try again, or email info@alphaedge.net.in');
     } finally {
       setLoading(false);
     }

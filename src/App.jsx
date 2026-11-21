@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from '@vercel/analytics/react';
 import { useEffect, useState } from 'react';
@@ -41,7 +41,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/programmes" element={<ProgrammesPage />} />
-          <Route path="/programmes/ai-900" element={<ProgrammeAi900Page />} />
+          <Route path="/programmes/master-programme" element={<ProgrammeAi900Page />} />
           <Route path="/programmes/ai-agents-finance" element={<ProgrammeAiAgentsFinancePage />} />
           <Route path="/algorithm" element={<AlgoTradingPage />} />
           <Route path="/ai-and-trading" element={<AIandTrading />} />
@@ -55,6 +55,8 @@ function App() {
           <Route path="/enquiries_view" element={<EnquiriesViewPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/capstone" element={<CapstonePage />} />
+          <Route path="/old-master-programme-route" element={<Navigate to="/new-master-programme-route" replace />} />
+          <Route path="/programmes/ai-900" element={<Navigate to="/programmes/master-programme" replace />} />
         </Routes>
       </Router>
     </HelmetProvider>

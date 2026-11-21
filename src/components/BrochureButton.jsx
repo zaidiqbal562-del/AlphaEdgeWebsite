@@ -2,7 +2,7 @@ export default function BrochureButton() {
   return (
  <a 
   href="/alphaedge-1Year.html" 
-  download="AlphaEdge-AI-900-Brochure.html" 
+  download="AlphaEdge-Master-Programme-AIML-Brochure.html" 
   className="inline-flex items-center gap-2 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-75"
 >
   <svg 

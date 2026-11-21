@@ -80,8 +80,8 @@ export default function AboutPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--text-muted)]">Next step</p>
               <h2 className="mt-3 text-3xl font-bold tracking-[-0.06em] text-[var(--text-primary)]">See the flagship programme.</h2>
             </div>
-            <Link to="/programmes/ai-900" className="inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.35)]">
-              Explore AI-900
+            <Link to="/programmes/master-programme" className="inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-slate-950 shadow-[0_0_30px_rgba(16,185,129,0.35)]">
+              Explore Master Programme
             </Link>
           </div>
         </div>

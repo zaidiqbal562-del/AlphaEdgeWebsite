@@ -1,4 +1,3 @@
-
 import Layout from '../layout/Layout';
 import NumberCounter from '../components/NumberCounter';
 import { T, Reveal, Section, SectionHeader, Banner } from '../components/ui';
@@ -89,7 +88,7 @@ export default function AdmissionsPage() {
       <Section>
         <SectionHeader
           eyebrow="Curriculum overview"
-          title="The AI-900 programme at a glance"
+          title="The Master Programme in AI/ML for Trading and Investment at a glance"
           description="The brochure covers the programme structure, curriculum breakdown, assessment method and learning outcomes."
         />
 

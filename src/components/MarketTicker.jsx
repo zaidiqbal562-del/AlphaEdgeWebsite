@@ -1,8 +1,8 @@
 import { useEffect, useRef, memo } from 'react';
 
 const SYMBOLS = [
-  { proName: 'BSE:NIFTY', title: 'NIFTY 50' },
-  { proName: 'BSE:BANKNIFTY', title: 'BANK NIFTY' },
+  // { proName: 'BSE:NIFTY', title: 'NIFTY 50' },
+  // { proName: 'BSE:BANKNIFTY', title: 'BANK NIFTY' },
   { proName: 'BSE:SENSEX', title: 'SENSEX' },
   // { proName: 'BSE:CNXIT', title: 'NIFTY IT' },
   { proName: 'BSE:RELIANCE', title: 'Reliance' },

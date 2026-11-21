@@ -116,8 +116,8 @@ export default function ProgrammeAi900Page() {
 
   return (
     <Layout
-      title="AI-900 | AlphaEdge"
-      description="AI-900 is AlphaEdge's flagship 52-week applied AI and quantitative finance programme, covering market foundations, machine learning, deep learning, LLMs, RAG, agentic systems and governance."
+      title="Master Programme in AI/ML for Trading and Investment | AlphaEdge"
+      description="AlphaEdge's 52-week Master Programme in AI/ML for Trading and Investment covers market foundations, machine learning, deep learning, generative AI, agentic systems and governance."
     >
       {/* ============================ HERO ============================ */}
       <Section>

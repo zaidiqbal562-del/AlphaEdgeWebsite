@@ -4,7 +4,7 @@ import BrochureButton from '../components/BrochureButton';
 
 const programmes = [
   {
-    title: 'AI-900 — Master Programme in Applied Artificial Intelligence for Financial Systems',
+    title: 'Master Programme in AI/ML for Trading and Investment',
     summary:
       '52-week flagship programme. Machine learning, deep learning, generative AI, retrieval architectures, MCP, agentic systems, production engineering and governance — taught completely, in sequence, with nothing assumed and nothing skipped.',
     focus: 'Applied AI for market-facing financial systems and decision support.',
@@ -12,7 +12,7 @@ const programmes = [
     delivery: '13 modules across 52 weeks, with 1,100 hours covering engineering, modelling and governance.',
     outcome: 'A complete capability stack for building and managing AI systems in finance.',
     result: 'A practical, production-oriented AI skillset for modern financial systems.',
-    href: '/programmes/ai-900',
+    href: '/programmes/master-programme',
     badge: 'Flagship programme',
     stats: {
       weeks: 52,

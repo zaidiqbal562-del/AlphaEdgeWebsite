@@ -1,6 +1,12 @@
 import { timingSafeEqual } from 'node:crypto';
 import mysql from 'mysql2/promise';
 
+const resumeTypes = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+];
+
 let pool;
 
 function getPool() {
@@ -55,9 +61,38 @@ export default async function handler(req, res) {
 
     try {
       const database = getPool();
+      const resumeId = req.query?.resume;
+
+      if (resumeId) {
+        const id = Number(resumeId);
+        if (!Number.isSafeInteger(id) || id < 1) {
+          return res.status(400).json({ error: 'Invalid resume request.' });
+        }
+
+        const [rows] = await database.execute(
+          `SELECT resume_filename, resume_mime_type, resume_data
+           FROM admissions_applications
+           WHERE id = ? LIMIT 1`,
+          [id],
+        );
+
+        if (!rows.length || !rows[0].resume_data) {
+          return res.status(404).json({ error: 'Resume not found.' });
+        }
+
+        const mimeType = resumeTypes.includes(rows[0].resume_mime_type)
+          ? rows[0].resume_mime_type
+          : 'application/octet-stream';
+        const filename = String(rows[0].resume_filename || 'resume').replace(/[\r\n"]/g, '_');
+        res.setHeader('Content-Type', mimeType);
+        res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Cache-Control', 'private, no-store');
+        return res.status(200).send(Buffer.from(rows[0].resume_data));
+      }
+
       const [applications] = await database.execute(
         `SELECT id, full_name, email, phone, city, qualification, programme,
-                resume_url, created_at
+                resume_url, resume_filename, resume_mime_type, created_at
          FROM admissions_applications
          ORDER BY created_at DESC
          LIMIT 100`,
@@ -99,7 +134,7 @@ export default async function handler(req, res) {
   const resumeUrl = text(body.resumeUrl, 1000);
 
   const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(application.email);
-  const validPhone = /^[+\d\s().-]{7,30}$/.test(application.phone);
+  const validPhone = /^\+[1-9]\d{6,14}$/.test(application.phone);
   const requiredFields = Object.values(application).every(Boolean);
   let validResumeUrl = true;
 
@@ -115,12 +150,35 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Check the required fields and consent, then try again.' });
   }
 
+  let resumeBuffer = null;
+  let resumeFilename = null;
+  let resumeMimeType = null;
+
+  if (body.resume) {
+    const filename = text(body.resume.filename, 255);
+    const mimeType = text(body.resume.mimeType, 100);
+    const data = typeof body.resume.data === 'string' ? body.resume.data : '';
+
+    if (!filename || !resumeTypes.includes(mimeType) || !/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(data)) {
+      return res.status(400).json({ error: 'The resume must be a valid PDF, DOC, or DOCX file.' });
+    }
+
+    resumeBuffer = Buffer.from(data, 'base64');
+    if (resumeBuffer.length === 0 || resumeBuffer.length > 5 * 1024 * 1024) {
+      return res.status(400).json({ error: 'Resume must be smaller than 5 MB.' });
+    }
+
+    resumeFilename = filename.replace(/[\r\n/"]/g, '_');
+    resumeMimeType = mimeType;
+  }
+
   try {
     const database = getPool();
     await database.execute(
       `INSERT INTO admissions_applications
-        (full_name, email, phone, city, qualification, programme, resume_url)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        (full_name, email, phone, city, qualification, programme,
+         resume_url, resume_filename, resume_mime_type, resume_data)
+       VALUES (?, ?, ?, ?, ?, ?, NULL, ?, ?, ?)`,
       [
         application.fullName,
         application.email,
@@ -128,7 +186,9 @@ export default async function handler(req, res) {
         application.city,
         application.qualification,
         application.programme,
-        resumeUrl || null,
+        resumeFilename,
+        resumeMimeType,
+        resumeBuffer,
       ],
     );
 

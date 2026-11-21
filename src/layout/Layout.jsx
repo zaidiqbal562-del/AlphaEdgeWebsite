@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../components/Footer';
+import MarketTicker from '../components/MarketTicker';
 
 const navigation = [
   { label: 'Home', href: '/' },
@@ -11,18 +12,18 @@ const navigation = [
     href: '/programmes',
     submenu: [
       { label: 'All Programmes', href: '/programmes' },
-      { label: 'AI-900', href: '/programmes/ai-900' },
+      { label: 'Master Programme in AI/ML for Trading & Investment', href: '/programmes/master-programme' },
       { label: 'AI & Agents in Finance', href: '/programmes/ai-agents-finance' },
     ],
   },
   { label: 'Algorithms', href: '/algorithm' },
   { label: 'AI & Trading', href: '/ai-and-trading' },
   { label: 'Governance & Risk', href: '/governance-risk' },
-  { label: 'Careers', href: '/careers' },
+  // { label: 'Careers', href: '/careers' },
   { label: 'Admissions', href: '/admissions' },
   { label: 'Media', href: '/media' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Contact', href: '/contact' },
+  // { label: 'FAQ', href: '/faq' },
+  // { label: 'Contact', href: '/contact' },
 ];
 
 export default function Layout({ title, description, keywords, children }) {
@@ -145,7 +146,7 @@ export default function Layout({ title, description, keywords, children }) {
         {/* HEADER */}
         {/* ====================================================== */}
 
-        <header className="sticky top-0 z-50 border-b border-[var(--border-soft)] bg-[var(--surface-strong)]/90 backdrop-blur-xl">
+        <header className="sticky top-0 z-50 border-b border-[var(--border-soft)] bg-[#e5e7eb]/95 backdrop-blur-xl">
 
           {/* ================= HEADER CONTAINER ================= */}
 
@@ -542,7 +543,7 @@ export default function Layout({ title, description, keywords, children }) {
         {/* ====================================================== */}
         {/* MAIN */}
         {/* ====================================================== */}
-
+        <MarketTicker/>
         <main>{children}</main>
 
         {/* ====================================================== */}
