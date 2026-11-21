@@ -79,6 +79,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
     const email = application.email.trim().toLowerCase();
     const city = application.city.trim();
     const qualification = application.qualification.trim();
+    const website = event.currentTarget.elements.website.value;
 
     if (fullName.length < 2) {
       setError('Please enter your full name.');
@@ -126,7 +127,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
           programme: application.programme,
           resume,
           consent: application.consent,
-          website: event.currentTarget.elements.website.value,
+          website,
         }),
       });
       const result = await response.json().catch(() => ({}));
