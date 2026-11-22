@@ -24,6 +24,7 @@ import MediaPage from './pages/MediaPage';
 import EnquiriesViewPage from './pages/EnquiriesViewPage';
 import AuthPage from './pages/AuthPage';
 import AdminDashboardPage from './pages/AdminDashboardPage';
+import LibraryResourcesPage from './pages/LibraryResourcesPage';
 
 import './App.css';
 
@@ -60,6 +61,7 @@ function App() {
           <Route path="/signup" element={<AuthPage mode="signup" />} />
           <Route path="/enquiries_view" element={<EnquiriesViewPage />} />
           <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/library-resources" element={<LibraryResourcesPage />} />
           <Route path="/old-master-programme-route" element={<Navigate to="/new-master-programme-route" replace />} />
           <Route path="/programmes/ai-900" element={<Navigate to="/programmes/master-programme" replace />} />
           <Route path="/auth" element={<AuthPage />} />
