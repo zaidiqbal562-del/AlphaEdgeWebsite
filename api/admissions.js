@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import mysql from 'mysql2/promise';
+import nodemailer from 'nodemailer';
 
 const resumeTypes = [
   'application/pdf',
@@ -51,6 +52,57 @@ function hasAdminAccess(req) {
   const provided = Buffer.from(authorization.slice(7));
   const expected = Buffer.from(expectedToken);
   return provided.length === expected.length && timingSafeEqual(provided, expected);
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+async function sendApplicationAcknowledgement(application) {
+  const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS } = process.env;
+
+  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
+    throw new Error('SMTP environment variables are not configured.');
+  }
+
+  const transport = nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: Number(SMTP_PORT),
+    secure: ['true', '1', 'yes'].includes(String(SMTP_SECURE).toLowerCase()),
+    auth: {
+      user: SMTP_USER,
+      pass: SMTP_PASS,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  });
+
+  const fromName = process.env.SMTP_FROM_NAME || 'AlphaEdge Admissions';
+  const fromAddress = process.env.SMTP_FROM || SMTP_USER;
+  const safeName = escapeHtml(application.fullName);
+  const safeProgramme = escapeHtml(application.programme);
+
+  await transport.sendMail({
+    from: `"${fromName}" <${fromAddress}>`,
+    to: application.email,
+    subject: `Application received — ${application.programme}`,
+    text: `Dear ${application.fullName},\n\nThank you for applying to ${application.programme} at AlphaEdge.\n\nWe have received your application and our admissions team will review your details and contact you soon within 24 hours .\n\nBest regards,\nAlphaEdge Admissions Team`,
+    html: `
+      <div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;color:#0f172a;line-height:1.6">
+        <h2 style="color:#059669">Application Received</h2>
+        <p>Dear ${safeName},</p>
+        <p>Thank you for applying to <strong>${safeProgramme}</strong> at AlphaEdge.</p>
+        <p>We have received your application and our admissions team will review your details and contact you soon.</p>
+        <p>Best regards,<br><strong>AlphaEdge Admissions Team</strong></p>
+      </div>
+    `,
+  });
 }
 
 export default async function handler(req, res) {
@@ -192,7 +244,15 @@ export default async function handler(req, res) {
       ],
     );
 
-    return res.status(201).json({ success: true });
+    let emailSent = false;
+    try {
+      await sendApplicationAcknowledgement(application);
+      emailSent = true;
+    } catch (mailError) {
+      console.error('Admissions acknowledgement email could not be sent:', mailError.message);
+    }
+
+    return res.status(201).json({ success: true, emailSent });
   } catch (error) {
     console.error('Admissions application could not be saved:', error.message);
     const status = error.message.includes('environment is not configured') ? 503 : 500;

@@ -25,7 +25,7 @@ export default function LibraryResourcesPage() {
         <SectionHeader
           eyebrow="Library resources"
           title="Library Resources"
-          description="The Fintech SDE Roadmap PDF is public; additional resources are available to enrolled students."
+          description="Additional resources are available to enrolled students."
         />
 
         <div className="grid gap-8 lg:grid-cols-2">
@@ -56,7 +56,7 @@ export default function LibraryResourcesPage() {
 
           {isStudent ? (
             <Reveal className={T.cardAlt} delay={100}>
-              <p className={T.eyebrow}>Student resource image</p>
+              <p className={T.eyebrow}>Enrolled Student resources </p>
               <h2 className="mt-2 text-2xl font-bold text-[var(--text-primary)]">
                 Shanghai Futures Exchange
               </h2>

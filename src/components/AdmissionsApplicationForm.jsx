@@ -28,6 +28,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
   const [application, setApplication] = useState(emptyApplication);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const [error, setError] = useState('');
   const [resumeKey, setResumeKey] = useState(0);
 
@@ -73,6 +74,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
     event.preventDefault();
     setSubmitting(true);
     setSubmitted(false);
+    setEmailSent(false);
     setError('');
 
     const fullName = application.fullName.trim();
@@ -139,6 +141,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
       setApplication(emptyApplication);
       setResumeKey((key) => key + 1);
       setSubmitted(true);
+      setEmailSent(result.emailSent === true);
     } catch (submissionError) {
       setError(submissionError.message || 'We could not submit your application. Please try again.');
     } finally {
@@ -158,6 +161,7 @@ export default function AdmissionsApplicationForm({ compact = false }) {
         {submitted && (
           <p role="status" className="mb-6 rounded-xl border border-[var(--accent)]/40 bg-[var(--accent)]/10 p-4 text-sm leading-6 text-[var(--text-primary)]">
             Thank you. Your application has been received by the AlphaEdge admissions team.
+            {emailSent && ' A confirmation email has also been sent to your email address.'}
           </p>
         )}
         {error && (
