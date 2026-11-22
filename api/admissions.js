@@ -92,14 +92,32 @@ async function sendApplicationAcknowledgement(application) {
     from: `"${fromName}" <${fromAddress}>`,
     to: application.email,
     subject: `Application received — ${application.programme}`,
-    text: `Dear ${application.fullName},\n\nThank you for applying to ${application.programme} at AlphaEdge.\n\nWe have received your application and our admissions team will review your details and contact you soon within 24 hours .\n\nBest regards,\nAlphaEdge Admissions Team`,
+    text: `Dear ${application.fullName},\n\nThank you for applying to ${application.programme} at AlphaEdge.\n\nWe have received your application and our admissions team will review your details and contact you soon within 24 hours .\n\nBest regards,\nAlphaEdge Admissions Team\n\nContact us\n1F-CS-56, Ansal Plaza Mall, Sector-1,\nVaishali, Ghaziabad,\nUttar Pradesh – 201010\n+91 92057 75137\ninfo@alphaedge.net.in`,
     html: `
       <div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;color:#0f172a;line-height:1.6">
-        <h2 style="color:#059669">Application Received</h2>
-        <p>Dear ${safeName},</p>
-        <p>Thank you for applying to <strong>${safeProgramme}</strong> at AlphaEdge.</p>
-        <p>We have received your application and our admissions team will review your details and contact you soon.</p>
-        <p>Best regards,<br><strong>AlphaEdge Admissions Team</strong></p>
+        <div style="text-align:center;padding:20px 0;border-bottom:1px solid #e2e8f0">
+          <img
+            src="https://alphaedge.in/logocroppedbgpxl.png"
+            alt="AlphaEdge"
+            width="180"
+            style="display:inline-block;width:180px;height:auto;max-width:180px"
+          />
+        </div>
+        <div style="padding:24px 20px">
+          <h2 style="color:#059669">Application Received</h2>
+          <p>Dear ${safeName},</p>
+          <p>Thank you for applying to <strong>${safeProgramme}</strong> at AlphaEdge.</p>
+          <p>We have received your application and our admissions team will review your details and contact you soon within 24 hours.</p>
+          <p>Best regards,<br><strong>AlphaEdge Admissions Team</strong></p>
+        </div>
+        <div style="border-top:1px solid #e2e8f0;padding:20px;background:#f8fafc;text-align:center;font-size:13px;color:#475569">
+          <strong style="display:block;margin-bottom:8px;color:#0f172a">Contact us</strong>
+          1F-CS-56, Ansal Plaza Mall, Sector-1,<br>
+          Vaishali, Ghaziabad,<br>
+          Uttar Pradesh – 201010<br>
+          <a href="tel:+919205775137" style="color:#059669;text-decoration:none">+91 92057 75137</a><br>
+          <a href="mailto:info@alphaedge.net.in" style="color:#059669;text-decoration:none">info@alphaedge.net.in</a>
+        </div>
       </div>
     `,
   });
